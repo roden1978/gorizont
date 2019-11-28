@@ -1,0 +1,40 @@
+import React from 'react'
+import styles from './Content.module.css'
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import ProjectsContainer from "../Projects/ProjectsContainer";
+import Gallery from "../Gallery/Gallery";
+import Contacts from "../Contacts/Contacts";
+import AboutUs from "../AboutUs/AboutUs";
+import Admin from "../Admin/Admin";
+import Create from "../Admin/AdminForms/Create";
+import Update from "../Admin/AdminForms/Update";
+import Delete from "../Admin/AdminForms/Delete";
+import NewsContainer from "../News/NewsContainer";
+
+const Content = (props) => {
+    return (
+        <div className={styles.content}>
+            <Switch>
+                <Route exact path='/'
+                       render={() => <Redirect from='/' to='/news'/>}/>
+                <Route path='/news' component={NewsContainer}/>
+                <Route path='/projects/:projectId?' component={ProjectsContainer}/>
+                <Route path='/gallery' component={Gallery}/>
+                <Route path='/contacts' component={Contacts}/>
+                <Route path='/about' component={AboutUs}/>
+                <Route exact path='/admin' component={Admin}/>
+                <Route exact path='/admin/create' component={Create}/>
+                <Route exact path='/admin/update' component={Update}/>
+                <Route exact path='/admin/delete' component={Delete}/>
+                {/*<Route path='/login'
+                       render={() => <Login/>}/>*/}
+                {/*<Route path='/admin'
+                       render={() => <Admin/>}/>*/}
+                <Route path='*'
+                       render={() => <div>Page not found: error 404</div>}/>
+            </Switch>
+        </div>
+    )
+}
+
+export default withRouter(Content)

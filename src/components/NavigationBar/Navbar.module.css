@@ -1,0 +1,82 @@
+nav {
+    /*grid-area: appNav;*/
+    /*background-color: burlywood;*/
+    font-weight: normal;
+    /*display: flex;*/
+    height: 50px;
+    width: 100%;
+    display: block;
+    background-color: black;
+    margin: 100px auto 0;
+    position: absolute;
+}
+
+/*nav::before{
+    content: "";
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    left: 0px;
+    z-index: -1;
+}*/
+
+ul {
+    padding: 0;
+    list-style: none;
+    height: 50px;
+    margin: 0 0 0 50%;
+}
+
+ul li {
+    float: left;
+}
+
+ul li a {
+    text-decoration: none;
+    display: block;
+    height: 50px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    line-height: 50px;
+    color: white;
+    position: relative;
+    transition: background-color 0.5s;
+}
+
+ul li a:hover {
+   /* color: coral;*/
+    background-color: #282c34;
+    display: block;
+}
+
+ul li a.activeLink {
+    color: coral;
+
+}
+
+/*
+
+.item a{
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    height: 45px;
+left: 700px;
+display: block;
+}
+
+.item a.activeLink{
+    color: coral;
+}
+
+.item a:hover{
+    color: green;
+    background-color: darkseagreen;
+}
+
+.app_nav .item {
+    margin-left: 10px;
+    display: block;
+}*/

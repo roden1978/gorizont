@@ -1,0 +1,12 @@
+.header {
+    background-color: #282c34;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    color: coral;
+    position: fixed;
+    width: 100%;
+   /* margin-left: 5vw;*/
+    /*justify-content: center;*/
+}
+
