@@ -4,7 +4,7 @@ import styles from './Footer.module.css'
 const Footer = (props) =>{
     return (
         <footer className={styles.footer}>
-            <h3>Footer</h3>
+            <h5>&copy; ООО Горизонт</h5>
         </footer>
     )
 }
