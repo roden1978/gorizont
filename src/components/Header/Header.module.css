@@ -1,12 +1,42 @@
 .header {
     background-color: #282c34;
-    height: 250px;
+    height: 210px;
     display: flex;
-    flex-direction: column;
     color: coral;
     position: fixed;
     width: 100%;
+    flex-wrap: nowrap;
+    justify-content:center;
+    background-image: url("../../assets/backgrounds/headerBkg.jpg");
+    background-size: cover;
    /* margin-left: 5vw;*/
     /*justify-content: center;*/
+}
+
+.logo{
+    display: inline-block;
+    /*border: 1px solid grey;*/
+    width: 50%;
+}
+.nameContainer{
+    display: inline-block;
+    /*border: 1px solid blue;*/
+    width: 50%;
+    text-align: center;
+}
+.name{
+    font-size: 50px;
+    font-weight: bolder;
+    color: whitesmoke;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 7px black;
+}
+.ooo{
+    font-size: 30px;
+    font-weight: bolder;
+    color: whitesmoke;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 7px black;
+    margin-top: 50px;
 }
 
