@@ -8,9 +8,10 @@ body, html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f5f6f7;
+ /* background-image: url("./assets/backgrounds/bodyBackground.png");*/
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    monospace, "Roboto";
 }

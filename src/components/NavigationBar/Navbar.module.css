@@ -1,19 +1,20 @@
-
+/*#282c34*/
 .container{
     display: flex;
     flex-wrap: nowrap;
     justify-content:center;
     box-shadow: 7px 7px 4px grey;
-    background-color: #282c34;
+    background-color: #0d47a1;
     position: fixed;
     width: 100%;
     margin-top: 210px;
     align-self: center;
+    z-index: 998;
 }
 .menuItem{
     display: block;
     height: 50px;
-    background-color: #282c34;
+    background-color: #0d47a1;
     text-align: center;
     text-transform: uppercase;
 }

@@ -9,6 +9,7 @@
     justify-content:center;
     background-image: url("../../assets/backgrounds/headerBkg.jpg");
     background-size: cover;
+    z-index: 999;
    /* margin-left: 5vw;*/
     /*justify-content: center;*/
 }
