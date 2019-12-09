@@ -1,6 +1,13 @@
 export const SET_NEWS = 'SET_NEWS';
 export const SET_PROJECTS = 'SET_PROJECTS';
 export const SET_PROJECT = 'SET_PROJECT';
+export const SET_PHOTO_ALBUMS = 'SET_PHOTO_ALBUMS';
+export const SET_PHOTOS = 'SET_PHOTOS';
+export const SET_PHOTO = 'SET_PHOTO';
+export const SET_JOBS = 'SET_JOBS';
+export const SET_CONTACTS = 'SET_CONTACTS';
+export const SET_ABOUT = 'SET_ABOUT';
+
 /*
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_PROFILE = 'GET_PROFILE';

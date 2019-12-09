@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Content.module.css'
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import ProjectsContainer from "../Projects/ProjectsContainer";
-import Gallery from "../Gallery/Gallery";
+import JobsContainer from "../Jobs/JobsContainer";
 import Contacts from "../Contacts/Contacts";
 import AboutUs from "../AboutUs/AboutUs";
 import Admin from "../Admin/Admin";
@@ -10,6 +10,7 @@ import Create from "../Admin/AdminForms/Create";
 import Update from "../Admin/AdminForms/Update";
 import Delete from "../Admin/AdminForms/Delete";
 import NewsContainer from "../News/NewsContainer";
+import GalleryContainer from "../Gallery/GalleryContainer";
 
 const Content = (props) => {
     return (
@@ -19,9 +20,10 @@ const Content = (props) => {
                        render={() => <Redirect from='/' to='/news'/>}/>
                 <Route path='/news' component={NewsContainer}/>
                 <Route path='/projects/:projectId?' component={ProjectsContainer}/>
-                <Route path='/gallery' component={Gallery}/>
+                <Route path='/gallery' component={GalleryContainer}/>
                 <Route path='/contacts' component={Contacts}/>
                 <Route path='/about' component={AboutUs}/>
+                <Route path='/job' component={JobsContainer}/>
                 <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/admin/create' component={Create}/>
                 <Route exact path='/admin/update' component={Update}/>

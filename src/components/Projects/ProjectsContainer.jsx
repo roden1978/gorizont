@@ -12,7 +12,7 @@ class ProjectsContainer extends React.Component {
 
 
     componentDidMount() {
-    debugger
+   //debugger
         this.updateProject()
         /*this.props.match.params.projectId
             ? this.props.getProject(this.props.match.params.projectId)

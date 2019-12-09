@@ -6,10 +6,14 @@ import {reducer as formReducer} from 'redux-form'
 //Reducers
 import news_reducer from './reducers/newsReducer'
 import projects_reducer from './reducers/projectsReducer'
+import photos_reducer from "./reducers/photosReducer";
+import jobs_reducer from "./reducers/jobsReducer";
 
 let reducers = combineReducers({
     news: news_reducer,
     projects: projects_reducer,
+    photos: photos_reducer,
+    jobs: jobs_reducer,
     form: formReducer
 })
 

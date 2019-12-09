@@ -5,7 +5,7 @@ let initialState = {
 }
 
 const projects_reducer = (state = initialState, action) => {
-debugger
+//debugger
     switch (action.type) {
         case SET_PROJECTS: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
