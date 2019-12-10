@@ -3,8 +3,8 @@ import styles from './Content.module.css'
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import ProjectsContainer from "../Projects/ProjectsContainer";
 import JobsContainer from "../Jobs/JobsContainer";
-import Contacts from "../Contacts/Contacts";
-import AboutUs from "../AboutUs/AboutUs";
+import ContactsContainer from "../Contacts/ContactsContainer";
+import AboutUsContainer from "../AboutUs/AboutUsContainer";
 import Admin from "../Admin/Admin";
 import Create from "../Admin/AdminForms/Create";
 import Update from "../Admin/AdminForms/Update";
@@ -21,8 +21,8 @@ const Content = (props) => {
                 <Route path='/news' component={NewsContainer}/>
                 <Route path='/projects/:projectId?' component={ProjectsContainer}/>
                 <Route path='/gallery' component={GalleryContainer}/>
-                <Route path='/contacts' component={Contacts}/>
-                <Route path='/about' component={AboutUs}/>
+                <Route path='/contacts' component={ContactsContainer}/>
+                <Route path='/about' component={AboutUsContainer}/>
                 <Route path='/job' component={JobsContainer}/>
                 <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/admin/create' component={Create}/>

@@ -49,7 +49,7 @@ const NewsItem = (props) => {
     createAt.locale('ru');
 
     return (
-        <Grid item xs={10} sm={8}>
+        <Grid item xs={10}>
             <Card className={classes.card}>
                 <CardHeader title={props.title}
                             className={classes.title}

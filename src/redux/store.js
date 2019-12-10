@@ -8,12 +8,16 @@ import news_reducer from './reducers/newsReducer'
 import projects_reducer from './reducers/projectsReducer'
 import photos_reducer from "./reducers/photosReducer";
 import jobs_reducer from "./reducers/jobsReducer";
+import contacts_reducer from "./reducers/contactsReducer";
+import about_reducer from "./reducers/aboutReducer";
 
 let reducers = combineReducers({
     news: news_reducer,
     projects: projects_reducer,
     photos: photos_reducer,
     jobs: jobs_reducer,
+    contacts: contacts_reducer,
+    about: about_reducer,
     form: formReducer
 })
 

@@ -35,7 +35,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
-    getJob() {
+    getJobs() {
         //debugger
         return instance.get('/api/job')
             .then(response => {

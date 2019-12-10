@@ -2,6 +2,8 @@ import React from 'react'
 import Job from './Job/Job'
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
+import {Container} from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     pos:{
         paddingBottom: 20,
         paddingTop: 20,
+    },
+    cardGrid: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(8),
     }
 }));
 
@@ -21,18 +27,20 @@ const Jobs = (props) => {
         job => <Job key={job.__id}  {...job}/>)
 
     return (
-        <div className={classes.root}>
+        <React.Fragment>
+            <Container className={classes.cardGrid} maxWidth="md">
             <Grid
                 container
                 direction="row"
                 justify="space-evenly"
                 alignItems="center"
                 spacing={3}
-                className={classes.pos}
             >
-                {jobs}
+                    {jobs}
+
             </Grid>
-        </div>
+            </Container>
+        </React.Fragment>
     );
 }
 
