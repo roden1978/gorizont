@@ -8,7 +8,6 @@ import Avatar from "@material-ui/core/Avatar";
 import katokIcon from "../../assets/icons/katok.svg";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-//import SimpleMap from "../../common/SimpleMap";
 
 const useStyles = makeStyles(theme => ({
     root: {

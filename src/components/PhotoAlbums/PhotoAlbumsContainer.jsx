@@ -30,7 +30,8 @@ class PhotoAlbumsContainer extends React.Component {
                              description={this.props.description}
                              id={this.props.id}
                              photos={this.props.photos}
-                             photo={this.props.photo}/>)
+                             photo={this.props.photo}
+        primary = {this.props.primary}/>)
     }
 }
 
