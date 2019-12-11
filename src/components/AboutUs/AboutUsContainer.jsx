@@ -11,7 +11,7 @@ class AboutUsContainer extends React.Component{
     }
 
     render() {
-        return (<AboutUs about = {this.props.about}/>)
+        return (<AboutUs about = {this.props.about.about}/>)
     }
 }
 /*функция принимает state созданный в redux при помощи reducers

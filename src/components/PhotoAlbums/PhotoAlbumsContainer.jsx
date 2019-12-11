@@ -5,30 +5,32 @@ import {connect} from "react-redux";
 
 class PhotoAlbumsContainer extends React.Component {
 
-/* updateProject (){
-     this.props.match.params.projectId ? this.props.getProject(this.props.match.params.projectId)
-: this.props.getProjects();
-}
+     updatePrimary(){
+         this.props.primary ? this.props.getPhoto(this.props.primary)
+    : this.props.getPhotos(this.props.id);
+    }
 
-componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.props.match.params.projectId !== prevProps.match.params.projectId)
-        this.updateProject()
-}*/
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.primary !== prevProps.primary)
+            this.updatePrimary()
+    }
     componentDidMount() {
-   //debugger
-            //this.props.getPhotos(this.props.match.params.photosetId)
+        //debugger
+        //this.props.getPhotos(this.props.match.params.photosetId)
         //this.props.photoset.every(()=>{
-            this.props.getPhotos(this.props.id);
+        //this.props.getPhotos(this.props.id);
         //})
+        this.updatePrimary();
     }
 
 
-
     render() {
-        debugger
-        return (<PhotoAlbums title = {this.props.title}
-                             description = {this.props.description}
-                             photos={this.props.photos.photo}/>)
+    //debugger
+        return (<PhotoAlbums title={this.props.title}
+                             description={this.props.description}
+                             id={this.props.id}
+                             photos={this.props.photos}
+                             photo={this.props.photo}/>)
     }
 }
 
@@ -36,7 +38,8 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        photos: state.photos
+        photos: state.photos,
+        photo: state.photo
     }
 };
 

@@ -28,6 +28,7 @@ const Gallery = (props) => {
         photoset => <PhotoAlbumsContainer key={photoset.id}
                                           id={photoset.id}
                                           title={photoset.title._content}
+                                          primary = {photoset.primary}
                                           description={photoset.description._content}
                                           {...props}/>
     )

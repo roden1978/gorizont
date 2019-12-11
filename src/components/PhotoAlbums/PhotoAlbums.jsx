@@ -27,30 +27,40 @@ const useStyles = makeStyles(theme => ({
 const PhotoAlbums = (props) => {
     const classes = useStyles();
 
+    let primaryURL = null;
     debugger
+    if (props.photos.photo) {
+        primaryURL = props.photos.photo.every((ph) => {
+            if (ph.label === 'Small')
+                return ph.source;
+        })
+    }
+
+    //debugger
     return (
-            <Grid item xs={12} sm={6}>
-                <Card className={classes.card}>
-                    <CardMedia
-                        className={classes.cardMedia}
-                        image={katok}
-                        title={props.title}
-                    />
-                    <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {props.title}
-                        </Typography>
-                        <Typography>
-                            {props.description}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                            View
-                        </Button>
-                    </CardActions>
-                </Card>
-            </Grid>
+        <Grid item xs={12} sm={6}>
+            <Card className={classes.card}>
+                <CardMedia
+                    className={classes.cardMedia}
+                    image={
+                        primaryURL ? primaryURL : katok}
+                    title={props.title}
+                />
+                <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.title}
+                    </Typography>
+                    <Typography>
+                        {props.description}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small" color="primary">
+                        View
+                    </Button>
+                </CardActions>
+            </Card>
+        </Grid>
 
     );
 }

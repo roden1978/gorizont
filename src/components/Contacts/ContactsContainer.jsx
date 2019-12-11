@@ -11,7 +11,7 @@ class ContactsContainer extends React.Component{
     }
 
     render() {
-        return (<Contacts contacts = {this.props.contacts}/>)
+        return (<Contacts contacts = {this.props.contacts.contacts}/>)
     }
 }
 /*функция принимает state созданный в redux при помощи reducers

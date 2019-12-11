@@ -2,7 +2,7 @@ import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO} from "../actions/types";
 
 let initialState = {
     sets: [],
-    photos: null,
+    photos: [],
     photo: []
 
 }
@@ -23,7 +23,7 @@ const photos_reducer = (state = initialState, action) => {
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
-                ...state, photos: [action.payload]
+                ...state, photos: action.payload.photoset.photo
             };
         }
         case SET_PHOTO: {
@@ -31,7 +31,7 @@ const photos_reducer = (state = initialState, action) => {
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
-                ...state, photo: action.payload
+                ...state, photo: action.payload.sizes.size
             };
         }
         default:
