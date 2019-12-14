@@ -26,12 +26,12 @@ const useStyles = makeStyles(theme => ({
 
 const PhotoAlbums = (props) => {
     const classes = useStyles();
-
-    let primaryPhoto = null;
+debugger
+   /* let primaryPhoto = null;
     debugger
     if (props.photos.photo.length > 0) {
         primaryPhoto = props.photos.photo.find(ph => ph.label == "Medium")
-    }
+    }*/
 
     //debugger
     return (
@@ -40,7 +40,7 @@ const PhotoAlbums = (props) => {
                 <CardMedia
                     className={classes.cardMedia}
                     image={
-                        primaryPhoto ? primaryPhoto.source : katok}
+                        props.photos.primaryPhotoURL ? props.photos.primaryPhotoURL : katok}
                     title={props.title}
                 />
                 <CardContent className={classes.cardContent}>

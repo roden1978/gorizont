@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 const Gallery = (props) => {
     const classes = useStyles();
-    //debugger
+    debugger
     let sets = props.sets.sets.map(
         photoset => <PhotoAlbumsContainer key={photoset.id}
                                           id={photoset.id}

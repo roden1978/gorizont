@@ -3,7 +3,6 @@ import Job from './Job/Job'
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import {Container} from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,7 +31,7 @@ const Jobs = (props) => {
             <Grid
                 container
                 direction="row"
-                justify="space-evenly"
+                justify="flex-start"
                 alignItems="center"
                 spacing={3}
             >
