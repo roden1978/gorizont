@@ -1,5 +1,5 @@
 import {flickrAPI} from '../../api/api'
-import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO} from "../actions/types";
+import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO, SET_PHOTO_WITH_URL} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setPhotosets = (photosets) => {
@@ -23,6 +23,14 @@ export const setPhoto = (photo) => {
     }
 }
 
+export const setPhotoWithUrl = (photo, set) => {
+    return {
+        type: SET_PHOTO_WITH_URL,
+        payload: photo,
+        set: set
+    }
+}
+
 /*Thunk Creators*/
 export const getPhotosets = () => {
     return async (dispatch) => {
@@ -43,5 +51,12 @@ export const getPhoto = (id) => {
     return async (dispatch) => {
         const photo = await flickrAPI.getPhoto(id);
         dispatch(setPhoto(photo));
+    }
+}
+
+export const getPhotoWithUrl = (id, set) => {
+    return async (dispatch) => {
+        const photo = await flickrAPI.getPhoto(id);
+        dispatch(setPhotoWithUrl(photo, set));
     }
 }

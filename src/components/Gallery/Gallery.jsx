@@ -1,7 +1,6 @@
 import React from 'react'
 import s from './Gallery.module.css'
-import PhotoAlbumsContainer from "../PhotoAlbums/PhotoAlbumsContainer";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import PhotoAlbums from "../PhotoAlbums/PhotoAlbums";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core";
@@ -24,13 +23,14 @@ const useStyles = makeStyles(theme => ({
 const Gallery = (props) => {
     const classes = useStyles();
     debugger
+
+    props.sets.sets.splice(0, Math.ceil(props.sets.sets.length/2) - 1)
+
     let sets = props.sets.sets.map(
-        photoset => <PhotoAlbumsContainer key={photoset.id}
-                                          id={photoset.id}
+        photoset => <PhotoAlbums key={photoset.id}
                                           title={photoset.title._content}
-                                          primary = {photoset.primary}
                                           description={photoset.description._content}
-                                          {...props}/>
+                                          url={photoset.primary}/>
     )
 
 
