@@ -10,13 +10,13 @@ class GalleryContainer extends React.Component{
 
 
     updatePrimary(){
-             this.props.sets.sets.length > 0 ? this.props.sets.sets.every((set) => this.props.getPhotoWithUrl(set.primary, set))
+             this.props.sets.length > 0 ? this.props.sets.every((set) => this.props.getPhotoWithUrl(set.primary, set))
         : this.props.getPhotosets();
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
-    //debugger
-            if(prevProps.sets.sets.length === 0){
+    debugger
+            if(prevProps.sets.length === 0){
                 this.updatePrimary();
             }
 
@@ -24,21 +24,26 @@ class GalleryContainer extends React.Component{
 
 
     componentDidMount() {
-        //debugger
+        debugger
         //this.props.getPhotosets();
         this.updatePrimary();
     }
 
+    componentWillUnmount() {
+        this.props.setsWithUrl.length = 0;
+    }
+
     render() {
-        //debugger
-        return (<Gallery sets = {this.props.sets}/>)
+        debugger
+        return (<Gallery sets = {this.props.setsWithUrl}/>)
     }
 }
 /*функция принимает state созданный в redux при помощи reducers
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        sets: state.photos
+        sets: state.photos.sets,
+        setsWithUrl: state.photos.setsWithUrl
     }
 };
 

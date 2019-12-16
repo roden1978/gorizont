@@ -24,9 +24,9 @@ const Gallery = (props) => {
     const classes = useStyles();
     debugger
 
-    props.sets.sets.splice(0, Math.ceil(props.sets.sets.length/2) - 1)
+    //props.sets.sets.splice(0, Math.ceil(props.sets.sets.length/2) - 1)
 
-    let sets = props.sets.sets.map(
+    let sets = props.sets.map(
         photoset => <PhotoAlbums key={photoset.id}
                                           title={photoset.title._content}
                                           description={photoset.description._content}

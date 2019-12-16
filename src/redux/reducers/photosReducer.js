@@ -2,6 +2,7 @@ import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO, SET_PHOTO_WITH_URL} from "../ac
 
 let initialState = {
     sets: [],
+    setsWithUrl: [],
     photos: [],
     photo: [],
     primaryPhotoURL: null
@@ -45,7 +46,7 @@ const photos_reducer = (state = initialState, action) => {
             const size = action.payload.sizes.size.find(ph => ph.label == "Medium")
             return {
                 ...state,
-                sets: [...state.sets, {...action.set, primary: size.source}]
+                setsWithUrl: [...state.setsWithUrl, {...action.set, primary: size.source}]
                 }
 
         }

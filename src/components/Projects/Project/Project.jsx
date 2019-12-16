@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme =>({
     expand: {
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
-        backgroundColor:'coral',
+        backgroundColor:'#f5f6f7',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),

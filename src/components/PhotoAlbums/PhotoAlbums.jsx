@@ -53,7 +53,7 @@ const PhotoAlbums = (props) => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary">
-                        View
+                        Обзор фотоальбома
                     </Button>
                 </CardActions>
             </Card>
