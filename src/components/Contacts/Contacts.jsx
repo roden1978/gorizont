@@ -55,7 +55,7 @@ const Contacts = (props) => {
                                            {props.contacts.length === 0 ? '' : 'Эл. почта: ' + props.contacts[0].companyEmail}
                                        </Typography>
                                        <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           Телефон: {props.contacts.length === 0 ? '' : 'Телефон: ' + props.contacts[0].companyPhone}
+                                           {props.contacts.length === 0 ? '' : 'Телефон: ' + props.contacts[0].companyPhone}
                                        </Typography>
                                        <Typography variant="body1" color="textPrimary" gutterBottom>
                                            {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner01 + ": " + props.contacts[0].phone01}

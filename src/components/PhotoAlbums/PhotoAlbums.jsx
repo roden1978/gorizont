@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import katok from '../../assets/icons/katok.svg';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
+import {NavLink} from "react-router-dom";
+import {blueGrey} from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +22,14 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-    }
+    },
+    link: {
+        color: blueGrey[400],
+        textDecoration: 'none',
+        textTransform: 'uppercase',
+        fontWeight: 'lighter',
+        fontSize: 14,
+    },
 }));
 
 const PhotoAlbums = (props) => {
@@ -34,6 +42,8 @@ const PhotoAlbums = (props) => {
     }*/
 
     //debugger
+   /* const photoAlbum = <NavLink to={'/album/' + props.key}/>*/
+
     return (
         <Grid item xs={12} sm={6}>
             <Card className={classes.card}>
@@ -52,9 +62,12 @@ const PhotoAlbums = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary">
+                    {/*<Button size="small" color="primary" onClick={() => {
+                        {photoAlbum}
+                    }}>
                         Обзор фотоальбома
-                    </Button>
+                    </Button>*/}
+                    <NavLink to={'/album/' + props.id} className={classes.link}>Обзор фотоальбома</NavLink>
                 </CardActions>
             </Card>
         </Grid>

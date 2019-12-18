@@ -28,6 +28,7 @@ const Gallery = (props) => {
 
     let sets = props.sets.map(
         photoset => <PhotoAlbums key={photoset.id}
+                                 id = {photoset.id}
                                           title={photoset.title._content}
                                           description={photoset.description._content}
                                           url={photoset.primary}/>

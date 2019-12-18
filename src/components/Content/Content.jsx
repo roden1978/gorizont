@@ -11,6 +11,7 @@ import Update from "../Admin/AdminForms/Update";
 import Delete from "../Admin/AdminForms/Delete";
 import NewsContainer from "../News/NewsContainer";
 import GalleryContainer from "../Gallery/GalleryContainer";
+import PhotoAlbumContainer from "../PhotoAlbum/PhotoAlbumContainer";
 
 const Content = (props) => {
     return (
@@ -21,6 +22,7 @@ const Content = (props) => {
                 <Route path='/news' component={NewsContainer}/>
                 <Route path='/projects/:projectId?' component={ProjectsContainer}/>
                 <Route path='/gallery' component={GalleryContainer}/>
+                <Route path='/album/:albumId?' component={PhotoAlbumContainer}/>
                 <Route path='/contacts' component={ContactsContainer}/>
                 <Route path='/about' component={AboutUsContainer}/>
                 <Route path='/job' component={JobsContainer}/>

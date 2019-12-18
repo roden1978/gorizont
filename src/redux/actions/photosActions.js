@@ -1,5 +1,5 @@
 import {flickrAPI} from '../../api/api'
-import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO, SET_PHOTO_WITH_URL} from "../actions/types";
+import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO, SET_URL_TO_ALBUMS, SET_URL_TO_PHOTOS} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setPhotosets = (photosets) => {
@@ -23,11 +23,19 @@ export const setPhoto = (photo) => {
     }
 }
 
-export const setPhotoWithUrl = (photo, set) => {
+export const setUrlToAlbums = (photo, set) => {
     return {
-        type: SET_PHOTO_WITH_URL,
+        type: SET_URL_TO_ALBUMS,
         payload: photo,
         set: set
+    }
+}
+
+export const setUrlToPhotos = (photo, card) => {
+    return {
+        type: SET_URL_TO_PHOTOS,
+        payload: photo,
+        card: card
     }
 }
 
@@ -54,9 +62,15 @@ export const getPhoto = (id) => {
     }
 }
 
-export const getPhotoWithUrl = (id, set) => {
+export const getAlbumsWithUrl = (id, set) => {
     return async (dispatch) => {
         const photo = await flickrAPI.getPhoto(id);
-        dispatch(setPhotoWithUrl(photo, set));
+        dispatch(setUrlToAlbums(photo, set));
+    }
+}
+export const getPhotoWithUrl = (id, card) => {
+    return async (dispatch) => {
+        const photo = await flickrAPI.getPhoto(id);
+        dispatch(setUrlToPhotos(photo, card));
     }
 }
