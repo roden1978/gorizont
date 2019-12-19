@@ -1,15 +1,25 @@
-import {SET_PHOTO_ALBUMS, SET_PHOTOS, SET_PHOTO, SET_URL_TO_ALBUMS, SET_URL_TO_PHOTOS} from "../actions/types";
+import {
+    SET_PHOTO_ALBUMS,
+    SET_PHOTOS,
+    SET_PHOTO,
+    SET_URL_TO_ALBUMS,
+    SET_URL_TO_PHOTOS,
+    IS_CLICKED,
+    SET_URL
+} from "../actions/types";
 
 let initialState = {
     sets: [],
     setsWithUrl: [],
     photos: [],
     photosWithUrl: [],
-    photo: []
+    photo: [],
+    isClicked: false,
+    url: ''
 }
 
 const photos_reducer = (state = initialState, action) => {
-//debugger
+debugger
     switch (action.type) {
         case SET_PHOTO_ALBUMS: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
@@ -42,13 +52,19 @@ const photos_reducer = (state = initialState, action) => {
 
         }
         case SET_URL_TO_PHOTOS:{
-        debugger
+        //debugger
             const size = action.payload.sizes.size.find(ph => ph.label == "Large")
             return {
                 ...state,
                 photosWithUrl: [...state.photosWithUrl, {...action.card, url: size.source}]
             }
 
+        }
+        case IS_CLICKED:{
+            return {...state, isClicked: action.payload}
+        }
+        case SET_URL:{
+            return {...state, url: action.payload}
         }
         default:
             return state;

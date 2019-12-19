@@ -9,6 +9,8 @@ export const SET_URL_TO_PHOTOS = 'SET_URL_TO_PHOTOS';
 export const SET_JOBS = 'SET_JOBS';
 export const SET_CONTACTS = 'SET_CONTACTS';
 export const SET_ABOUT = 'SET_ABOUT';
+export const IS_CLICKED = 'IS_CLICKED'
+export const SET_URL = 'SET_URL'
 
 /*
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

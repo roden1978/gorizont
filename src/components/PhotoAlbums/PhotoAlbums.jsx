@@ -34,15 +34,6 @@ const useStyles = makeStyles(theme => ({
 
 const PhotoAlbums = (props) => {
     const classes = useStyles();
-//debugger
-   /* let primaryPhoto = null;
-    debugger
-    if (props.photos.photo.length > 0) {
-        primaryPhoto = props.photos.photo.find(ph => ph.label == "Medium")
-    }*/
-
-    //debugger
-   /* const photoAlbum = <NavLink to={'/album/' + props.key}/>*/
 
     return (
         <Grid item xs={12} sm={6}>
@@ -51,23 +42,14 @@ const PhotoAlbums = (props) => {
                     className={classes.cardMedia}
                     image={
                         props.url ? props.url : katok}
-                    title={props.title}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {props.title}
-                    </Typography>
                     <Typography>
                         {props.description}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    {/*<Button size="small" color="primary" onClick={() => {
-                        {photoAlbum}
-                    }}>
-                        Обзор фотоальбома
-                    </Button>*/}
-                    <NavLink to={'/album/' + props.id} className={classes.link}>Обзор фотоальбома</NavLink>
+                    <NavLink to={'/album/' + props.id} className={classes.link}>Обзор</NavLink>
                 </CardActions>
             </Card>
         </Grid>
@@ -76,5 +58,13 @@ const PhotoAlbums = (props) => {
 }
 
 export default PhotoAlbums;
+
+/*
+* <Typography gutterBottom variant="h5" component="h2">
+                        {props.title}
+                    </Typography>
+                    *
+                    *
+                    title={props.title} */
 
 
