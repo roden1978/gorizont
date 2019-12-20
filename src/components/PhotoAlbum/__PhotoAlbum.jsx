@@ -8,9 +8,29 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import katok from "../../assets/icons/katok.svg";
 import Avatar from "@material-ui/core/Avatar";
 import ModalPhoto from "../../common/ModalPhoto";
-import Container from "@material-ui/core/Container";
 
 const PhotoAlbum = (props) => {
+
+   /* const [isClicked, setClicked] = useState(false);
+    const [open, setOpen] = useState(true)
+    const onButtonClickOpen = () =>{
+        debugger
+        setClicked(true);
+        //setOpen(false);
+    }*/
+
+   /* useEffect(()=>{
+        debugger
+        if(open){
+            setClicked(false);
+        }
+            setOpen(true);
+
+    }, [open])*/
+
+    /*const onClose = () =>{
+        setClicked(false);
+    }*/
 
     const useStyles = makeStyles(theme => ({
         root: {
@@ -19,13 +39,22 @@ const PhotoAlbum = (props) => {
             justifyContent: 'space-around',
             overflow: 'hidden',
             backgroundColor: theme.palette.background.paper,
-            transform: 'translateZ(0)',
+
+            transform: 'translateY(35%)',
         },
         gridList: {
+            flexWrap: 'nowrap',
+            // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+            transform: 'translateZ(0)',
             backgroundColor: '#f5f6f7',
+            alignItems: 'center'
         },
-        icon: {
-            color: 'rgba(255, 255, 255, 0.54)',
+        title: {
+            color: theme.palette.primary.light,
+        },
+        titleBar: {
+            background:
+                'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
         },
         im: {
             width: '120%',
@@ -34,26 +63,26 @@ const PhotoAlbum = (props) => {
             backgroundColor: '#f5f6f7',
             width: 40,
             height: 40,
-            color: 'rgba(255, 255, 255, 0.54)',
         },
         katok: {
             width: 35,
-        },
-        titleBar: {
-            background:
-                'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
         },
     }));
 
     const classes = useStyles();
 
+    /* let photoCards = props.cards.map(
+         card => <SingleLinePhotosList key={card.id}
+                                       title={card.title}
+                                       url={card.url}/>
+                                       backgroundColor: theme.palette.background.paper,
+     )*/
 debugger
     return (
         <div className={classes.root}>
-            <Container maxWidth="md">
-            <GridList cellHeight={400} className={classes.gridList}>
+            <GridList className={classes.gridList} cellHeight={'400'} cols={3.5} spacing={6}>
                 {props.cards.map(card => (
-                    <GridListTile key={card.url ? card.url : katok}>
+                    <GridListTile cols={1} key={card.url ? card.url : katok}>
                         <ButtonBase   onClick={()=>{
                             props.changeClicked(true);
                             props.getUrl(card.url);
@@ -62,7 +91,10 @@ debugger
                         </ButtonBase>
                         <GridListTileBar
                             title={card.title}
-                            className={classes.titleBar}
+                            classes={{
+                                root: classes.titleBar,
+                                title: classes.title,
+                            }}
                             actionIcon={
                                 <Avatar className={classes.avatar}>
                                     <img className={classes.katok} src={katok} alt={card.title}/>
@@ -71,8 +103,8 @@ debugger
                         />
                     </GridListTile>
                 ))}
+
             </GridList>
-            </Container>
             {props.isClicked ? <ModalPhoto changeClicked = {props.changeClicked} url = {props.url}/> : null}
         </div>
     );
@@ -92,10 +124,4 @@ export default PhotoAlbum;
                                 </IconButton>
                             }
                             title={card.title}
-
-
-
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">December</ListSubheader>
-                </GridListTile>
             */

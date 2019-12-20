@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #coral',
+        border: '2px solid coral',
         boxShadow: theme.shadows[10],
         padding: theme.spacing(2, 4, 3),
     },
@@ -22,9 +22,9 @@ export default function TransitionsModal(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
-    const handleOpen = () => {
+    /*const handleOpen = () => {
         setOpen(true);
-    };
+    };*/
 
     const handleClose = () => {
         setOpen(false);
@@ -43,7 +43,7 @@ export default function TransitionsModal(props) {
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
-                    timeout: 500,
+                    timeout: 1000,
                 }}
             >
                 <Fade in={open}>
@@ -55,8 +55,3 @@ export default function TransitionsModal(props) {
         </div>
     );
 }
-
-/*
-* <button type="button" onClick={handleOpen}>
-                react-transition-group
-            </button>*/
