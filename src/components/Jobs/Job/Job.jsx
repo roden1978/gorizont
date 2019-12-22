@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#1976d2', //#0d47a1
+        backgroundColor: '#1976d2', //#0d47a1 #1976d2
         color: '#ffffff'
     },
     pos: {

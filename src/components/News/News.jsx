@@ -22,7 +22,7 @@ const News = (props) => {
     //debugger
     const classes = useStyles();
 
-    let newsItems = props.news.news.map(
+    let newsItems = props.news.map(
         newsItem => <NewsItem key={newsItem.__id}  {...newsItem}/>)
 
     return (

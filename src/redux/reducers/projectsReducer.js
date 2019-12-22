@@ -1,7 +1,8 @@
-import {SET_PROJECTS, SET_PROJECT} from "../actions/types";
+import {SET_PROJECTS, SET_PROJECT, SET_ID} from "../actions/types";
 
 let initialState = {
-    projects: []
+    projects: [],
+    id: null
 }
 
 const projects_reducer = (state = initialState, action) => {
@@ -25,7 +26,11 @@ const projects_reducer = (state = initialState, action) => {
             };
             // break
         }
-
+            case SET_ID: {
+                return{
+                    ...state, id: action.payload
+                }
+            }
         default:
             return state;
     }

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme =>({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#1976d2', //#0d47a1
+        backgroundColor: 'coral', //#0d47a1 #1976d2
         color: '#ffffff'
     },
     pos: {
@@ -62,8 +62,12 @@ const Project = (props) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
+        if(!props.id)
         setExpanded(!expanded);
+        props.getId(null);
     };
+debugger
+
 
     return(
         <Grid item xs={10}>
@@ -89,13 +93,13 @@ const Project = (props) => {
                             [classes.expandOpen]: expanded,
                         })}
                         onClick={handleExpandClick}
-                        aria-expanded={expanded}
+                        aria-expanded={expanded }
                         aria-label="Показать больше"
                     >
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
                     <CardContent>
                         <Typography paragraph>{props.description}</Typography>
                         <Typography paragraph>{props.description}</Typography>

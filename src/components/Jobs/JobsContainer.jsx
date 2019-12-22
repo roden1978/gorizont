@@ -18,7 +18,7 @@ class JobsContainer extends React.Component{
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        jobs: state.jobs
+        jobs: state.jobs.jobs
     }
 };
 

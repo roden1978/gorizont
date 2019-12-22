@@ -18,7 +18,7 @@ class NewsContainer extends React.Component{
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        news: state.news
+        news: state.news.news
     }
 };
 

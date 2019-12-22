@@ -19,10 +19,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Projects = (props) => {
+    debugger
     const classes = useStyles();
 
-    let projectItems = props.projects.projects.map(
-        project => <Project key={project.__id}  {...project}/>
+    let projectItems = props.projects.map(
+        project => <Project key={project.__id}  id = {props.id} getId = {props.getId} {...project}/>
     )
     return (
         <div>

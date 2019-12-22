@@ -19,7 +19,7 @@ let initialState = {
 }
 
 const photos_reducer = (state = initialState, action) => {
-debugger
+//debugger
     switch (action.type) {
         case SET_PHOTO_ALBUMS: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ

@@ -1,5 +1,5 @@
 import {mongodbAPI} from '../../api/api'
-import {SET_PROJECTS, SET_PROJECT} from "../actions/types";
+import {SET_PROJECTS, SET_PROJECT, SET_ID} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setProjects = (projects) => {
@@ -16,6 +16,13 @@ export const setProject = (project) => {
     }
 }
 
+export const setId = (id) => {
+    return {
+        type: SET_ID,
+        payload: id
+    }
+}
+
 /*Thunk Creators*/
 export const getProjects = () => {
     return async (dispatch) => {
@@ -28,5 +35,11 @@ export const getProject = (id) => {
     return async (dispatch) => {
         const project = await mongodbAPI.getProject(id);
         dispatch(setProject(project));
+    }
+}
+
+export const getId = (id) => {
+    return (dispatch) => {
+        dispatch(setId(id));
     }
 }

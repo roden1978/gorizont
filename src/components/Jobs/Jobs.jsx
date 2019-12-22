@@ -22,7 +22,7 @@ const Jobs = (props) => {
     //debugger
     const classes = useStyles();
 
-    let jobs = props.jobs.jobs.map(
+    let jobs = props.jobs.map(
         job => <Job key={job.__id}  {...job}/>)
 
     return (
