@@ -9,6 +9,8 @@ import katok from "../../assets/icons/katok.svg";
 import Avatar from "@material-ui/core/Avatar";
 import ModalPhoto from "../../common/ModalPhoto";
 import Container from "@material-ui/core/Container";
+import {NavLink} from "react-router-dom";
+import {blueGrey} from "@material-ui/core/colors";
 
 const PhotoAlbum = (props) => {
 
@@ -50,6 +52,7 @@ const PhotoAlbum = (props) => {
 debugger
     return (
         <div className={classes.root}>
+
             <Container maxWidth="md">
             <GridList cellHeight={400} className={classes.gridList}>
                 {props.cards.map(card => (
@@ -74,6 +77,7 @@ debugger
             </GridList>
             </Container>
             {props.isClicked ? <ModalPhoto changeClicked = {props.changeClicked} url = {props.url}/> : null}
+
         </div>
     );
     //onClose()

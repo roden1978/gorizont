@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme =>({
     },
     title: {
         fontSize: 16,
-        backgroundColor: 'coral', //#0d47a1 #1976d2
+        backgroundColor: '#0d47a1', //#0d47a1 #1976d2
         color: '#ffffff'
     },
     pos: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme =>({
         fontWeight: 'bold',
     },
     avatar: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f5f6f7',
         width: 50,
         height: 50,
     },
@@ -101,11 +101,7 @@ debugger
                 </CardActions>
                 <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>{props.description}</Typography>
-                        <Typography paragraph>{props.description}</Typography>
-                        <Typography paragraph>{props.description}</Typography>
-                        <Typography paragraph>{props.description}</Typography>
-                        <Typography paragraph>{props.description}</Typography>
+                        {props.text.map(paragraph => <Typography paragraph>{paragraph}</Typography>)}
                     </CardContent>
                 </Collapse>
             </Card>

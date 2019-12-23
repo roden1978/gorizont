@@ -16,7 +16,7 @@ import katokIcon from '../../../assets/icons/katok.svg'
 
 const useStyles = makeStyles({
     link: {
-        color: blueGrey[400],
+        color: 'coral', // blueGrey[400],
         textDecoration: 'none',
         textTransform: 'uppercase',
         fontWeight: 'lighter',
