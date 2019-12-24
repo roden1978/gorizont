@@ -4,17 +4,17 @@
     flex-wrap: nowrap;
     justify-content:center;
     box-shadow: 7px 7px 4px grey;
-    background-color: #0d47a1;
+    background-color: #282c34;
     position: fixed;
     width: 100%;
     margin-top: 210px;
     align-self: center;
-    z-index: 998;
+    z-index: 995;
 }
 .menuItem{
     display: block;
     height: 50px;
-    background-color: #0d47a1;
+    background-color: #282c34;
     text-align: center;
     text-transform: uppercase;
 }

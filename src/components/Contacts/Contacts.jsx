@@ -43,7 +43,7 @@ const Contacts = (props) => {
                         spacing={3}
                         className={classes.pos}
                     >
-                        <Grid item xs={5}>
+                        <Grid item xs={10}>
                                <Card>
                                    <CardHeader title={props.contacts.length === 0 ? '' : props.contacts[0].companyName}
                                    className={classes.title}/>

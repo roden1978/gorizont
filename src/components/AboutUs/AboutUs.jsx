@@ -42,7 +42,7 @@ debugger
                         spacing={3}
                         className={classes.pos}
                     >
-                        <Grid item xs={5}>
+                        <Grid item xs={10}>
                             <Card>
                                 <CardHeader title={'О нас'}
                                             className={classes.title}/>

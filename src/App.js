@@ -3,16 +3,38 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Content from "./components/Content/Content";
+import MobileContent from "./components/Content/MobileContent";
+import MobileHeader from "./components/Header/MobileHeader";
+import device from 'device'
 
 function App() {
 
-    return (
-        <div className="App">
-            <Header/>
-            <Content/>
-            <Footer/>
-        </div>
-    );
+    const myDevice = device(navigator.userAgent);
+    //console.log(myDevice);
+
+    if (myDevice.is('desktop')) {
+        return (
+            <div className="App">
+                <Header/>
+                <Content myDevice = {myDevice}/>
+                <Footer/>
+            </div>
+        );
+    }
+
+    /*myDevice.is('tv') || myDevice.is('tablet') || myDevice.is('phone')*/
+
+    if(myDevice.is('tv') || myDevice.is('tablet') || myDevice.is('phone')){
+        return (
+            <div className="App">
+                <MobileHeader/>
+                <MobileContent/>
+                <Footer/>
+            </div>
+        );
+    }else {
+        return <h1>Не поддерживаемое устройство!</h1>
+    }
 }
 
 export default App;

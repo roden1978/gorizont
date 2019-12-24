@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -14,7 +14,11 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         border: '2px solid coral',
         boxShadow: theme.shadows[10],
-        padding: theme.spacing(2, 4, 3),
+        padding: theme.spacing(1, 1, 1),
+
+    },
+    im: {
+        width: '100%',
     },
 }));
 
@@ -43,12 +47,12 @@ export default function TransitionsModal(props) {
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
-                    timeout: 1000,
+                    timeout: 500,
                 }}
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <img src={props.url} alt = ''/>
+                        <img className={classes.im} src={props.url} alt=''/>
                     </div>
                 </Fade>
             </Modal>

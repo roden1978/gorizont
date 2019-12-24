@@ -31,7 +31,7 @@ const Jobs = (props) => {
             <Grid
                 container
                 direction="row"
-                justify="flex-start"
+                justify="space-evenly"
                 alignItems="center"
                 spacing={3}
             >

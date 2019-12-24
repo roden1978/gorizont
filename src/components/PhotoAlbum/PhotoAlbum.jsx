@@ -25,6 +25,7 @@ const PhotoAlbum = (props) => {
         },
         gridList: {
             backgroundColor: '#f5f6f7',
+            flexDirection: 'row',
         },
         icon: {
             color: 'rgba(255, 255, 255, 0.54)',
@@ -53,10 +54,10 @@ debugger
     return (
         <div className={classes.root}>
 
-            <Container maxWidth="md">
-            <GridList cellHeight={400} className={classes.gridList}>
+            <Container maxWidth="md" sx = {5}>
+            <GridList cellHeight={400} className={classes.gridList} >
                 {props.cards.map(card => (
-                    <GridListTile key={card.url ? card.url : katok}>
+                    <GridListTile key={card.url ? card.url : katok} >
                         <ButtonBase   onClick={()=>{
                             props.changeClicked(true);
                             props.getUrl(card.url);
