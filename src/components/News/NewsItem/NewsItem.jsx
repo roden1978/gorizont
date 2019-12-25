@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#0d47a1',//#0d47a1
+        backgroundColor: '#2d7fff',//#0d47a1
         color: '#FFFFFF',
     },
     pos: {
@@ -66,7 +66,7 @@ const NewsItem = (props) => {
                 </CardContent>
                 <CardActions>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
-                        Ознакомиться с проектом:
+                        Проект:
                     </Typography>
 
                     <NavLink to={'/projects/' + props.project}

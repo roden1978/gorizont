@@ -20,11 +20,12 @@ const PhotoAlbum = (props) => {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
-            backgroundColor: theme.palette.background.paper,
+            //backgroundColor: theme.palette.background.paper,
             transform: 'translateZ(0)',
+            backgroundColor: '#b4b4b4',
         },
         gridList: {
-            backgroundColor: '#f5f6f7',
+            backgroundColor: '#b4b4b4', //f5f6f7
             flexDirection: 'row',
         },
         icon: {

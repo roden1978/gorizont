@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
     },
     link: {
-        color: blueGrey[400],
+        color: 'coral',
         textDecoration: 'none',
         textTransform: 'uppercase',
         fontWeight: 'lighter',

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#0d47a1', //#0d47a1 #1976d2
+        backgroundColor: '#2d7fff', //#0d47a1 #1976d2
         color: '#ffffff'
     },
     pos: {
@@ -63,7 +63,7 @@ const Job = (props) => {
                 <CardHeader title={props.title}
                             className={classes.title}
                             subheader={
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                <Typography variant="body1" color="textSecondary" gutterBottom>
                                     {props.company}
                                 </Typography>}
                             avatar={
@@ -78,7 +78,7 @@ const Job = (props) => {
                         {props.description}
                     </Typography>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
-                        Заработная плата: {props.price}
+                        З/п: {props.price} руб.
                     </Typography>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
                         Электронная почта: {props.email}

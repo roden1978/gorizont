@@ -12,6 +12,10 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse";
+import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
+import {Link} from "react-router-dom";
+import MenuItem from "@material-ui/core/MenuItem";
+import styles from "../../Header/Header.module.css";
 
 const useStyles = makeStyles(theme =>({
     price: {
@@ -19,9 +23,8 @@ const useStyles = makeStyles(theme =>({
         fontWeight: 'bold',
     },
     title: {
-        fontSize: 16,
-        backgroundColor: '#0d47a1', //#0d47a1 #1976d2
-        color: '#ffffff'
+        backgroundColor: '#2d7fff', //#0d47a1 #1976d2
+        color: '#ffffff',
     },
     pos: {
         marginLeft: 12,
@@ -42,7 +45,7 @@ const useStyles = makeStyles(theme =>({
         flexDirection: 'column',
     },
     cardContent: {
-        minHeight: 160,
+        minHeight: 140,
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -88,6 +91,12 @@ debugger
 
                 </CardContent>
                 <CardActions  disableSpacing>
+                    {props.albumId ? <IconButton aria-label="Фотоальбом"
+                                                 component={Link} to={'/album/' + props.albumId}>
+                        <PhotoLibraryOutlinedIcon />
+                    </IconButton>
+                    : ''}
+
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,

@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#0d47a1',//#0d47a1
+        backgroundColor: '#2d7fff',//#0d47a1
         color: '#FFFFFF',
     },
 }));

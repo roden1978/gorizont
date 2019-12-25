@@ -22,9 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const Gallery = (props) => {
     const classes = useStyles();
-    debugger
-
-    //props.sets.sets.splice(0, Math.ceil(props.sets.sets.length/2) - 1)
+    //debugger
 
     let sets = props.sets.map(
         photoset => <PhotoAlbums key={photoset.id}
@@ -34,12 +32,11 @@ const Gallery = (props) => {
                                           url={photoset.primary}/>
     )
 
-
     return (
         <div className={classes.root}>
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
-                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    <Typography variant="h5" align="center" color="textPrimary" paragraph>
                         В галерее представлены фотоальбомы к проектам ООО Горизонт
                     </Typography>
                 </Container>
