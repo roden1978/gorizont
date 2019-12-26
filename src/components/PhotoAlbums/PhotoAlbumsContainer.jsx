@@ -1,6 +1,7 @@
 import React from 'react';
 import {getPhoto} from '../../redux/actions/photosActions';
 import PhotoAlbums from "../PhotoAlbums/PhotoAlbums";
+
 import {connect} from "react-redux";
 
 class PhotoAlbumsContainer extends React.Component {
@@ -11,29 +12,15 @@ class PhotoAlbumsContainer extends React.Component {
         this.size = null;
         this.url = null;
     }
-    //this.size  = null;
-    /* updatePrimary(){
-         this.props.primary ? this.props.getPhoto(this.props.primary)
-    : this.props.getPhotos(this.props.id);
-    }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.primary !== prevProps.primary)
-            this.updatePrimary()
-    }*/
     componentDidMount() {
-        debugger
-        //this.props.getPhotos(this.props.match.params.photosetId)
-        //this.props.photoset.every(()=>{
+        //debugger
         this.props.getPhoto(this.props.primary);
-        //})
-        //this.updatePrimary();
     }
 
 
     render() {
-        debugger
-        //props.photos.photo
+        //debugger
         if(this.props.photos.photo.length > 0)
         this.result = this.props.photos.photo.filter(ph => this.props.photos.sets.every(
             set => ph.primary === set.primary)

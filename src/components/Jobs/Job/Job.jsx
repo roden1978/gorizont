@@ -1,18 +1,18 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
-import {lighten, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import {blue, blueGrey, purple} from "@material-ui/core/colors";
-import moment from "moment";
 import 'moment/locale/ru'
-import katokIcon from '../../../assets/icons/katok.svg'
+import man01 from '../../../assets/icons/man.svg'
+import man02 from '../../../assets/icons/man01.svg'
+import man03 from '../../../assets/icons/man02.svg'
+import man04 from '../../../assets/icons/man03.svg'
+import man05 from '../../../assets/icons/man04.svg'
+import man06 from '../../../assets/icons/man05.svg'
 
 const useStyles = makeStyles({
     price: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
         height: 50,
     },
     katok: {
-        width: 45,
+        height: 45,
     },
     card: {
         height: '100%',
@@ -47,15 +47,44 @@ const useStyles = makeStyles({
     }
 });
 
-/*linear-gradient(to right, #0d47a1, #ffff)
-* 'linear-gradient(to right, #0d47a1 90%, coral)'*/
 const Job = (props) => {
     const classes = useStyles();
 
-    /*let createAt = moment([props.createAt]);
-    createAt.locale('ru');
-     sm={4}
-    */
+    let titleIcon;
+
+    const getRandomInt = (max) => {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    switch (getRandomInt(7)) {
+        case 0: {
+            titleIcon = man01;
+            break;
+            }
+        case 1: {
+            titleIcon = man02;
+            break;
+        }
+        case 2: {
+            titleIcon = man03;
+            break;
+        }
+        case 3: {
+            titleIcon = man04;
+            break;
+        }
+        case 4: {
+            titleIcon = man05;
+            break;
+        }
+        case 5: {
+            titleIcon = man06;
+            break;
+        }
+        default:
+            titleIcon = man01;
+            break;
+    }
 
     return (
         <Grid item xs={8} sm={4}>
@@ -68,7 +97,7 @@ const Job = (props) => {
                                 </Typography>}
                             avatar={
                                 <Avatar className={classes.avatar}>
-                                    <img className={classes.katok} src={katokIcon} alt="Работа"/>
+                                    <img className={classes.katok} src={titleIcon} alt="Работа"/>
                                 </Avatar>
                             }
 

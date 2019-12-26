@@ -7,4 +7,14 @@
 .footer h5{
     margin-left: 50px;
 }
+
+.footerMob {
+    background-color: #3f51b5;
+    flex: 0 0 auto;
+    color: white;
+}
+
+.footerMob h5{
+    margin-left: 50px;
+}
 /*#282c34*/

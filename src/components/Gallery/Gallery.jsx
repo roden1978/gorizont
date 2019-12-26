@@ -1,5 +1,4 @@
 import React from 'react'
-import s from './Gallery.module.css'
 import PhotoAlbums from "../PhotoAlbums/PhotoAlbums";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";

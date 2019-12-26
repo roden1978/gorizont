@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Content from "./components/Content/Content";
 import MobileContent from "./components/Content/MobileContent";
 import MobileHeader from "./components/Header/MobileHeader";
+import MobileFooter from './components/Footer/MobileFooter'
 import device from 'device'
 
 function App() {
@@ -22,14 +23,12 @@ function App() {
         );
     }
 
-    /*myDevice.is('tv') || myDevice.is('tablet') || myDevice.is('phone')*/
-
     if(myDevice.is('tv') || myDevice.is('tablet') || myDevice.is('phone')){
         return (
             <div className="App">
                 <MobileHeader/>
                 <MobileContent/>
-                <Footer/>
+                <MobileFooter/>
             </div>
         );
     }else {

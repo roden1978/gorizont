@@ -8,7 +8,6 @@ import katok from '../../assets/icons/katok.svg';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import {NavLink} from "react-router-dom";
-import {blueGrey} from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles(theme => ({
@@ -59,12 +58,5 @@ const PhotoAlbums = (props) => {
 
 export default PhotoAlbums;
 
-/*
-* <Typography gutterBottom variant="h5" component="h2">
-                        {props.title}
-                    </Typography>
-                    *
-                    *
-                    title={props.title} */
 
 
