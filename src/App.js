@@ -11,7 +11,6 @@ import device from 'device'
 function App() {
 
     const myDevice = device(navigator.userAgent);
-    //console.log(myDevice);
 
     if (myDevice.is('desktop')) {
         return (

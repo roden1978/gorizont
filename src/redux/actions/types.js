@@ -12,3 +12,4 @@ export const SET_ABOUT = 'SET_ABOUT';
 export const IS_CLICKED = 'IS_CLICKED'
 export const SET_URL = 'SET_URL'
 export const SET_ID = 'SET_ID'
+export const SET_AUTHORIZED = 'SET_AUTHORIZED'

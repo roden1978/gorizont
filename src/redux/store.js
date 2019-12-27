@@ -10,6 +10,7 @@ import photos_reducer from "./reducers/photosReducer";
 import jobs_reducer from "./reducers/jobsReducer";
 import contacts_reducer from "./reducers/contactsReducer";
 import about_reducer from "./reducers/aboutReducer";
+import auth_reducer from "./reducers/authReducer";
 
 let reducers = combineReducers({
     news: news_reducer,
@@ -18,14 +19,13 @@ let reducers = combineReducers({
     jobs: jobs_reducer,
     contacts: contacts_reducer,
     about: about_reducer,
+    auth: auth_reducer,
     form: formReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)
 ));
-
-//let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 window.store = store;
 

@@ -12,6 +12,7 @@ import Delete from "../Admin/AdminForms/Delete";
 import NewsContainer from "../News/NewsContainer";
 import GalleryContainer from "../Gallery/GalleryContainer";
 import PhotoAlbumContainer from "../PhotoAlbum/PhotoAlbumContainer";
+import Auth from "../Auth/Auth";
 
 const Content = (props) => {
     return (
@@ -30,10 +31,8 @@ const Content = (props) => {
                 <Route exact path='/admin/create' component={Create}/>
                 <Route exact path='/admin/update' component={Update}/>
                 <Route exact path='/admin/delete' component={Delete}/>
-                {/*<Route path='/login'
-                       render={() => <Login/>}/>*/}
-                {/*<Route path='/admin'
-                       render={() => <Admin/>}/>*/}
+                <Route path='/login'
+                       render={() => <Auth/>}/>
                 <Route path='*'
                        render={() => <div>Page not found: error 404</div>}/>
             </Switch>

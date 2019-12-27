@@ -1,6 +1,8 @@
 import React from 'react'
 import s from './Admin.module.css'
 import {NavLink} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const Admin = (props) => {
     return (
@@ -20,4 +22,4 @@ const Admin = (props) => {
     );
 }
 
-export default Admin;
+export default compose(withAuthRedirect)(Admin)
