@@ -13,6 +13,7 @@ import NewsContainer from "../News/NewsContainer";
 import GalleryContainer from "../Gallery/GalleryContainer";
 import PhotoAlbumContainer from "../PhotoAlbum/PhotoAlbumContainer";
 import Auth from "../Auth/Auth";
+import Login from "../Auth/Login";
 
 const Content = (props) => {
     return (
@@ -31,8 +32,10 @@ const Content = (props) => {
                 <Route exact path='/admin/create' component={Create}/>
                 <Route exact path='/admin/update' component={Update}/>
                 <Route exact path='/admin/delete' component={Delete}/>
-                <Route path='/login'
+                <Route path='/auth'
                        render={() => <Auth/>}/>
+                <Route path='/login'
+                       render={() => <Login/>}/>
                 <Route path='*'
                        render={() => <div>Page not found: error 404</div>}/>
             </Switch>

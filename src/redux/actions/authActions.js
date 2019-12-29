@@ -1,3 +1,4 @@
+import {authAPI} from '../../api/api'
 import {SET_AUTHORIZED} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -9,8 +10,10 @@ export const setAuthorized = (isAuthorized) => {
 }
 
 /*Thunk Creators*/
-export const getAuthorize = (isAuthorized) => {
+export const getAuthorize = () => {
     return  (dispatch) => {
-        dispatch(setAuthorized(isAuthorized));
+        debugger
+        const result = authAPI.handleAuthentication()
+        dispatch(setAuthorized(result));
     }
 }

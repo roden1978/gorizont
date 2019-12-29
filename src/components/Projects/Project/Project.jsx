@@ -115,19 +115,6 @@ debugger
                 </Collapse>
             </Card>
         </Grid>
-
-
-
-
-
-      /*
-        <div className={styles.cardWrapper}>
-            <div className={styles.card}>
-                <div className={styles.name}>{props.title}</div>
-                {props.description}
-            </div>
-
-        </div>*/
     );
 }
 

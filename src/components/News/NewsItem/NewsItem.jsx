@@ -24,14 +24,14 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#2d7fff',//#0d47a1
+        backgroundColor: '#3b5998',//#0d47a1
         color: '#FFFFFF',
     },
     pos: {
         marginLeft: 12,
     },
     avatar:{
-        backgroundColor: '#f5f6f7',
+        backgroundColor: '#e9ecf4',
         width: 50,
         height: 50,
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     }
 });
 
-/*linear-gradient(to right, #0d47a1, #ffff)
+/*linear-gradient(to right, #0d47a1, #ffff #f5f6f7)
 * 'linear-gradient(to right, #0d47a1 90%, coral)'*/
 const NewsItem = (props) => {
     const classes = useStyles();

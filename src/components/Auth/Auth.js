@@ -2,18 +2,19 @@ import React from "react";
 import auth0 from 'auth0-js'
 import {connect} from "react-redux";
 import {getAuthorize} from "../../redux/actions/authActions";
+import {authAPI} from '../../api/api'
 
-class Auth extends React.Component{
+const Auth =() => {
 
-    componentDidMount() {
         //debugger
-        this.authorize();
-    }
+        authAPI.authorizeAuth0();
+}
+export default Auth;
+/*
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.isAuthorized !== prevProps.isAuthorized){
-            this.authorize()
-        } else {
+        debugger
+        if(!this.props.isAuthorized) {
             this.handleAuthentication()
         }
     }
@@ -47,12 +48,12 @@ class Auth extends React.Component{
     }
 }
 
-/*функция принимает state созданный в redux при помощи reducers
-* и возвращает требуемые нам данные из state*/
+/!*функция принимает state созданный в redux при помощи reducers
+* и возвращает требуемые нам данные из state*!/
 let mapStateToProps = (state) => {
     return {
         auth: state.auth.isAuthorized
     }
 }
 
-export default connect(mapStateToProps, {getAuthorize})(Auth);
+export default connect(mapStateToProps, {getAuthorize})(Auth);*/

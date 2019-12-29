@@ -1,8 +1,18 @@
 //import * as axios from "axios/index";
 
 import axios from 'axios'
+import auth0 from 'auth0-js'
+import {connect} from "react-redux";
+import {getAuthorize} from "../redux/actions/authActions";
 
 const instance = axios.create();
+let auth = new auth0.WebAuth({
+    domain: 'dev-8e4ti4s2.auth0.com',
+    clientID: 'bOS225UZ986RtJmRgZCZG2SzZPGPJGJZ',
+    redirectUri: 'http://localhost:3000/login',
+    responseType: 'token id_token',
+    scope: 'openid'
+})
 
 export const mongodbAPI = {
     getNews() {
@@ -101,3 +111,24 @@ export const flickrAPI = {
             )
     }
 }
+
+export const authAPI = {
+    authorizeAuth0(){
+        auth.authorize();
+    },
+
+    handleAuthentication(){
+        debugger
+       const result = auth.parseHash((err, authResult) => {
+            if (authResult && authResult.accessToken) {
+                return true;
+            }else if(err){
+                console.log(err);
+            }
+        })
+
+        return result;
+    },
+
+}
+

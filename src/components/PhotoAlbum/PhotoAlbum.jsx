@@ -22,10 +22,10 @@ const PhotoAlbum = (props) => {
             overflow: 'hidden',
             //backgroundColor: theme.palette.background.paper,
             transform: 'translateZ(0)',
-            backgroundColor: '#b4b4b4',
+            backgroundColor: '#e9ecf4',
         },
         gridList: {
-            backgroundColor: '#b4b4b4', //f5f6f7
+            backgroundColor: '#e9ecf4', //f5f6f7
             flexDirection: 'row',
         },
         icon: {

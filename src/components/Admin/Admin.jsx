@@ -5,6 +5,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 const Admin = (props) => {
+
     return (
         <div>
             <div>Login</div>
