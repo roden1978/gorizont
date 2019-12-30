@@ -1,5 +1,7 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const Update = (props) =>{
     return(
@@ -12,4 +14,4 @@ const Update = (props) =>{
     )
 };
 
-export default Update;
+export default compose(withAuthRedirect)(Update)

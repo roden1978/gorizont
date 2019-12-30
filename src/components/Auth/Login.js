@@ -14,7 +14,7 @@ class Login extends React.Component {
 
     render() {
         return (<>
-            {console.log('Auth:' + this.props.auth)}
+            {this.props.auth ? <Redirect to = '/admin' /> : null}
         </>)
     }
 }
@@ -27,3 +27,5 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {getAuthorize})(Login)
+
+/*{console.log('Auth:' + this.props.auth)}*/

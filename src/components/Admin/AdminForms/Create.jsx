@@ -1,5 +1,7 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const Create = (props) =>{
     return(
@@ -12,4 +14,4 @@ const Create = (props) =>{
     )
 };
 
-export default Create;
+export default compose(withAuthRedirect)(Create)

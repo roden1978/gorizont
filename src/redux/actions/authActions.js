@@ -1,5 +1,6 @@
-import {authAPI} from '../../api/api'
+import {authAPI, mongodbAPI} from '../../api/api'
 import {SET_AUTHORIZED} from "../actions/types";
+import {setNews} from "./newsActions";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setAuthorized = (isAuthorized) => {
@@ -11,9 +12,20 @@ export const setAuthorized = (isAuthorized) => {
 
 /*Thunk Creators*/
 export const getAuthorize = () => {
-    return  (dispatch) => {
-        debugger
-        const result = authAPI.handleAuthentication()
-        dispatch(setAuthorized(result));
+    return  async (dispatch) => {
+        await authAPI.handleAuthentication()
+            .then(result => {
+                dispatch(setAuthorized(result))
+            });
+
+
     }
 }
+
+/*
+export const getNews = () => {
+    return async (dispatch) => {
+        const news = await mongodbAPI.getNews();
+        dispatch(setNews(news));
+    }
+}*/

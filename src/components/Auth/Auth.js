@@ -1,7 +1,4 @@
 import React from "react";
-import auth0 from 'auth0-js'
-import {connect} from "react-redux";
-import {getAuthorize} from "../../redux/actions/authActions";
 import {authAPI} from '../../api/api'
 
 const Auth =() => {

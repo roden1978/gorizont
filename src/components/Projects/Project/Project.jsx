@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme =>({
         fontWeight: 'bold',
     },
     title: {
-        backgroundColor: '#2d7fff', //#0d47a1 #1976d2
+        background:
+            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)', //#0d47a1 #1976d2
         color: '#ffffff',
     },
     pos: {

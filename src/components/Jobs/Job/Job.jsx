@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#2d7fff', //#0d47a1 #1976d2
+        background:
+            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)', //#0d47a1 #1976d2
         color: '#ffffff'
     },
     pos: {

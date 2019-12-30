@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#2d7fff',//#0d47a1
+        background:
+            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',//#0d47a1
         color: '#FFFFFF',
     },
 }));

@@ -11,9 +11,9 @@ let auth = new auth0.WebAuth({
     clientID: 'bOS225UZ986RtJmRgZCZG2SzZPGPJGJZ',
     redirectUri: 'http://localhost:3000/login',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'email'
 })
-
+/*openid*/
 export const mongodbAPI = {
     getNews() {
         //debugger
@@ -118,17 +118,16 @@ export const authAPI = {
     },
 
     handleAuthentication(){
-        debugger
-       const result = auth.parseHash((err, authResult) => {
+        return new Promise((resolve, reject) => {
+           auth.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken) {
-                return true;
+                resolve(true);
             }else if(err){
                 console.log(err);
             }
         })
-
-        return result;
-    },
+    }
+        )}
 
 }
 

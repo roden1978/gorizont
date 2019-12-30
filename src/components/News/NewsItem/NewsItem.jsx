@@ -24,7 +24,8 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 16,
-        backgroundColor: '#3b5998',//#0d47a1
+        background:
+            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',
         color: '#FFFFFF',
     },
     pos: {
@@ -41,7 +42,8 @@ const useStyles = makeStyles({
 });
 
 /*linear-gradient(to right, #0d47a1, #ffff #f5f6f7)
-* 'linear-gradient(to right, #0d47a1 90%, coral)'*/
+* 'linear-gradient(to right, #0d47a1 90%, coral)'
+* backgroundColor: '#3b5998',//#0d47a1*/
 const NewsItem = (props) => {
     const classes = useStyles();
 
