@@ -127,7 +127,10 @@ export const authAPI = {
             }
         })
     }
-        )}
+        )},
+    logout(){
+        auth.logout();
+    }
 
 }
 

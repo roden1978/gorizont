@@ -1,6 +1,7 @@
 import React from "react";
 import {authAPI} from '../../api/api'
 import {getAuthorize} from "../../redux/actions/authActions";
+import Spinner from "../../common/Spinner";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
@@ -11,10 +12,13 @@ class Login extends React.Component {
         this.props.getAuthorize();
 
     }
+    /*componentWillUnmount() {
+        authAPI.logout();
+    }*/
 
     render() {
         return (<>
-            {this.props.auth ? <Redirect to = '/admin' /> : null}
+            {this.props.auth ? <Redirect to = '/admin' /> : <Spinner/>}
         </>)
     }
 }
