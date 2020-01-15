@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm install && npm run build"
   },
-  "proxy": "https://warm-eyrie-80483.herokuapp.com",
+  "proxy": "warm-eyrie-80483.herokuapp.com",
   "eslintConfig": {
     "extends": "react-app"
   },
