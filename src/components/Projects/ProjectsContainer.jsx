@@ -35,7 +35,7 @@ class ProjectsContainer extends React.Component {
     }
 
     render() {
-        debugger
+        //debugger
         return (<Projects projects={this.props.projects} id={this.props.id} getId = {this.props.getId}/>)
     }
 }

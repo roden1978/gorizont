@@ -8,7 +8,7 @@ import {Redirect} from "react-router-dom";
 class Login extends React.Component {
 
     componentDidMount() {
-        debugger
+        //debugger
         this.props.getAuthorize();
 
     }

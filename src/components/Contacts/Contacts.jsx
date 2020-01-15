@@ -1,11 +1,8 @@
 import React from 'react'
-import s from './Contacts.module.css'
 import {Container, makeStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
-import katokIcon from "../../assets/icons/katok.svg";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
@@ -32,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 const Contacts = (props) => {
     const classes = useStyles();
     //const info = props.contacts[0];
-    debugger
+    //debugger
     return(
             <div className={classes.root}>
                 <Container className={classes.cardGrid} maxWidth="sx">

@@ -14,8 +14,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 import {Link} from "react-router-dom";
-import MenuItem from "@material-ui/core/MenuItem";
-import styles from "../../Header/Header.module.css";
 
 const useStyles = makeStyles(theme =>({
     price: {
@@ -70,7 +68,7 @@ const Project = (props) => {
         setExpanded(!expanded);
         props.getId(null);
     };
-debugger
+//debugger
 
 
     return(

@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function TransitionsModal(props) {
+export default function ModalPhoto(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 

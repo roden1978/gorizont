@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 const AboutUs = (props) => {
     const classes = useStyles();
     //const info = props.contacts[0];
-debugger
+//debugger
     return(
         <div>
             <div className={classes.root}>

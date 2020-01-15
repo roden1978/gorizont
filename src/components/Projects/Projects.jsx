@@ -1,5 +1,4 @@
 import React from 'react'
-import s from './Projects.module.css'
 import Project from "./Project/Project";
 import {Container, makeStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -19,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Projects = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
 
     let projectItems = props.projects.map(

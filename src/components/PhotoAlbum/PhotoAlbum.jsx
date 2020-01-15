@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import s from './PhothoAlbum.module.css'
+import React from 'react'
 import GridList from "@material-ui/core/GridList";
 import {makeStyles} from "@material-ui/core";
 import GridListTile from '@material-ui/core/GridListTile';
@@ -9,8 +8,6 @@ import katok from "../../assets/icons/katok.svg";
 import Avatar from "@material-ui/core/Avatar";
 import ModalPhoto from "../../common/ModalPhoto";
 import Container from "@material-ui/core/Container";
-import {NavLink} from "react-router-dom";
-import {blueGrey} from "@material-ui/core/colors";
 
 const PhotoAlbum = (props) => {
 
@@ -20,7 +17,6 @@ const PhotoAlbum = (props) => {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
-            //backgroundColor: theme.palette.background.paper,
             transform: 'translateZ(0)',
             backgroundColor: '#e9ecf4',
         },
@@ -51,7 +47,7 @@ const PhotoAlbum = (props) => {
 
     const classes = useStyles();
 
-debugger
+//debugger
     return (
         <div className={classes.root}>
 
@@ -86,22 +82,3 @@ debugger
 }
 
 export default PhotoAlbum;
-
-/*<Container className={classes.cardGrid} maxWidth="md">
-                <GridList className={classes.gridList} cols={2.5}>
-                    {photoCards}
-                </GridList>
-            </Container>
- actionIcon={
-                                <IconButton aria-label={`star ${card.title}`}>
-                                    <StarBorderIcon className={classes.title}/>
-                                </IconButton>
-                            }
-                            title={card.title}
-
-
-
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">December</ListSubheader>
-                </GridListTile>
-            */

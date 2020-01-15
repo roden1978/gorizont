@@ -3,7 +3,7 @@ import styles from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
-    const scrollHeight = Math.max(
+   /* const scrollHeight = Math.max(
         document.body.scrollHeight, document.documentElement.scrollHeight,
         document.body.offsetHeight, document.documentElement.offsetHeight,
         document.body.clientHeight, document.documentElement.clientHeight
@@ -12,7 +12,7 @@ const Navbar = () => {
         document.body.scrollWidth, document.documentElement.scrollWidth,
         document.body.offsetWidth, document.documentElement.offsetWidth,
         document.body.clientWidth, document.documentElement.clientWidth
-    )
+    )*/
     return (
                 <nav className={styles.container}>
                     <div className={styles.menuItem}><NavLink to='/news' activeClassName={styles.activeLink}>Новости</NavLink></div>

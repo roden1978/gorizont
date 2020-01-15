@@ -11,7 +11,7 @@ class GalleryContainer extends React.Component{
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
-    debugger
+    //debugger
             if(prevProps.sets.length === 0){
                 this.updatePrimary();
             }
@@ -28,7 +28,7 @@ class GalleryContainer extends React.Component{
     }
 
     render() {
-        debugger
+        //debugger
         return (<Gallery sets = {this.props.setsWithUrl}/>)
     }
 }

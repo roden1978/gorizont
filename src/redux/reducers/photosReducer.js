@@ -44,7 +44,7 @@ const photos_reducer = (state = initialState, action) => {
         }
         case SET_URL_TO_ALBUMS:{
             //debugger
-            const size = action.payload.sizes.size.find(ph => ph.label == "Medium")
+            const size = action.payload.sizes.size.find(ph => ph.label === "Medium")
             return {
                 ...state,
                 setsWithUrl: [...state.setsWithUrl, {...action.set, primary: size.source}]
@@ -53,7 +53,7 @@ const photos_reducer = (state = initialState, action) => {
         }
         case SET_URL_TO_PHOTOS:{
         //debugger
-            const size = action.payload.sizes.size.find(ph => ph.label == "Large")
+            const size = action.payload.sizes.size.find(ph => ph.label === "Large")
             return {
                 ...state,
                 photosWithUrl: [...state.photosWithUrl, {...action.card, url: size.source}]

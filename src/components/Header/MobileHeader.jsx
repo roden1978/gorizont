@@ -7,9 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import styles from "../NavigationBar/Navbar.module.css";
 import {Link} from 'react-router-dom';
-import Redirect from "react-router-dom/es/Redirect";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,11 +35,7 @@ export default function MenuAppBar() {
         setAnchorEl(null);
     };
 
-    const redirectTo = (path) =>{
-
-    }
-
-    return (
+     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
-import {lighten, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
@@ -8,8 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import {blue, blueGrey, purple} from "@material-ui/core/colors";
 import moment from "moment";
 import 'moment/locale/ru'
 import katokIcon from '../../../assets/icons/katok.svg'
@@ -83,15 +81,3 @@ const NewsItem = (props) => {
 }
 
 export default NewsItem;
-
-/*
-*
-            <div>Title: {props.title}</div>
-            <div>Text: <br/>{props.text}</div>
-            <div>Project id: {props.project}</div>
-            <div>Date: {props.createAt}</div>
-            <div>Project Name: {props.projectTitle}</div>
-            <div>Link: <NavLink to={'/projects/' + props.project}>{props.projectTitle}</NavLink></div>
-            *
-            * <NavLink to={'/projects/' + props.project}
-                             className={classes.link}>{props.projectTitle}</NavLink>*/

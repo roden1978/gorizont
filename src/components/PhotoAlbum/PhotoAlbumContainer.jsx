@@ -29,7 +29,7 @@ class PhotoAlbumContainer extends React.Component {
     }
 
     render() {
-    debugger
+    //debugger
         return (<PhotoAlbum cards={this.props.photosWithUrl}
                             isClicked={this.props.isClicked}
                             url={this.props.url}
