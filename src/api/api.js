@@ -17,7 +17,7 @@ let auth = new auth0.WebAuth({
 export const mongodbAPI = {
     getNews() {
         //debugger
-        return instance.get('/api/news')
+        return instance.get('/news')
             .then(response => {
                 return response.data
             })
