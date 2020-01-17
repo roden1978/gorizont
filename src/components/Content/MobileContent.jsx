@@ -14,7 +14,7 @@ const MobileContent = (props) => {
         <div className={styles.mobileContent}>
             <Switch>
                 <Route exact path='/'
-                       render={() => <Redirect from='/' to='/news'/>}/>
+                       render={() => <Redirect from='/' to='/job'/>}/>
                 <Route path='/news' component={NewsContainer}/>
                 <Route path='/projects/:projectId?' component={ProjectsContainer}/>
                 <Route path='/gallery' component={GalleryContainer}/>
