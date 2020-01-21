@@ -14,6 +14,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 import {Link} from "react-router-dom";
+import moment from "moment";
+import 'moment/locale/ru'
 
 const useStyles = makeStyles(theme =>({
     price: {
@@ -46,6 +48,9 @@ const useStyles = makeStyles(theme =>({
     cardContent: {
         minHeight: 140,
     },
+    date: {
+        marginLeft: 12
+    },
     expand: {
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
@@ -68,6 +73,9 @@ const Project = (props) => {
         setExpanded(!expanded);
         props.getId(null);
     };
+
+    let createAt = moment(props.createAt);
+    createAt.locale('ru');
 //debugger
 
 
@@ -104,7 +112,7 @@ const Project = (props) => {
                         aria-expanded={expanded }
                         aria-label="Показать больше"
                     >
-                        <ExpandMoreIcon />
+                        <ExpandMoreIcon/>
                     </IconButton>
                 </CardActions>
                 <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
@@ -112,9 +120,16 @@ const Project = (props) => {
                         {props.text.map(paragraph => <Typography paragraph>{paragraph}</Typography>)}
                     </CardContent>
                 </Collapse>
+                <Typography className={classes.date} variant="body2" color="textSecondary">
+                    Старт проекта: {createAt.format('LL')}
+                </Typography>
+                <>
+                    admin panel
+                    </>
             </Card>
         </Grid>
     );
 }
 
 export default Project;
+

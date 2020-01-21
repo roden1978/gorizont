@@ -11,6 +11,10 @@ import Avatar from "@material-ui/core/Avatar";
 import moment from "moment";
 import 'moment/locale/ru'
 import katokIcon from '../../../assets/icons/katok.svg'
+import clsx from "clsx";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
+import Collapse from "@material-ui/core/Collapse";
 
 const useStyles = makeStyles({
     link: {
@@ -29,13 +33,13 @@ const useStyles = makeStyles({
     pos: {
         marginLeft: 12,
     },
-    avatar:{
+    avatar: {
         backgroundColor: '#e9ecf4',
         width: 50,
         height: 50,
     },
-    katok:{
-      width:45,
+    katok: {
+        width: 45,
     }
 });
 
@@ -45,16 +49,17 @@ const useStyles = makeStyles({
 const NewsItem = (props) => {
     const classes = useStyles();
 
-    let createAt = moment([props.createAt]);
-    createAt.locale('ru');
+    let createAt = moment(props.createAt);
 
+    createAt.locale('ru');
+    //console.log(createAt.format('LL'));
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
                 <CardHeader title={props.title}
                             className={classes.title}
                             avatar={
-                                <Avatar  className={classes.avatar}>
+                                <Avatar className={classes.avatar}>
                                     <img className={classes.katok} src={katokIcon} alt="Новости"/>
                                 </Avatar>
                             }
@@ -75,9 +80,52 @@ const NewsItem = (props) => {
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
                     {createAt.format('LL')}
                 </Typography>
+                <AdminPanelNews/>
             </Card>
         </Grid>
     );
 }
 
 export default NewsItem;
+
+const AdminPanelNews = (props) => {
+    return (
+        <>
+            <CardActions>
+                <Typography variant="body2" color="textPrimary">
+                    Создать
+                </Typography>
+                <IconButton>
+                    <ExpandMoreIcon/>
+                </IconButton>
+                <Typography variant="body2" color="textPrimary">
+                    Редактировать
+                </Typography>
+                <IconButton>
+                    <ExpandMoreIcon/>
+                </IconButton>
+                <Typography variant="body2" color="textPrimary">
+                    Удалить
+                </Typography>
+                <IconButton>
+                    <ExpandMoreIcon/>
+                </IconButton>
+            </CardActions>
+            <Collapse in = {true} timeout="auto" unmountOnExit>
+                <CardContent>
+                    <Typography variant="body2" color="textPrimary">
+                        Admin panel
+                    </Typography>
+                </CardContent>
+            </Collapse>
+        </>
+    )
+}
+
+const EditNewsForm = () =>{
+    return(
+        <form>
+
+        </form>
+    )
+}

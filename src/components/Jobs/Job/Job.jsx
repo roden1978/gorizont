@@ -13,6 +13,7 @@ import man03 from '../../../assets/icons/man02.svg'
 import man04 from '../../../assets/icons/man03.svg'
 import man05 from '../../../assets/icons/man04.svg'
 import man06 from '../../../assets/icons/man05.svg'
+import moment from "moment";
 
 const useStyles = makeStyles({
     price: {
@@ -29,6 +30,9 @@ const useStyles = makeStyles({
         marginLeft: 12,
         fontSize: 14,
         fontWeight: 'bold',
+    },
+    date: {
+        marginLeft: 12
     },
     avatar: {
         backgroundColor: '#ffffff',
@@ -50,6 +54,15 @@ const useStyles = makeStyles({
 
 const Job = (props) => {
     const classes = useStyles();
+
+    const currentDate = new Date();
+    const pubDate = new Date(props.createAt);
+    const days = 30 - Math.floor((currentDate - pubDate)/(24*60*60*1000)) +1 ;
+    //console.log(days);
+
+    let createAt = moment(props.createAt);
+
+    createAt.locale('ru');
 
     let titleIcon;
 
@@ -114,9 +127,15 @@ const Job = (props) => {
                         Электронная почта: {props.email}
                     </Typography>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
-                        Телефон: {props.phone}
-                    </Typography>
+                    Телефон: {props.phone}
+                </Typography>
                 </CardContent>
+                <Typography className={classes.date} variant="body2" color="textSecondary">
+                    {createAt.format('LL')}
+                </Typography>
+                <Typography className={classes.date} variant="body2" color="textSecondary">
+                    Дней осталось: {days}
+                </Typography>
             </Card>
         </Grid>
     );

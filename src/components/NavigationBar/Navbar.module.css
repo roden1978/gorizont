@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content:center;
-    box-shadow: 7px 7px 4px grey;
+    box-shadow: 0px 4px 8px grey;
     background-color: #282c34;
     position: fixed;
     width: 100%;
