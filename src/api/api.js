@@ -25,6 +25,15 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    getNewsItem(id) {
+        return instance.get('/api/news/' + id)
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
 
     getProjects() {
         return instance.get('/api/projects')

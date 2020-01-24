@@ -1,8 +1,11 @@
-import {SET_NEWS} from "../actions/types";
+import {SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM, GET_ALL_NEWS, SET_NEWS_ITEM, SET_CURRENT_NEWS_ID} from "../actions/types";
 
 let initialState = {
     news: [],
-    projectTitle: ''
+    loadProjects: false,
+    getAllNews: false,
+    getNewsItem: false,
+    currentNewsId: null
 }
 
 const news_reducer = (state = initialState, action) => {
@@ -19,6 +22,32 @@ const news_reducer = (state = initialState, action) => {
                 ...state, news: action.payload
                 //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
             };
+        }
+        case  LOAD_PROJECTS:{
+            return {
+                ...state, loadProjects: action.payload
+            }
+        }
+        case  GET_ALL_NEWS:{
+            return {
+                ...state, getAllNews: action.payload
+            }
+        }
+        case  SET_NEWS_ITEM:{
+            return {
+                ...state, getNewsItem: action.payload
+            }
+        }
+        case CHANGE_NEWS_ITEM:{
+            const newsItem  = state.news.find(item =>item._id === state.currentNewsId)
+            return {
+                ...state, news: [newsItem]
+            }
+        }
+        case SET_CURRENT_NEWS_ID :{
+            return{
+                ...state, currentNewsId: action.payload
+            }
         }
         default:
             return state;

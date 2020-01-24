@@ -23,7 +23,13 @@ const News = (props) => {
     const classes = useStyles();
 
     let newsItems = props.news.map(
-        newsItem => <NewsItem key={newsItem.__id}  {...newsItem}/>)
+        newsItem => <NewsItem key={newsItem._id}
+                              {...newsItem}
+                              projects = {props.projects}
+                              setLoadProjects = {props.setLoadProjects}
+                              setNewsItem = {props.setNewsItem}
+                              setAllNews = {props.setAllNews}
+                              setCurrentNewsId = {props.setCurrentNewsId}/>)
 
     return (
         <div className={classes.root}>
