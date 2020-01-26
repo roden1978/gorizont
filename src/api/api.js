@@ -34,6 +34,12 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    updateNews(newsData){
+        return instance.post('/api/news', newsData)
+            .then(response => {
+                return response.data;
+            })
+    },
 
     getProjects() {
         return instance.get('/api/projects')

@@ -113,7 +113,7 @@ debugger
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
                     {createAt.format('LL')}
                 </Typography>
-                <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects} {...props}/>
+                <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects} saveNews = {props.saveNews} {...props}/>
             </Card>
         </Grid>
     );
@@ -185,6 +185,27 @@ const AdminPanelNews = (props) => {
             props.setAllNews(true);
         }
         //props.getId(null);
+    };
+
+    const showResults = (values) => {
+        const position = values.project.indexOf('|', 0);
+        let id, title;
+        if (position > 0){
+            id = values.project.slice(0, position);
+            title = values.project.slice(position + 1);
+            values.project = id;
+            values.projectTitle = title.trim();
+        }
+
+        //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+        //props.saveNews(JSON.stringify(values, null, 2));
+        props.saveNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+
+        if(expandedEdit)
+        handleEditExpandClick();
+
+        if(expandedCreate)
+            handleCreateExpandClick();
     };
 
     return (
@@ -342,6 +363,7 @@ const renderSelectField = ({
         <InputLabel htmlFor="age-native-simple">{label}</InputLabel>
         <Select
             native
+            onChange={input.onChange}
             {...input}
             {...custom}
         >
@@ -354,27 +376,33 @@ const renderSelectField = ({
 ////////////////////////////////////////////////////////
 const setInitialData = (props, reset)=>{
 if(reset){
+    initialData.id = null;
     initialData.title = '';
     initialData.text = '';
     initialData.project = '';
     initialData.status = true;
     initialData.projectTitle = '';
+    initialData.createAt = null
 }else{
+    initialData.id = props._id;
     initialData.title = props.title;
     initialData.text = props.text;
     initialData.project = props.project;
     initialData.status = props.status;
     initialData.projectTitle = props.projectTitle;
+    initialData.createAt = props.createAt;
 }
 
 }
 
 const initialData = {
+    id: null,
     title: '',
     text: '',
     project: '',
     projectTitle: '',
-    status: null
+    status: null,
+    createAt: null
 }
 ///////////////////////////////////////////////////////
 
@@ -386,7 +414,7 @@ const EditNewsForm = (props) => {
     //console.log(props.val + " " + props.expandedEdit);
 
     let projectsItems = projects.map(
-        projectItem => <option value={projectItem._id}>{projectItem.title}</option>)
+        projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`} label={projectItem.title}></option>)
 
     if(props.expandedEdit){
         pristine = false;
@@ -422,7 +450,8 @@ const EditNewsForm = (props) => {
                     label="Проект"
                 >
                     <option value=""/>
-                    {!props.expandedEdit ? projectsItems : <option value={props.project}>{props.projectTitle}</option>}
+                    {!props.expandedEdit ? projectsItems : <option value={props.project} label={props.projectTitle}></option>}
+
                 </Field>
             </div>
 
@@ -443,9 +472,7 @@ const EditNewsForm = (props) => {
     )
 }
 ////////////////////////////
-const showResults = (values) => {
-    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-};
+
 
 ////////////////////////////
 const EditNewsReduxForm = reduxForm({

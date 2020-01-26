@@ -22,6 +22,16 @@ export const getNews = () => {
     }
 }
 
+export const saveNews = (id, title, text, project, projectTitle, status, createAt) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.updateNews({id, title, text, project, projectTitle, status, createAt});
+        if (data.resultCode === 0) {
+            dispatch(getNews());
+        }
+    }
+}
+
 export const setLoadProjects = (loadProjects) =>{
     return{
         type: LOAD_PROJECTS,

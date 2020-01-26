@@ -29,7 +29,8 @@ const News = (props) => {
                               setLoadProjects = {props.setLoadProjects}
                               setNewsItem = {props.setNewsItem}
                               setAllNews = {props.setAllNews}
-                              setCurrentNewsId = {props.setCurrentNewsId}/>)
+                              setCurrentNewsId = {props.setCurrentNewsId}
+                              saveNews = {props.saveNews}/>)
 
     return (
         <div className={classes.root}>
