@@ -2,11 +2,13 @@ import React from 'react';
 import {
     getNews,
     setLoadProjects,
-    setAllNews,
     setNewsItem,
     setChangeNewsItem,
     setCurrentNewsId,
-    saveNews
+    createNews,
+    updateNews,
+    getAllNews,
+    setIsAllNews
 } from '../../redux/actions/newsActions';
 import {getProjects} from "../../redux/actions/projectsActions";
 import News from "./News";
@@ -16,7 +18,10 @@ class NewsContainer extends React.Component {
 
     componentDidMount() {
         //debugger
-        this.props.getNews();
+        if (this.props.adminMode)
+            this.props.getAllNews();
+        else
+            this.props.getNews();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -29,9 +34,10 @@ class NewsContainer extends React.Component {
             this.props.setNewsItem(false);
         }
 
-        if (this.props.getAllNews) {
-            this.props.getNews();
-            this.props.setAllNews(false)
+        if (this.props.isAllNews && this.props.adminMode) {
+            setTimeout(null,1000);
+            this.props.getAllNews();
+            this.props.setIsAllNews(false);
         }
     }
 
@@ -39,10 +45,12 @@ class NewsContainer extends React.Component {
         return (<News news={this.props.news}
                       setLoadProjects={this.props.setLoadProjects}
                       setNewsItem={this.props.setNewsItem}
-                      setAllNews={this.props.setAllNews}
+                      setIsAllNews={this.props.setIsAllNews}
                       projects={this.props.projects}
                       setCurrentNewsId={this.props.setCurrentNewsId}
-                      saveNews={this.props.saveNews}/>)
+                      createNews={this.props.createNews}
+                      updateNews={this.props.updateNews}
+                      adminMode={this.props.adminMode}/>)
     }
 }
 
@@ -53,9 +61,10 @@ let mapStateToProps = (state) => {
         news: state.news.news,
         loadProjects: state.news.loadProjects,
         projects: state.projects.projects,
-        getAllNews: state.news.getAllNews,
+        isAllNews: state.news.isAllNews,
         getNewsItem: state.news.getNewsItem,
-        currentNewsId: state.news.currentNewsId
+        currentNewsId: state.news.currentNewsId,
+        adminMode: state.auth.adminMode
     }
 };
 
@@ -63,8 +72,7 @@ let mapStateToProps = (state) => {
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
 export default connect(mapStateToProps,
-    {
-        getNews, getProjects, setLoadProjects,
-        setAllNews, setNewsItem, setChangeNewsItem,
-        setCurrentNewsId, saveNews
+    {   getNews, getProjects, setLoadProjects,
+        setNewsItem, setChangeNewsItem, setIsAllNews,
+        setCurrentNewsId, createNews, updateNews, getAllNews
     })(NewsContainer);

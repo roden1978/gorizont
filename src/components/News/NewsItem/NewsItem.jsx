@@ -113,7 +113,7 @@ debugger
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
                     {createAt.format('LL')}
                 </Typography>
-                <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects} saveNews = {props.saveNews} {...props}/>
+                {props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects} saveNews = {props.saveNews} {...props}/> : ''}
             </Card>
         </Grid>
     );
@@ -140,7 +140,7 @@ const AdminPanelNews = (props) => {
         }
         else{
             props.projects.length = 0;
-            props.setAllNews(true);
+            props.setIsAllNews(true);
         }
 
         //props.getId(null);
@@ -153,9 +153,8 @@ const AdminPanelNews = (props) => {
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
             setInitialData(props);
-        }
-        else{
-            props.setAllNews(true);
+        }else{
+            props.setIsAllNews(true);
         }
 
         //props.getId(null);
@@ -167,11 +166,9 @@ const AdminPanelNews = (props) => {
         if(!expandedHidden){
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
+        }else{
+            props.setIsAllNews(true);
         }
-        else{
-            props.setAllNews(true);
-        }
-        //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
@@ -180,11 +177,9 @@ const AdminPanelNews = (props) => {
         if(!expandedDelete){
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
+        }else{
+            props.setIsAllNews(true);
         }
-        else{
-            props.setAllNews(true);
-        }
-        //props.getId(null);
     };
 
     const showResults = (values) => {
@@ -199,13 +194,19 @@ const AdminPanelNews = (props) => {
 
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
-        props.saveNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
 
-        if(expandedEdit)
-        handleEditExpandClick();
 
-        if(expandedCreate)
+        if(expandedEdit){
+            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+            handleEditExpandClick();
+        }
+
+
+        if(expandedCreate){
+            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
             handleCreateExpandClick();
+        }
+
     };
 
     return (

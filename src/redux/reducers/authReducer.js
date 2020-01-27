@@ -1,7 +1,8 @@
 import {SET_AUTHORIZED} from "../actions/types";
 
 let initialState = {
-    isAuthorized: false
+    isAuthorized: false,
+    adminMode: true
 }
 
 const auth_reducer = (state = initialState, action) => {

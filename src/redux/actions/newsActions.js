@@ -2,7 +2,7 @@ import {mongodbAPI} from '../../api/api'
 import {SET_NEWS,
     LOAD_PROJECTS,
     CHANGE_NEWS_ITEM,
-    GET_ALL_NEWS,
+    IS_ALL_NEWS,
     SET_NEWS_ITEM,
 SET_CURRENT_NEWS_ID} from "../actions/types";
 
@@ -22,12 +22,29 @@ export const getNews = () => {
     }
 }
 
-export const saveNews = (id, title, text, project, projectTitle, status, createAt) =>{
+export const getAllNews = () => {
+    return async (dispatch) => {
+        const news = await mongodbAPI.getAllNews();
+        dispatch(setNews(news));
+    }
+}
+
+export const createNews = (title, text, project, projectTitle, status) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.createNews({title, text, project, projectTitle, status});
+        if (data.resultCode === 0) {
+            dispatch(getAllNews());
+        }
+    }
+}
+
+export const updateNews = (id, title, text, project, projectTitle, status, createAt) =>{
     debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.updateNews({id, title, text, project, projectTitle, status, createAt});
         if (data.resultCode === 0) {
-            dispatch(getNews());
+            dispatch(getAllNews());
         }
     }
 }
@@ -39,18 +56,17 @@ export const setLoadProjects = (loadProjects) =>{
     }
 }
 
+export const setIsAllNews = (isAllNews) =>{
+    return{
+        type: IS_ALL_NEWS,
+        payload: isAllNews
+    }
+}
+
 export const setChangeNewsItem = () =>{
     return{
         type: CHANGE_NEWS_ITEM
     }
-}
-
-export const setAllNews = (allNews) =>{
-    return{
-        type: GET_ALL_NEWS,
-        payload: allNews
-    }
-
 }
 
 export const  setNewsItem = (newsItem) =>{

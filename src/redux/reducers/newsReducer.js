@@ -1,10 +1,10 @@
-import {SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM, GET_ALL_NEWS, SET_NEWS_ITEM, SET_CURRENT_NEWS_ID} from "../actions/types";
+import {SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM, IS_ALL_NEWS, SET_NEWS_ITEM, SET_CURRENT_NEWS_ID} from "../actions/types";
 
 let initialState = {
     news: [],
     loadProjects: false,
-    getAllNews: false,
     getNewsItem: false,
+    isAllNews: false,
     currentNewsId: null
 }
 
@@ -28,9 +28,9 @@ const news_reducer = (state = initialState, action) => {
                 ...state, loadProjects: action.payload
             }
         }
-        case  GET_ALL_NEWS:{
+        case  IS_ALL_NEWS:{
             return {
-                ...state, getAllNews: action.payload
+                ...state, isAllNews: action.payload
             }
         }
         case  SET_NEWS_ITEM:{

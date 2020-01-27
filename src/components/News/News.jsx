@@ -28,9 +28,11 @@ const News = (props) => {
                               projects = {props.projects}
                               setLoadProjects = {props.setLoadProjects}
                               setNewsItem = {props.setNewsItem}
-                              setAllNews = {props.setAllNews}
+                              setIsAllNews = {props.setIsAllNews}
                               setCurrentNewsId = {props.setCurrentNewsId}
-                              saveNews = {props.saveNews}/>)
+                              createNews={props.createNews}
+                              updateNews={props.updateNews}
+            {...props}/>)
 
     return (
         <div className={classes.root}>

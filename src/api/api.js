@@ -17,7 +17,17 @@ let auth = new auth0.WebAuth({
 export const mongodbAPI = {
     getNews() {
         //debugger
-        return instance.get('/api/news')
+        return instance.get('/api/news/')
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    getAllNews() {
+        //debugger
+        return instance.get('/api/news/all')
             .then(response => {
                 return response.data
             })
@@ -35,10 +45,22 @@ export const mongodbAPI = {
             )
     },
     updateNews(newsData){
-        return instance.post('/api/news', newsData)
+        return instance.post('/api/news/upd',newsData)
             .then(response => {
                 return response.data;
             })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    createNews(newsData){
+        return instance.post('/api/news/', newsData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
     },
 
     getProjects() {
