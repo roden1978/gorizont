@@ -16,6 +16,7 @@ import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 import {Link} from "react-router-dom";
 import moment from "moment";
 import 'moment/locale/ru'
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(theme =>({
     price: {
@@ -98,12 +99,19 @@ const Project = (props) => {
 
                 </CardContent>
                 <CardActions  disableSpacing>
-                    {props.albumId ? <IconButton aria-label="Фотоальбом"
-                                                 component={Link} to={'/album/' + props.albumId}>
-                        <PhotoLibraryOutlinedIcon />
-                    </IconButton>
+                    {props.albumId ? <>
+                    <Typography variant="body2" color="textPrimary">
+                        Фотоальбом
+                    </Typography>
+                    <Tooltip title="Открыть фотоальбом" placement={'top'} arrow>
+                            <IconButton aria-label="Фотоальбом"
+                                        component={Link} to={'/album/' + props.albumId}>
+                                <PhotoLibraryOutlinedIcon />
+                            </IconButton>
+                    </Tooltip>
+                    </>
                     : ''}
-
+                    <Tooltip title="Показать больше" placement={'top'} arrow>
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
@@ -114,10 +122,15 @@ const Project = (props) => {
                     >
                         <ExpandMoreIcon/>
                     </IconButton>
+                    </Tooltip>
                 </CardActions>
                 <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
                     <CardContent>
-                        {props.text.map(paragraph => <Typography paragraph>{paragraph}</Typography>)}
+                        <>
+                            {props.text.split('\n').map((i, key) => {
+                                return <Typography key={key} paragraph variant="body1" color="textPrimary" gutterBottom>{i}</Typography>;
+                            })}
+                        </>
                     </CardContent>
                 </Collapse>
                 <Typography className={classes.date} variant="body2" color="textSecondary">
@@ -133,3 +146,4 @@ const Project = (props) => {
 
 export default Project;
 
+/*{props.text.map(paragraph => <Typography paragraph>{paragraph}</Typography>)}*/

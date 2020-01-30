@@ -1,7 +1,8 @@
-import {SET_CONTACTS} from "../actions/types";
+import {SET_CONTACTS, SET_IS_CHANGED_CONTACTS} from "../actions/types";
 
 let initialState = {
-    contacts: []
+    contacts: [],
+    isChangedContacts: false
 }
 
 const contacts_reducer = (state = initialState, action) => {
@@ -16,6 +17,15 @@ const contacts_reducer = (state = initialState, action) => {
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
                 ...state, contacts: action.payload
+                //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
+            };
+        }
+        case SET_IS_CHANGED_CONTACTS: {
+            /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
+            * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
+            * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
+            return {
+                ...state, isChangedContacts: action.payload
                 //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
             };
         }

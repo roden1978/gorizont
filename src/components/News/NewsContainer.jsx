@@ -7,6 +7,7 @@ import {
     setCurrentNewsId,
     createNews,
     updateNews,
+    deleteNews,
     getAllNews,
     setIsAllNews
 } from '../../redux/actions/newsActions';
@@ -35,7 +36,7 @@ class NewsContainer extends React.Component {
         }
 
         if (this.props.isAllNews && this.props.adminMode) {
-            setTimeout(null,1000);
+            setTimeout(null,2000);
             this.props.getAllNews();
             this.props.setIsAllNews(false);
         }
@@ -50,6 +51,7 @@ class NewsContainer extends React.Component {
                       setCurrentNewsId={this.props.setCurrentNewsId}
                       createNews={this.props.createNews}
                       updateNews={this.props.updateNews}
+                      deleteNews={this.props.deleteNews}
                       adminMode={this.props.adminMode}/>)
     }
 }
@@ -74,5 +76,5 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps,
     {   getNews, getProjects, setLoadProjects,
         setNewsItem, setChangeNewsItem, setIsAllNews,
-        setCurrentNewsId, createNews, updateNews, getAllNews
+        setCurrentNewsId, createNews, updateNews, getAllNews, deleteNews
     })(NewsContainer);

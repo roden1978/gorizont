@@ -1,7 +1,8 @@
-import {SET_ABOUT} from "../actions/types";
+import {SET_ABOUT, SET_IS_CHANGED_ABOUT} from "../actions/types";
 
 let initialState = {
-    about: []
+    about: [],
+    isChangedAbout: false
 }
 
 const about_reducer = (state = initialState, action) => {
@@ -16,7 +17,11 @@ const about_reducer = (state = initialState, action) => {
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
                 ...state, about: action.payload
-                //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
+            };
+        }
+        case SET_IS_CHANGED_ABOUT: {
+            return {
+                ...state, isChangedAbout: action.payload
             };
         }
         default:
@@ -25,6 +30,3 @@ const about_reducer = (state = initialState, action) => {
 }
 
 export default about_reducer;
-
-/* [{__id:'123', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'},
-        {__id:'1234', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]*/

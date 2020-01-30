@@ -13,7 +13,7 @@ let auth = new auth0.WebAuth({
     responseType: 'token id_token',
     scope: 'email'
 })
-/*openid*/
+//API для новостей
 export const mongodbAPI = {
     getNews() {
         //debugger
@@ -62,7 +62,16 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
-
+    deleteNews(newsData){
+      return instance.delete('/api/news/' + newsData.id)
+          .then(response => {
+              return response.data;
+          })
+          .catch(err =>
+              console.log(err)
+          )
+    },
+//API для проектов
     getProjects() {
         return instance.get('/api/projects')
             .then(response => {
@@ -82,6 +91,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //API для объявлений
     getJobs() {
         //debugger
         return instance.get('/api/job')
@@ -92,6 +102,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //API для контактов
     getContacts() {
         //debugger
         return instance.get('/api/contacts')
@@ -102,6 +113,16 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    updateContacts(contactsData){
+        return instance.post('/api/contacts/upd',contactsData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //API для о нас
     getAbout() {
         //debugger
         return instance.get('/api/about')
@@ -112,7 +133,15 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
-
+    updateAbout(aboutData){
+        return instance.post('/api/about/upd',aboutData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
 }
 
 export const flickrAPI = {

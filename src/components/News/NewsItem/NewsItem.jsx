@@ -15,7 +15,7 @@ import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
-import TextField from "@material-ui/core/TextField";
+/*import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -23,9 +23,11 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
+import RadioGroup from "@material-ui/core/RadioGroup";*/
 import {Field, reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     pos: {
         marginLeft: 12,
     },
-    butt: {
+    buttonSubmit: {
         margin: 10,
     },
     avatar: {
@@ -73,6 +75,10 @@ const useStyles = makeStyles(theme => ({
     },
     wi: {
         backgroundColor: '#e9ecf4'
+    },
+    adminPanel:{
+        border:'2px solid grey',
+        backgroundColor: '#e9ecf4'
     }
 }));
 
@@ -81,7 +87,7 @@ const useStyles = makeStyles(theme => ({
 * backgroundColor: '#3b5998',//#0d47a1*/
 const NewsItem = (props) => {
     const classes = useStyles();
-debugger
+    debugger
     let createAt = moment(props.createAt);
 
     createAt.locale('ru');
@@ -98,9 +104,11 @@ debugger
                             }
                 />
                 <CardContent>
-                    <Typography variant="body1" color="textPrimary" gutterBottom>
-                        {props.text}
-                    </Typography>
+                    <>
+                    {props.text.split('\n').map((i, key) => {
+                        return <Typography key={key} paragraph variant="body1" color="textPrimary" gutterBottom>{i}</Typography>;
+                    })}
+                    </>
                 </CardContent>
                 <CardActions>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
@@ -113,32 +121,32 @@ debugger
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
                     {createAt.format('LL')}
                 </Typography>
-                {props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects} saveNews = {props.saveNews} {...props}/> : ''}
+                {props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects}
+                                                   saveNews={props.saveNews} {...props}/> : ''}
             </Card>
         </Grid>
     );
 }
-
+//<Typography variant="body1" color="textPrimary" display="inline" gutterBottom>
 export default NewsItem;
 
 const AdminPanelNews = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
-    const [expandedHidden, setExpandedHidden] = React.useState(false);
+    /*const [expandedHidden, setExpandedHidden] = React.useState(false);*/
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
         // if(!props.id)
         setExpandedCreate(!expandedCreate);
-        if (!expandedCreate){
+        if (!expandedCreate) {
             props.setLoadProjects(true);
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
-            setInitialData(props,true);
-        }
-        else{
+            setInitialData(props, true);
+        } else {
             props.projects.length = 0;
             props.setIsAllNews(true);
         }
@@ -149,35 +157,25 @@ const AdminPanelNews = (props) => {
     const handleEditExpandClick = () => {
         // if(!props.id)
         setExpandedEdit(!expandedEdit);
-        if(!expandedEdit){
+        if (!expandedEdit) {
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
-            setInitialData(props);
-        }else{
+            setInitialData(props, false, false);
+        } else {
             props.setIsAllNews(true);
         }
 
         //props.getId(null);
     };
 
-    const handleHiddenExpandClick = () => {
-        // if(!props.id)
-        setExpandedHidden(!expandedHidden);
-        if(!expandedHidden){
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
-        }else{
-            props.setIsAllNews(true);
-        }
-    };
-
     const handleDeleteExpandClick = () => {
         // if(!props.id)
         setExpandedDelete(!expandedDelete);
-        if(!expandedDelete){
+        if (!expandedDelete) {
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
-        }else{
+            setInitialData(props, false, true);
+        } else {
             props.setIsAllNews(true);
         }
     };
@@ -185,7 +183,7 @@ const AdminPanelNews = (props) => {
     const showResults = (values) => {
         const position = values.project.indexOf('|', 0);
         let id, title;
-        if (position > 0){
+        if (position > 0) {
             id = values.project.slice(0, position);
             title = values.project.slice(position + 1);
             values.project = id;
@@ -196,16 +194,23 @@ const AdminPanelNews = (props) => {
         //props.saveNews(JSON.stringify(values, null, 2));
 
 
-        if(expandedEdit){
-            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
-            handleEditExpandClick();
-        }
+
+                if (expandedEdit) {
+                    props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+                    handleEditExpandClick();
+                }
 
 
-        if(expandedCreate){
-            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
-            handleCreateExpandClick();
-        }
+                if (expandedCreate) {
+                    props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
+                    handleCreateExpandClick();
+                }
+
+                if (expandedDelete){
+                    props.deleteNews (values.id);
+                    handleDeleteExpandClick();
+                }
+
 
     };
 
@@ -215,60 +220,60 @@ const AdminPanelNews = (props) => {
                 <Typography variant="body2" color="textPrimary">
                     Создать
                 </Typography>
-                <IconButton onClick={handleCreateExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedCreate,
-                            })}
-                            aria-expanded={expandedCreate}
-                            aria-label="Показать больше"
-                            disabled={expandedDelete || expandedEdit || expandedHidden}>
-                    <ExpandMoreIcon/>
-                </IconButton>
+                <Tooltip title={!expandedCreate ? "Создать новость" : "Отмена"} placement={'top'} arrow>
+                    <IconButton onClick={handleCreateExpandClick}
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expandedCreate,
+                                })}
+                                aria-expanded={expandedCreate}
+                                aria-label="Показать больше"
+                                disabled={expandedDelete || expandedEdit}>
+                        <ExpandMoreIcon/>
+                    </IconButton>
+                </Tooltip>
+
                 <Typography variant="body2" color="textPrimary">
                     Редактировать
                 </Typography>
-                <IconButton onClick={handleEditExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedEdit,
-                            })}
-                            aria-expanded={expandedEdit}
-                            aria-label="Показать больше"
-                            disabled={expandedCreate || expandedDelete || expandedHidden}>
-                    <ExpandMoreIcon/>
-                </IconButton>
-                <Typography variant="body2" color="textPrimary">
-                    Скрыть
-                </Typography>
-                <IconButton onClick={handleHiddenExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedHidden,
-                            })}
-                            aria-expanded={expandedHidden}
-                            aria-label="Показать больше"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}>
-                    <ExpandMoreIcon/>
-                </IconButton>
+                <Tooltip title={!expandedEdit ? "Редактировать новость" : "Отмена"} placement={'top'} arrow>
+                    <IconButton onClick={handleEditExpandClick}
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expandedEdit,
+                                })}
+                                aria-expanded={expandedEdit}
+                                aria-label="Показать больше"
+                                disabled={expandedCreate || expandedDelete}>
+                        <ExpandMoreIcon/>
+                    </IconButton>
+                </Tooltip>
+
+
                 <Typography variant="body2" color="textPrimary">
                     Удалить из БД
                 </Typography>
-                <IconButton onClick={handleDeleteExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedDelete,
-                            })}
-                            aria-expanded={expandedDelete}
-                            aria-label="Показать больше"
-                            disabled={expandedCreate || expandedEdit || expandedHidden}>
-                    <ExpandMoreIcon/>
-                </IconButton>
+                <Tooltip title={!expandedDelete ? "Удалить из БД" : "Отмена"} placement={'top'} arrow>
+                    <IconButton onClick={handleDeleteExpandClick}
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expandedDelete,
+                                })}
+                                aria-expanded={expandedDelete}
+                                aria-label="Показать больше"
+                                disabled={expandedCreate || expandedEdit}>
+                        <ExpandMoreIcon/>
+                    </IconButton>
+                </Tooltip>
+
             </CardActions>
-            <Collapse in={expandedCreate || expandedEdit || expandedDelete || expandedHidden} timeout="auto"
+            <Collapse in={expandedCreate || expandedEdit || expandedDelete} timeout="auto"
                       unmountOnExit>
-                <CardContent>
+                <CardContent className={classes.adminPanel}>
+                    <Typography variant="h6" color="textPrimary" align="center">
+                        ПАНЕЛЬ АДМИНИСТРИРОВАНИЯ
+                    </Typography>
                     <EditNewsReduxForm onSubmit={showResults}
                                        expandedCreate={expandedCreate}
                                        expandedEdit={expandedEdit}
                                        expandedDelete={expandedDelete}
-                                       expandedHidden={expandedHidden}
                                        projects={props.projects}
                                        {...props}/>
                 </CardContent>
@@ -276,9 +281,26 @@ const AdminPanelNews = (props) => {
         </>
     )
 }
-
+/*<Typography variant="body2" color="textPrimary">
+                    Скрыть
+                </Typography>
+<IconButton onClick={handleHiddenExpandClick}
+                            className={clsx(classes.expand, {
+                                [classes.expandOpen]: expandedHidden,
+                            })}
+                            aria-expanded={expandedHidden}
+                            aria-label="Показать больше"
+                            disabled={expandedCreate || expandedEdit || expandedDelete}>
+                    <ExpandMoreIcon/>
+                </IconButton>*/
 ///////////////////////////////
-const validate = values => {
+/*let fields = [
+    'title',
+    'text',
+    'project'
+];*/
+
+const validate = (values) => {
     const errors = {}
     const requiredFields = [
         'title',
@@ -290,109 +312,40 @@ const validate = values => {
             errors[field] = 'Обязательное поле'
         }
     })
+    return errors
+}
+
+/*
     if (
         values.email &&
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
         errors.email = 'Invalid email address'
-    }
-    return errors
-}
-
-const renderTextField = ({
-                             label,
-                             input,
-                             value,
-                             meta: {touched, invalid, error},
-                             ...custom
-                         }) => (
-    <TextField
-        label={label}
-        value={input.value}
-        fullWidth
-        placeholder={label}
-        error={touched && invalid}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-    />
-)
-
-const renderCheckbox = ({input, label}) => (
-    <div>
-        <FormControlLabel
-            control={
-                <Checkbox
-                    checked={input.value ? true : false}
-                    onChange={input.onChange}
-                />
-            }
-            label={label}
-        />
-    </div>
-)
-
-/*
-input.value ? true : false
-
-const radioButton = ({input, ...rest}) => (
-    <FormControl>
-        <RadioGroup {...input} {...rest}>
-            <FormControlLabel value="female" control={<Radio/>} label="Female"/>
-            <FormControlLabel value="male" control={<Radio/>} label="Male"/>
-            <FormControlLabel value="other" control={<Radio/>} label="Other"/>
-        </RadioGroup>
-    </FormControl>
-)*/
-
-const renderFromHelper = ({touched, error}) => {
-    if (!(touched && error)) {
-        return
-    } else {
-        return <FormHelperText>{touched && error}</FormHelperText>
-    }
-}
-
-const renderSelectField = ({
-                               input,
-                               label,
-                               meta: {touched, error},
-                               children,
-                               ...custom
-                           }) => (
-    <FormControl error={touched && error}>
-        <InputLabel htmlFor="age-native-simple">{label}</InputLabel>
-        <Select
-            native
-            onChange={input.onChange}
-            {...input}
-            {...custom}
-        >
-            {children}
-        </Select>
-        {renderFromHelper({touched, error})}
-    </FormControl>
-)
+    }*/
 
 ////////////////////////////////////////////////////////
-const setInitialData = (props, reset)=>{
-if(reset){
-    initialData.id = null;
-    initialData.title = '';
-    initialData.text = '';
-    initialData.project = '';
-    initialData.status = true;
-    initialData.projectTitle = '';
-    initialData.createAt = null
-}else{
-    initialData.id = props._id;
-    initialData.title = props.title;
-    initialData.text = props.text;
-    initialData.project = props.project;
-    initialData.status = props.status;
-    initialData.projectTitle = props.projectTitle;
-    initialData.createAt = props.createAt;
-}
+const setInitialData = (props, reset, expandedDelete) => {
+    debugger
+    if (reset) {
+        initialData.id = null;
+        initialData.title = '';
+        initialData.text = '';
+        initialData.project = '';
+        initialData.status = true;
+        initialData.projectTitle = '';
+        initialData.createAt = null
+    } else {
+        initialData.id = props._id;
+        initialData.title = props.title;
+        initialData.text = props.text;
+        initialData.project = props.project;
+        if (expandedDelete)
+            initialData.status = false;
+        else
+            initialData.status = props.status;
+        initialData.projectTitle = props.projectTitle;
+        initialData.createAt = props.createAt;
+    }
 
 }
 
@@ -415,64 +368,83 @@ const EditNewsForm = (props) => {
     //console.log(props.val + " " + props.expandedEdit);
 
     let projectsItems = projects.map(
-        projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`} label={projectItem.title}></option>)
+        projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}
+                               label={projectItem.title}></option>)
 
-    if(props.expandedEdit){
+    if (props.expandedEdit) {
         pristine = false;
         submitting = false;
+    }
+
+    let getLabel = () => {
+        if (props.expandedEdit || props.expandedCreate) {
+            return "Показывать на сайте"
+        }
+        if (props.expandedDelete) {
+            return "Удалить из базы данных навсегда"
+        }
     }
 
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field
-                    name="title"
-                    component={renderTextField}
-                    label="Заголовок"
-                    value={props.title}
-                />
-            </div>
-            <div>
-                <Field
-                    name="text"
-                    component={renderTextField}
-                    label="Текст новости"
-                    multiline
-                    rowsMax="4"
-                    margin="normal"
-                />
-            </div>
-            <div>
-                <Field
-                    classes={classes}
-                    name="project"
-                    component={renderSelectField}
-                    label="Проект"
-                >
-                    <option value=""/>
-                    {!props.expandedEdit ? projectsItems : <option value={props.project} label={props.projectTitle}></option>}
+            {!props.expandedDelete ? <>
+                    <div>
+                        <Field
+                            name="title"
+                            component={renderTextField}
+                            label="Заголовок"
+                            full = "true"
+                            value={props.title}
+                        />
+                    </div>
+                    < div>
+                        < Field
+                            name="text"
+                            component={renderTextField}
+                            label="Текст новости"
+                            full = "true"
+                            multiline
+                            rowsMax="4"
+                            margin="normal"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                            classes={classes}
+                            name="project"
+                            component={renderSelectField}
+                            label="Проект"
+                            full = "true"
+                        >
+                            <option value=""/>
+                            {!props.expandedEdit ? projectsItems :
+                                <option value={props.project} label={props.projectTitle}></option>}
 
-                </Field>
-            </div>
-
+                        </Field>
+                    </div>
+                </>
+                : null
+            }
             <div>
                 <Field name="status"
                        component={renderCheckbox}
-                       label="Показывать на сайте"/>
+                       label={getLabel()}/>
             </div>
             <div>
-                <Button className={classesStyle.butt} variant="contained" color="primary" type="submit" disabled={pristine || submitting}>
+                <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
+                        disabled={pristine || submitting}>
                     Отправить
                 </Button>
-                <Button className={classesStyle.butt} variant="contained" color="primary" type="button" disabled={pristine || submitting} onClick={reset}>
+                <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="button"
+                        disabled={pristine || submitting} onClick={reset}>
                     Очистить поля
                 </Button>
             </div>
         </form>
     )
 }
-////////////////////////////
+////////////////////////////label="Показывать на сайте"
 
 
 ////////////////////////////

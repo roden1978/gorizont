@@ -49,6 +49,16 @@ export const updateNews = (id, title, text, project, projectTitle, status, creat
     }
 }
 
+export const deleteNews = (id) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.deleteNews({id});
+        if (data.resultCode === 0) {
+            dispatch(getAllNews());
+        }
+    }
+}
+
 export const setLoadProjects = (loadProjects) =>{
     return{
         type: LOAD_PROJECTS,
