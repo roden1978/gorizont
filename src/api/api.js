@@ -15,6 +15,7 @@ let auth = new auth0.WebAuth({
 })
 //API для новостей
 export const mongodbAPI = {
+    //Получить новости с условием
     getNews() {
         //debugger
         return instance.get('/api/news/')
@@ -25,6 +26,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Получить все новости
     getAllNews() {
         //debugger
         return instance.get('/api/news/all')
@@ -35,6 +37,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Получить новости с ИД
     getNewsItem(id) {
         return instance.get('/api/news/' + id)
             .then(response => {
@@ -44,6 +47,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Обновить новость
     updateNews(newsData){
         return instance.post('/api/news/upd',newsData)
             .then(response => {
@@ -53,6 +57,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Создать новость
     createNews(newsData){
         return instance.post('/api/news/', newsData)
             .then(response => {
@@ -62,6 +67,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Удалить новость из БД
     deleteNews(newsData){
       return instance.delete('/api/news/' + newsData.id)
           .then(response => {
@@ -72,6 +78,7 @@ export const mongodbAPI = {
           )
     },
 //API для проектов
+    //Полусть проекты с условием
     getProjects() {
         return instance.get('/api/projects')
             .then(response => {
@@ -81,11 +88,52 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
-
+//Получить проект с ИД
     getProject(id) {
         return instance.get('/api/projects/' + id)
             .then(response => {
                 return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Получить все проекты
+    getAllProjects() {
+        //debugger
+        return instance.get('/api/projects/all')
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Обновить проект
+    updateProject(projectData){
+        return instance.post('/api/projects/upd',projectData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Создать проект
+    createProject(projectData){
+        return instance.post('/api/projects/', projectData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Удалить проект из БД
+    deleteProject(projectData){
+        return instance.delete('/api/projects/' + projectData.id)
+            .then(response => {
+                return response.data;
             })
             .catch(err =>
                 console.log(err)
@@ -113,6 +161,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Обновить контакты
     updateContacts(contactsData){
         return instance.post('/api/contacts/upd',contactsData)
             .then(response => {
@@ -133,6 +182,7 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Обновить инфу о нас
     updateAbout(aboutData){
         return instance.post('/api/about/upd',aboutData)
             .then(response => {

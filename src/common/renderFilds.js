@@ -32,13 +32,14 @@ export const renderTextField = ({
     />
 )
 
-export const renderCheckbox = ({input, label}) => (
+export const renderCheckbox = ({input, label, disabled}) => (
     <div>
         <FormControlLabel
             control={
                 <Checkbox
                     checked={input.value ? true : false}
                     onChange={input.onChange}
+                    disabled={disabled}
                 />
             }
             label={label}
@@ -46,7 +47,7 @@ export const renderCheckbox = ({input, label}) => (
     </div>
 )
 
-export const radioButton = ({input, ...rest}) => (
+/*export const radioButton = ({input, ...rest}) => (
     <FormControl>
         <RadioGroup {...input} {...rest}>
             <FormControlLabel value="female" control={<Radio/>} label="Female"/>
@@ -54,7 +55,7 @@ export const radioButton = ({input, ...rest}) => (
             <FormControlLabel value="other" control={<Radio/>} label="Other"/>
         </RadioGroup>
     </FormControl>
-)
+)*/
 
 export const renderFromHelper = ({touched, error}) => {
     if (!(touched && error)) {

@@ -1,5 +1,12 @@
 import {mongodbAPI} from '../../api/api'
-import {SET_PROJECTS, SET_PROJECT, SET_ID} from "../actions/types";
+import {
+    SET_PROJECTS,
+    SET_PROJECT,
+    SET_ID,
+    IS_ALL_PROJECTS,
+    CHANGE_PROJECTS_ITEM,
+    SET_PROJECTS_ITEM, SET_PROJECTS_COUNT, LOAD_ALBUMS
+} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setProjects = (projects) => {
@@ -23,6 +30,40 @@ export const setId = (id) => {
     }
 }
 
+export const setLoadAlbums = (loadAlbums) =>{
+    return{
+        type: LOAD_ALBUMS,
+        payload: loadAlbums
+    }
+}
+
+export const setIsAllProjects = (isAllProjects) =>{
+    return{
+        type: IS_ALL_PROJECTS,
+        payload: isAllProjects
+    }
+}
+
+export const setChangeProjectsItem = () =>{
+    return{
+        type: CHANGE_PROJECTS_ITEM
+    }
+}
+
+export const  setProjectsItem = (projectsItem) =>{
+    return {
+        type: SET_PROJECTS_ITEM,
+        payload: projectsItem
+    }
+}
+
+export const  setProjectsCount = (count) =>{
+    return {
+        type: SET_PROJECTS_COUNT,
+        payload: count
+    }
+}
+
 /*Thunk Creators*/
 export const getProjects = () => {
     return async (dispatch) => {
@@ -43,3 +84,42 @@ export const getId = (id) => {
         dispatch(setId(id));
     }
 }
+
+export const getAllProjects = () => {
+    return async (dispatch) => {
+        const projects = await mongodbAPI.getAllProjects();
+        dispatch(setProjects(projects));
+    }
+}
+
+export const createProject = (/*Значения*/) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.createProject({/*Значения*/});
+        if (data.resultCode === 0) {
+            dispatch(getAllProjects());
+        }
+    }
+}
+
+export const updateProject = (/*Значения*/) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.updateProject({/*Значения*/});
+        if (data.resultCode === 0) {
+            dispatch(getAllProjects());
+        }
+    }
+}
+
+export const deleteProject = (id) =>{
+    debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.deleteProject({id});
+        if (data.resultCode === 0) {
+            dispatch(getAllProjects());
+        }
+    }
+}
+
+

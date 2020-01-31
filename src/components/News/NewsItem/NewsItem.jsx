@@ -76,8 +76,8 @@ const useStyles = makeStyles(theme => ({
     wi: {
         backgroundColor: '#e9ecf4'
     },
-    adminPanel:{
-        border:'2px solid grey',
+    adminPanel: {
+        border: '2px solid grey',
         backgroundColor: '#e9ecf4'
     }
 }));
@@ -105,9 +105,10 @@ const NewsItem = (props) => {
                 />
                 <CardContent>
                     <>
-                    {props.text.split('\n').map((i, key) => {
-                        return <Typography key={key} paragraph variant="body1" color="textPrimary" gutterBottom>{i}</Typography>;
-                    })}
+                        {props.text.split('\n').map((i, key) => {
+                            return <Typography key={key} paragraph variant="body1" color="textPrimary"
+                                               gutterBottom>{i}</Typography>;
+                        })}
                     </>
                 </CardContent>
                 <CardActions>
@@ -122,12 +123,14 @@ const NewsItem = (props) => {
                     {createAt.format('LL')}
                 </Typography>
                 {props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects}
-                                                   saveNews={props.saveNews} {...props}/> : ''}
+                                                   saveNews={props.saveNews} setNewsCount={props.setNewsCount}
+                                                   count={props.news.length} newsCount = {props.newsCount}
+                                                   {...props}/> : ''}
             </Card>
         </Grid>
     );
 }
-//<Typography variant="body1" color="textPrimary" display="inline" gutterBottom>
+
 export default NewsItem;
 
 const AdminPanelNews = (props) => {
@@ -155,21 +158,24 @@ const AdminPanelNews = (props) => {
     };
 
     const handleEditExpandClick = () => {
-        // if(!props.id)
+
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
+            props.setLoadProjects(true);
             props.setCurrentNewsId(props._id);
             props.setNewsItem(true);
             setInitialData(props, false, false);
         } else {
             props.setIsAllNews(true);
+
         }
 
         //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
-        // if(!props.id)
+        debugger
+        props.setNewsCount(props.count);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
             props.setCurrentNewsId(props._id);
@@ -177,6 +183,7 @@ const AdminPanelNews = (props) => {
             setInitialData(props, false, true);
         } else {
             props.setIsAllNews(true);
+
         }
     };
 
@@ -194,22 +201,21 @@ const AdminPanelNews = (props) => {
         //props.saveNews(JSON.stringify(values, null, 2));
 
 
+        if (expandedEdit) {
+            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+            handleEditExpandClick();
+        }
 
-                if (expandedEdit) {
-                    props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
-                    handleEditExpandClick();
-                }
 
+        if (expandedCreate) {
+            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
+            handleCreateExpandClick();
+        }
 
-                if (expandedCreate) {
-                    props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
-                    handleCreateExpandClick();
-                }
-
-                if (expandedDelete){
-                    props.deleteNews (values.id);
-                    handleDeleteExpandClick();
-                }
+        if (expandedDelete) {
+            props.deleteNews(values.id);
+            handleDeleteExpandClick();
+        }
 
 
     };
@@ -247,7 +253,6 @@ const AdminPanelNews = (props) => {
                     </IconButton>
                 </Tooltip>
 
-
                 <Typography variant="body2" color="textPrimary">
                     Удалить из БД
                 </Typography>
@@ -275,30 +280,13 @@ const AdminPanelNews = (props) => {
                                        expandedEdit={expandedEdit}
                                        expandedDelete={expandedDelete}
                                        projects={props.projects}
+                                       newsCount = {props.newsCount}
                                        {...props}/>
                 </CardContent>
             </Collapse>
         </>
     )
 }
-/*<Typography variant="body2" color="textPrimary">
-                    Скрыть
-                </Typography>
-<IconButton onClick={handleHiddenExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedHidden,
-                            })}
-                            aria-expanded={expandedHidden}
-                            aria-label="Показать больше"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}>
-                    <ExpandMoreIcon/>
-                </IconButton>*/
-///////////////////////////////
-/*let fields = [
-    'title',
-    'text',
-    'project'
-];*/
 
 const validate = (values) => {
     const errors = {}
@@ -315,15 +303,6 @@ const validate = (values) => {
     return errors
 }
 
-/*
-    if (
-        values.email &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-        errors.email = 'Invalid email address'
-    }*/
-
-////////////////////////////////////////////////////////
 const setInitialData = (props, reset, expandedDelete) => {
     debugger
     if (reset) {
@@ -394,7 +373,7 @@ const EditNewsForm = (props) => {
                             name="title"
                             component={renderTextField}
                             label="Заголовок"
-                            full = "true"
+                            full="true"
                             value={props.title}
                         />
                     </div>
@@ -403,7 +382,7 @@ const EditNewsForm = (props) => {
                             name="text"
                             component={renderTextField}
                             label="Текст новости"
-                            full = "true"
+                            full="true"
                             multiline
                             rowsMax="4"
                             margin="normal"
@@ -415,12 +394,15 @@ const EditNewsForm = (props) => {
                             name="project"
                             component={renderSelectField}
                             label="Проект"
-                            full = "true"
-                        >
-                            <option value=""/>
-                            {!props.expandedEdit ? projectsItems :
-                                <option value={props.project} label={props.projectTitle}></option>}
+                            full="true"
 
+                        >
+                            {props.expandedEdit ? <>
+                                    <option value={props.project} label={props.projectTitle}/>
+                                    <option value=''/>
+                                </> :
+                                <option value=''/>}
+                            {projectsItems}
                         </Field>
                     </div>
                 </>
@@ -429,7 +411,8 @@ const EditNewsForm = (props) => {
             <div>
                 <Field name="status"
                        component={renderCheckbox}
-                       label={getLabel()}/>
+                       label={getLabel()}
+                       disabled={props.newsCount === 1 ? true : false}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
@@ -444,12 +427,12 @@ const EditNewsForm = (props) => {
         </form>
     )
 }
-////////////////////////////label="Показывать на сайте"
 
-
-////////////////////////////
 const EditNewsReduxForm = reduxForm({
     form: 'EditNewsForm', // a unique identifier for this form
     validate,
     initialValues: initialData
 })(EditNewsForm)
+
+/*{!props.expandedEdit ? projectsItems :
+                                <option value={props.project} label={props.projectTitle}></option>}*/

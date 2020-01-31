@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
-    pos:{
+    pos: {
         paddingBottom: 20,
         paddingTop: 20,
     },
@@ -22,26 +22,22 @@ const Projects = (props) => {
     const classes = useStyles();
 
     let projectItems = props.projects.map(
-        project => <Project key={project.__id}  id = {props.id} getId = {props.getId} {...project}/>
+        project => <Project key={project.__id} id={props.id} getId={props.getId} {...project} {...props}/>
     )
     return (
         <div>
+            <Container className={classes.cardGrid} maxWidth="sx">
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-evenly"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    {projectItems}
 
-            <React.Fragment>
-                <Container className={classes.cardGrid} maxWidth="sx">
-                    <Grid
-                        container
-                        direction="row"
-                        justify="space-evenly"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        {projectItems}
-
-                    </Grid>
-                </Container>
-            </React.Fragment>
-
+                </Grid>
+            </Container>
         </div>
     );
 }

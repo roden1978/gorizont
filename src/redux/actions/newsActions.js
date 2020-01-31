@@ -1,10 +1,12 @@
 import {mongodbAPI} from '../../api/api'
-import {SET_NEWS,
+import {
+    SET_NEWS,
     LOAD_PROJECTS,
     CHANGE_NEWS_ITEM,
     IS_ALL_NEWS,
     SET_NEWS_ITEM,
-SET_CURRENT_NEWS_ID} from "../actions/types";
+    SET_CURRENT_NEWS_ID, SET_NEWS_COUNT
+} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setNews = (news) => {
@@ -90,5 +92,11 @@ export const  setCurrentNewsId = (id) =>{
     return {
         type: SET_CURRENT_NEWS_ID,
         payload: id
+    }
+}
+export const  setNewsCount = (count) =>{
+    return {
+        type: SET_NEWS_COUNT,
+        payload: count
     }
 }

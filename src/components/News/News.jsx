@@ -33,6 +33,8 @@ const News = (props) => {
                               createNews={props.createNews}
                               updateNews={props.updateNews}
                               deleteNews={props.deleteNews}
+                              setNewsCount={props.setNewsCount}
+                              newsCount = {props.newsCount}
             {...props}/>)
 
     return (
