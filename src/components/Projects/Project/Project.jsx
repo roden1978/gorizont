@@ -57,7 +57,6 @@ const useStyles = makeStyles(theme =>({
     },
     expand: {
         transform: 'rotate(0deg)',
-        marginLeft: 'auto',
         backgroundColor:'#f5f6f7',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
@@ -65,7 +64,17 @@ const useStyles = makeStyles(theme =>({
     },
     expandOpen: {
         transform: 'rotate(180deg)',
-    }
+    },
+    wi: {
+        backgroundColor: '#e9ecf4'
+    },
+    adminPanel: {
+        border: '2px solid grey',
+        backgroundColor: '#e9ecf4'
+    },
+    buttonSubmit: {
+        marginLeft: 10,
+    },
 }));
 
 const Project = (props) => {
@@ -78,10 +87,15 @@ const Project = (props) => {
         props.getId(null);
     };
 
+    const expandOver = () =>{
+        setExpanded(!expanded);
+        props.getId(null);
+    }
+
     let createAt = moment(props.createAt);
     createAt.locale('ru');
 //debugger
-
+//arginLeft: 'auto',
 
     return(
         <Grid item xs={10}>
@@ -101,7 +115,7 @@ const Project = (props) => {
                     </Typography>
 
                 </CardContent>
-                <CardActions  disableSpacing>
+                <CardActions  className={classes.card_act}>
                     {props.albumId ? <>
                     <Typography variant="body2" color="textPrimary">
                         Фотоальбом
@@ -114,7 +128,10 @@ const Project = (props) => {
                     </Tooltip>
                     </>
                     : ''}
-                    <Tooltip title="Показать больше" placement={'top'} arrow>
+                    <Typography variant="body2" color="textPrimary" >
+                        Показать больше
+                    </Typography>
+                    <Tooltip title={!expanded ? "Показать больше" : "Свернуть"} placement={'top'} arrow>
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
@@ -139,7 +156,7 @@ const Project = (props) => {
                 <Typography className={classes.date} variant="body2" color="textSecondary">
                     Старт проекта: {createAt.format('LL')}
                 </Typography>
-                {props.adminMode ? <AdminPanelProjects {...props}/> : ''}
+                {props.adminMode ? <AdminPanelProjects expandOver = {expandOver} {...props}/> : ''}
             </Card>
         </Grid>
     );
@@ -155,24 +172,24 @@ export default Project;
  */
 
 const AdminPanelProjects = (props) => {
-    //debugger
+    debugger
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
-    /*const [expandedHidden, setExpandedHidden] = React.useState(false);*/
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
         // if(!props.id)
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
-            props.setLoadProjects(true);
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.setLoadAlbums(true);
+            props.getId(props._id);
+            props.setProjectsItem(true);
             setInitialData(props, true);
         } else {
-            props.projects.length = 0;
-            props.setIsAllNews(true);
+            props.expandOver();
+            props.albums.length = 0;
+            props.setIsAllProjects(true);
         }
 
         //props.getId(null);
@@ -182,13 +199,13 @@ const AdminPanelProjects = (props) => {
 
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
-            props.setLoadProjects(true);
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.setLoadAlbums(true);
+            props.getId(props._id);
+            props.setProjectsItem(true);
             setInitialData(props, false, false);
         } else {
-            props.setIsAllNews(true);
-
+            props.expandOver();
+            props.setIsAllProjects(true);
         }
 
         //props.getId(null);
@@ -196,45 +213,53 @@ const AdminPanelProjects = (props) => {
 
     const handleDeleteExpandClick = () => {
         debugger
-        props.setNewsCount(props.count);
+        props.setProjectsCount(props.count);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.getId(props._id);
+            props.setProjectsItem(true);
             setInitialData(props, false, true);
         } else {
-            props.setIsAllNews(true);
-
+            props.expandOver();
+            props.setIsAllProjects(true);
         }
     };
 
     const showResults = (values) => {
-        const position = values.project.indexOf('|', 0);
+        const position = values.albumId.indexOf('|', 0);
         let id, title;
         if (position > 0) {
-            id = values.project.slice(0, position);
-            title = values.project.slice(position + 1);
-            values.project = id;
-            values.projectTitle = title.trim();
+            id = values.albumId.slice(0, position);
+            title = values.albumId.slice(position + 1);
+            values.albumId = id;
+            values.albumName = title.trim();
         }
 
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
+        /*id: null,
+    title: '',
+    description: '',
+    text: '',
+    albumId: '',
+    albumName: '',
+    status: null,
+    createAt: null*/
 
 
         if (expandedEdit) {
-            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+            props.updateProject(values.id, values.title, values.description, values.text, values.albumId, values.albumName, values.status, values.createAt);
             handleEditExpandClick();
         }
 
 
         if (expandedCreate) {
-            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
+            props.createProject(values.title, values.description, values.text, values.albumId, values.albumName, values.status);
             handleCreateExpandClick();
         }
 
         if (expandedDelete) {
-            props.deleteNews(values.id);
+            props.deleteProject(values.id);
             handleDeleteExpandClick();
         }
 
@@ -300,8 +325,8 @@ const AdminPanelProjects = (props) => {
                                        expandedCreate={expandedCreate}
                                        expandedEdit={expandedEdit}
                                        expandedDelete={expandedDelete}
-                                       projects={props.projects}
-                                       newsCount = {props.newsCount}
+                                       albums={props.albums}
+                                       projectsCount = {props.projectsCount}
                                        {...props}/>
                 </CardContent>
             </Collapse>
@@ -314,7 +339,7 @@ const validate = (values) => {
     const requiredFields = [
         'title',
         'text',
-        'project'
+        'description'
     ]
     requiredFields.forEach(field => {
         if (!values[field]) {
@@ -329,21 +354,23 @@ const setInitialData = (props, reset, expandedDelete) => {
     if (reset) {
         initialData.id = null;
         initialData.title = '';
+        initialData.description = '';
         initialData.text = '';
-        initialData.project = '';
+        initialData.albumId = '';
+        initialData.albumName = '';
         initialData.status = true;
-        initialData.projectTitle = '';
         initialData.createAt = null
     } else {
         initialData.id = props._id;
         initialData.title = props.title;
+        initialData.description = props.description;
         initialData.text = props.text;
-        initialData.project = props.project;
+        initialData.albumId = props.albumId;
+        initialData.albumName = props.albumName;
         if (expandedDelete)
             initialData.status = false;
         else
             initialData.status = props.status;
-        initialData.projectTitle = props.projectTitle;
         initialData.createAt = props.createAt;
     }
 
@@ -352,9 +379,10 @@ const setInitialData = (props, reset, expandedDelete) => {
 const initialData = {
     id: null,
     title: '',
+    description: '',
     text: '',
-    project: '',
-    projectTitle: '',
+    albumId: '',
+    albumName: '',
     status: null,
     createAt: null
 }
@@ -362,14 +390,14 @@ const initialData = {
 
 const EditProjectsForm = (props) => {
     const classesStyle = useStyles();
-    const {handleSubmit, reset, classes, projects} = props;
+    const {handleSubmit, reset, classes, albums} = props;
     let {pristine, submitting} = props;
     debugger
     //console.log(props.val + " " + props.expandedEdit);
 
-    let projectsItems = projects.map(
-        projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}
-                               label={projectItem.title}></option>)
+    let albumsItem = albums.map(
+        album => <option key={album.id} value={`${album.id}| ${album.description._content}`}
+                               label={album.description._content}></option>)
 
     if (props.expandedEdit) {
         pristine = false;
@@ -398,32 +426,41 @@ const EditProjectsForm = (props) => {
                             value={props.title}
                         />
                     </div>
+                    <div>
+                        <Field
+                            name="description"
+                            component={renderTextField}
+                            label="Краткое описание"
+                            full="true"
+                            value={props.description}
+                        />
+                    </div>
                     < div>
                         < Field
                             name="text"
                             component={renderTextField}
-                            label="Текст новости"
+                            label="Описание проекта"
                             full="true"
                             multiline
-                            rowsMax="4"
+                            rowsMax="10"
                             margin="normal"
                         />
                     </div>
                     <div>
                         <Field
                             classes={classes}
-                            name="project"
+                            name="albumId"
                             component={renderSelectField}
-                            label="Проект"
+                            label="Фотоальбом"
                             full="true"
 
                         >
                             {props.expandedEdit ? <>
-                                    <option value={props.project} label={props.projectTitle}/>
+                                    <option value={props.albumId} label={props.albumName}/>
                                     <option value=''/>
                                 </> :
                                 <option value=''/>}
-                            {projectsItems}
+                            {albumsItem}
                         </Field>
                     </div>
                 </>
@@ -433,7 +470,7 @@ const EditProjectsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.newsCount === 1 ? true : false}/>
+                       disabled={props.projectsCount === 1 ? true : false}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

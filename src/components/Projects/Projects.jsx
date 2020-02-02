@@ -22,11 +22,11 @@ const Projects = (props) => {
     const classes = useStyles();
 
     let projectItems = props.projects.map(
-        project => <Project key={project.__id} id={props.id} getId={props.getId} {...project} {...props}/>
+        project => <Project key={project._id} id={props.id} getId={props.getId} {...project} {...props}/>
     )
     return (
         <div>
-            <Container className={classes.cardGrid} maxWidth="sx">
+            <Container className={classes.cardGrid} maxWidth="xl">
                 <Grid
                     container
                     direction="row"
@@ -43,3 +43,4 @@ const Projects = (props) => {
 }
 
 export default Projects;
+//"xs","sm","md","lg","xl"

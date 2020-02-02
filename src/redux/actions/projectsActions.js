@@ -36,7 +36,11 @@ export const setLoadAlbums = (loadAlbums) =>{
         payload: loadAlbums
     }
 }
-
+/**
+ * Утановка флага для выполнения загрузки всех проектов без фильтров
+ * @param isAllProjects
+ * @returns {{payload: *, type: string}}
+ */
 export const setIsAllProjects = (isAllProjects) =>{
     return{
         type: IS_ALL_PROJECTS,
@@ -65,6 +69,10 @@ export const  setProjectsCount = (count) =>{
 }
 
 /*Thunk Creators*/
+/**
+ * Диапатчим в state проекты полученные с сервера
+ * @returns {function(...[*]=)}
+ */
 export const getProjects = () => {
     return async (dispatch) => {
         const projects = await mongodbAPI.getProjects();
@@ -92,20 +100,20 @@ export const getAllProjects = () => {
     }
 }
 
-export const createProject = (/*Значения*/) =>{
+export const createProject = (title, description, text, albumId, albumName, status) =>{
     debugger
     return async (dispatch) =>{
-        const data = await mongodbAPI.createProject({/*Значения*/});
+        const data = await mongodbAPI.createProject({title, description, text, albumId, albumName, status});
         if (data.resultCode === 0) {
             dispatch(getAllProjects());
         }
     }
 }
 
-export const updateProject = (/*Значения*/) =>{
+export const updateProject = (id, title, description, text, albumId, albumName, status, createAt) =>{
     debugger
     return async (dispatch) =>{
-        const data = await mongodbAPI.updateProject({/*Значения*/});
+        const data = await mongodbAPI.updateProject({id, title, description, text, albumId, albumName, status, createAt});
         if (data.resultCode === 0) {
             dispatch(getAllProjects());
         }

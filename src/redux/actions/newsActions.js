@@ -32,7 +32,7 @@ export const getAllNews = () => {
 }
 
 export const createNews = (title, text, project, projectTitle, status) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.createNews({title, text, project, projectTitle, status});
         if (data.resultCode === 0) {
@@ -42,7 +42,7 @@ export const createNews = (title, text, project, projectTitle, status) =>{
 }
 
 export const updateNews = (id, title, text, project, projectTitle, status, createAt) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.updateNews({id, title, text, project, projectTitle, status, createAt});
         if (data.resultCode === 0) {
@@ -52,7 +52,7 @@ export const updateNews = (id, title, text, project, projectTitle, status, creat
 }
 
 export const deleteNews = (id) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.deleteNews({id});
         if (data.resultCode === 0) {

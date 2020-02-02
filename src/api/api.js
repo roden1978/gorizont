@@ -111,6 +111,7 @@ export const mongodbAPI = {
     },
     //Обновить проект
     updateProject(projectData){
+        debugger
         return instance.post('/api/projects/upd',projectData)
             .then(response => {
                 return response.data;

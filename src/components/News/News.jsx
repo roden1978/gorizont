@@ -39,7 +39,7 @@ const News = (props) => {
 
     return (
         <div className={classes.root}>
-            <Container className={classes.cardGrid} maxWidth="sx">
+            <Container className={classes.cardGrid} maxWidth="xl">
             <Grid
                 container
                 direction="row"
