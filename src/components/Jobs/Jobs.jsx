@@ -23,10 +23,10 @@ const Jobs = (props) => {
     const classes = useStyles();
 
     let jobs = props.jobs.map(
-        job => <Job key={job.__id}  {...job}/>)
+        job => <Job key={job._id} {...job} {...props}/>)
 
     return (
-        <React.Fragment>
+        <div className={classes.root}>
             <Container className={classes.cardGrid} maxWidth="md">
             <Grid
                 container
@@ -39,7 +39,7 @@ const Jobs = (props) => {
 
             </Grid>
             </Container>
-        </React.Fragment>
+        </div>
     );
 }
 

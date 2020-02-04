@@ -19,6 +19,7 @@ import 'moment/locale/ru'
 import Tooltip from "@material-ui/core/Tooltip";
 import {Field, reduxForm} from "redux-form";
 import {renderCheckbox, renderSelectField, renderTextField} from "../../../common/renderFilds";
+import {validate} from '../../../common/validate'
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme =>({
@@ -88,7 +89,7 @@ const Project = (props) => {
     };
 
     const expandOver = () =>{
-        setExpanded(!expanded);
+        setExpanded(true);
         props.getId(null);
     }
 
@@ -144,7 +145,7 @@ const Project = (props) => {
                     </IconButton>
                     </Tooltip>
                 </CardActions>
-                <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
+                <Collapse in={expanded || props.id ? true : false} timeout="auto" unmountOnExit>
                     <CardContent>
                         <>
                             {props.text.split('\n').map((i, key) => {
@@ -334,21 +335,6 @@ const AdminPanelProjects = (props) => {
     )
 }
 
-const validate = (values) => {
-    const errors = {}
-    const requiredFields = [
-        'title',
-        'text',
-        'description'
-    ]
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Обязательное поле'
-        }
-    })
-    return errors
-}
-
 const setInitialData = (props, reset, expandedDelete) => {
     debugger
     if (reset) {
@@ -422,7 +408,6 @@ const EditProjectsForm = (props) => {
                             name="title"
                             component={renderTextField}
                             label="Заголовок"
-                            full="true"
                             value={props.title}
                         />
                     </div>
@@ -431,7 +416,6 @@ const EditProjectsForm = (props) => {
                             name="description"
                             component={renderTextField}
                             label="Краткое описание"
-                            full="true"
                             value={props.description}
                         />
                     </div>
@@ -440,7 +424,6 @@ const EditProjectsForm = (props) => {
                             name="text"
                             component={renderTextField}
                             label="Описание проекта"
-                            full="true"
                             multiline
                             rowsMax="10"
                             margin="normal"
@@ -452,7 +435,6 @@ const EditProjectsForm = (props) => {
                             name="albumId"
                             component={renderSelectField}
                             label="Фотоальбом"
-                            full="true"
 
                         >
                             {props.expandedEdit ? <>

@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../common/renderFilds";
+import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
 //import SimpleMap from "../../common/SimpleMap";
 
@@ -167,46 +168,6 @@ const AdminPanelAboutUs = (props) => {
         </>
     )
 }
-/*<Typography variant="body2" color="textPrimary">
-                    Скрыть
-                </Typography>
-<IconButton onClick={handleHiddenExpandClick}
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expandedHidden,
-                            })}
-                            aria-expanded={expandedHidden}
-                            aria-label="Показать больше"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}>
-                    <ExpandMoreIcon/>
-                </IconButton>*/
-///////////////////////////////
-/*let fields = [
-    'title',
-    'text',
-    'project'
-];*/
-
-const validate = (values) => {
-    const errors = {}
-    const requiredFields = [
-        'text'
-    ]
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Обязательное поле'
-        }
-    })
-    return errors
-}
-
-/*
-    if (
-        values.email &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-        errors.email = 'Invalid email address'
-    }*/
-
 ////////////////////////////////////////////////////////
 const setInitialData = (props) => {
     debugger
@@ -240,7 +201,6 @@ const EditAboutForm = (props) => {
                     component={renderTextField}
                     label="Описание нашей компании"
                     multiline
-                    full = "true"
                     rowsMax="10"
                     margin="normal"
                 />
@@ -258,9 +218,6 @@ const EditAboutForm = (props) => {
         </form>
     )
 }
-////////////////////////////label="Показывать на сайте"
-
-
 ////////////////////////////
 const EditAboutReduxForm = reduxForm({
     form: 'EditAboutForm', // a unique identifier for this form

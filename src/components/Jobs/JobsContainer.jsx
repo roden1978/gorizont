@@ -1,28 +1,57 @@
 import React from 'react';
-import {getJobs} from '../../redux/actions/jobsActions';
+import {
+    getJobs, getAllJobs, updateJob, createJob, deleteJob,
+    setChangeJobsItem, setCurrentJobsId, setIsAllJobs, setJobsCount, setJobsItem
+} from '../../redux/actions/jobsActions';
 import Jobs from "./Jobs";
 import {connect} from "react-redux";
 
-class JobsContainer extends React.Component{
+class JobsContainer extends React.Component {
 
     componentDidMount() {
-    //debugger
-        this.props.getJobs();
+        //debugger
+        if (this.props.adminMode)
+            this.props.getAllJobs();
+        else
+            this.props.getJobs();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        if (this.props.getJobsItem) {
+            this.props.setChangeJobsItem();
+            this.props.setJobsItem(false);
+        }
+
+        if (this.props.isAllJobs && this.props.adminMode) {
+            setTimeout(null, 2000);
+            this.props.getAllJobs();
+            this.props.setIsAllJobs(false);
+        }
     }
 
     render() {
-        return (<Jobs jobs = {this.props.jobs}/>)
+        return (<Jobs jobs={this.props.jobs} {...this.props}/>)
     }
 }
+
 /*функция принимает state созданный в redux при помощи reducers
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        jobs: state.jobs.jobs
+        jobs: state.jobs.jobs,
+        isAllJobs: state.jobs.isAllJobs,
+        getJobsItem: state.jobs.getJobsItem,
+        currentJobsId: state.jobs.currentJobsId,
+        jobsCount: state.jobs.jobsCount,
+        adminMode: state.auth.adminMode
     }
 };
 
 /*Создаем контейнерную кмпоненту MyNewsContainer*/
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
-export default connect(mapStateToProps, {getJobs})(JobsContainer);
+export default connect(mapStateToProps, {
+    getJobs, getAllJobs, updateJob, createJob, deleteJob,
+    setChangeJobsItem, setCurrentJobsId, setIsAllJobs, setJobsCount, setJobsItem
+})(JobsContainer);

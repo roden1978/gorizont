@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../common/renderFilds";
+import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         flexWrap: 'wrap'
     },
-    pos:{
+    pos: {
         paddingBottom: 20,
         paddingTop: 20,
     },
@@ -58,53 +59,53 @@ const Contacts = (props) => {
     const classes = useStyles();
     //const info = props.contacts[0];
     //debugger
-    return(
-            <div className={classes.root}>
-                <Container className={classes.cardGrid} maxWidth="sx">
-                    <Grid
-                        container
-                        direction="row"
-                        justify="space-evenly"
-                        alignItems="center"
-                        spacing={3}
-                        className={classes.pos}
-                    >
-                        <Grid item xs={10}>
-                               <Card>
-                                   <CardHeader title={props.contacts.length === 0 ? '' : props.contacts[0].companyName}
-                                   className={classes.title}/>
-                                   <CardContent>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : 'Адрес:' + props.contacts[0].companyAddress}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : 'Эл. почта: ' + props.contacts[0].companyEmail}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : 'Телефон: ' + props.contacts[0].companyPhone}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner01 + ": " + props.contacts[0].phone01}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner02 + ": " + props.contacts[0].phone02}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner03 + ": " + props.contacts[0].phone03}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner04 + ": " + props.contacts[0].phone04}
-                                       </Typography>
-                                       <Typography variant="body1" color="textPrimary" gutterBottom>
-                                           {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner05 + ": " + props.contacts[0].phone05}
-                                       </Typography>
-                                   </CardContent>
-                                   {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
-                               </Card>
-                        </Grid>
+    return (
+        <div className={classes.root}>
+            <Container className={classes.cardGrid} maxWidth="xl">
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-evenly"
+                    alignItems="center"
+                    spacing={3}
+                    className={classes.pos}
+                >
+                    <Grid item xs={10}>
+                        <Card>
+                            <CardHeader title={props.contacts.length === 0 ? '' : props.contacts[0].companyName}
+                                        className={classes.title}/>
+                            <CardContent>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : 'Адрес:' + props.contacts[0].companyAddress}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : 'Эл. почта: ' + props.contacts[0].companyEmail}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : 'Телефон: ' + props.contacts[0].companyPhone}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner01 + ": " + props.contacts[0].phone01}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner02 + ": " + props.contacts[0].phone02}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner03 + ": " + props.contacts[0].phone03}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner04 + ": " + props.contacts[0].phone04}
+                                </Typography>
+                                <Typography variant="body1" color="textPrimary" gutterBottom>
+                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner05 + ": " + props.contacts[0].phone05}
+                                </Typography>
+                            </CardContent>
+                            {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
+                        </Card>
                     </Grid>
-                </Container>
-            </div>
+                </Grid>
+            </Container>
+        </div>
     );
 }
 
@@ -171,67 +172,13 @@ const AdminPanelContacts = (props) => {
                         ПАНЕЛЬ АДМИНИСТРИРОВАНИЯ
                     </Typography>
                     <EditContactsReduxForm onSubmit={showResults}
-                                        expandedEdit={expandedEdit}
-                                        {...props}/>
+                                           expandedEdit={expandedEdit}
+                                           {...props}/>
                 </CardContent>
             </Collapse>
         </>
     )
 }
-/*
-* ,
-        'phoneOwner01', 'phone01', 'phoneOwner02', 'phone02',
-        'phoneOwner03', 'phone03', 'phoneOwner04', 'phone04',
-        'phoneOwner05', 'phone05'*/
-
-const validate = (values) => {
-    const errors = {}
-    const requiredFields = [
-        'companyName', 'companyAddress', 'companyEmail', 'companyPhone'
-    ]
-    const requiredPhones = ['companyPhone','phone01', 'phone02',
-        'phone03', 'phone04', 'phone05']
-
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Обязательное поле'
-        }
-    })
-
-    requiredPhones.forEach(phone => {
-        if (values[phone] &&
-            !/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i.test(values[phone])) {
-            errors[phone] = 'Не верный формат телефона'
-        }
-    })
-
-    if (
-        values.companyEmail &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.companyEmail)
-    )
-    {
-        errors.companyEmail = 'Не верный формат электронной почты'
-    }
-
-    /*if (
-        values.companyPhone &&
-        !/^(0|[1-9][0-9]{9})$/i.test(values.companyPhone)
-    )
-    {
-        errors.companyPhone = 'Не верный формат телефона'
-    }*/
-
-    return errors
-}
-
-/*
-    if (
-        values.email &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-        errors.email = 'Invalid email address'
-    }*/
-
 ////////////////////////////////////////////////////////
 const setInitialData = (props) => {
     debugger
@@ -270,95 +217,93 @@ const initialData = {
     phone05: ''
 }
 
-
-///////////////////////////////////////////////////////
-
 const EditContactsForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
     debugger
 
-
     if (props.expandedEdit) {
         pristine = false;
         submitting = false;
     }
 
+    const rightStyle = {style: {width: '45%', marginLeft: '6%'}}
+    const leftStyle = {style: {width: '45%', marginLeft: '2%'}}
+
     return (
         <form onSubmit={handleSubmit}>
-           <div>
-            < Field
-                name="companyName" component={renderTextField} label="Название компании" margin="normal"
-                inputProps={{style: {width: '50%'}}}
-            />
+            <div>
+                < Field
+                    name="companyName" component={renderTextField} label="Название компании" margin="normal"
+                    inputProps={leftStyle}
+                />
 
                 < Field
                     name="companyAddress" component={renderTextField} label="Адрес компании" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
-
+            <div>
                 < Field
                     name="companyEmail" component={renderTextField} label="Электронная почта" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
-
-
                 < Field
                     name="companyPhone" component={renderTextField} label="Телефон компании" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
+            </div>
             <div>
                 < Field
                     name="phoneOwner01" component={renderTextField} label="Владелец телефона" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
 
                 < Field
                     name="phone01" component={renderTextField} label="Телефон" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
             <div>
                 < Field
                     name="phoneOwner02" component={renderTextField} label="Владелец телефона" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
                 < Field
                     name="phone02" component={renderTextField} label="Телефон" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
             <div>
                 < Field
                     name="phoneOwner03" component={renderTextField} label="Владелец телефона" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
                 < Field
                     name="phone03" component={renderTextField} label="Телефон" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
             <div>
                 < Field
                     name="phoneOwner04" component={renderTextField} label="Владелец телефона" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
                 < Field
                     name="phone04" component={renderTextField} label="Телефон" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
             <div>
                 < Field
                     name="phoneOwner05" component={renderTextField} label="Владелец телефона" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={leftStyle}
                 />
 
                 < Field
                     name="phone05" component={renderTextField} label="Телефон" margin="normal"
-                    inputProps={{style: {width: '50%'}}}
+                    inputProps={rightStyle}
                 />
             </div>
             <div>
@@ -374,9 +319,6 @@ const EditContactsForm = (props) => {
         </form>
     )
 }
-////////////////////////////label="Показывать на сайте"
-
-
 ////////////////////////////
 const EditContactsReduxForm = reduxForm({
     form: 'EditAboutForm', // a unique identifier for this form

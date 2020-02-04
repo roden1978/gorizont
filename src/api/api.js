@@ -151,6 +151,57 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Получить все объявления
+    getAllJobs() {
+        //debugger
+        return instance.get('/api/job/all')
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Получить объявление с ИД
+    getJobsItem(id) {
+        return instance.get('/api/job/' + id)
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Обновить объявление
+    updateJob(jobData){
+        return instance.post('/api/job/upd',jobData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Создать объявление
+    createJob(jobData){
+        return instance.post('/api/job/', jobData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Удалить объявление из БД
+    deleteJob(jobData){
+        return instance.delete('/api/job/' + jobData.id)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
     //API для контактов
     getContacts() {
         //debugger

@@ -15,19 +15,11 @@ import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
-/*import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";*/
 import {Field, reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
+import {validate} from '../../../common/validate'
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -288,21 +280,6 @@ const AdminPanelNews = (props) => {
     )
 }
 
-const validate = (values) => {
-    const errors = {}
-    const requiredFields = [
-        'title',
-        'text',
-        'project'
-    ]
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Обязательное поле'
-        }
-    })
-    return errors
-}
-
 const setInitialData = (props, reset, expandedDelete) => {
     debugger
     if (reset) {
@@ -373,8 +350,6 @@ const EditNewsForm = (props) => {
                             name="title"
                             component={renderTextField}
                             label="Заголовок"
-                            full="true"
-                            value={props.title}
                         />
                     </div>
                     < div>
@@ -382,7 +357,7 @@ const EditNewsForm = (props) => {
                             name="text"
                             component={renderTextField}
                             label="Текст новости"
-                            full="true"
+
                             multiline
                             rowsMax="4"
                             margin="normal"
@@ -394,8 +369,6 @@ const EditNewsForm = (props) => {
                             name="project"
                             component={renderSelectField}
                             label="Проект"
-                            full="true"
-
                         >
                             {props.expandedEdit ? <>
                                     <option value={props.project} label={props.projectTitle}/>
@@ -433,6 +406,3 @@ const EditNewsReduxForm = reduxForm({
     validate,
     initialValues: initialData
 })(EditNewsForm)
-
-/*{!props.expandedEdit ? projectsItems :
-                                <option value={props.project} label={props.projectTitle}></option>}*/

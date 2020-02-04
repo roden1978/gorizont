@@ -1,7 +1,18 @@
-import {SET_JOBS} from "../actions/types";
+import {
+    CHANGE_JOBS_ITEM,
+    IS_ALL_JOBS,
+    SET_CURRENT_JOBS_ID,
+    SET_JOBS,
+    SET_JOBS_COUNT,
+    SET_JOBS_ITEM
+} from "../actions/types";
 
 let initialState = {
-    jobs: []
+    jobs: [],
+    getJobsItem: false,
+    isAllJobs: false,
+    currentJobsId: null,
+    jobsCount: null
 }
 
 const jobs_reducer = (state = initialState, action) => {
@@ -18,6 +29,32 @@ const jobs_reducer = (state = initialState, action) => {
                 ...state, jobs: action.payload
                 //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
             };
+        }
+        case  IS_ALL_JOBS:{
+            return {
+                ...state, isAllJobs: action.payload
+            }
+        }
+        case  SET_JOBS_ITEM:{
+            return {
+                ...state, getJobsItem: action.payload
+            }
+        }
+        case CHANGE_JOBS_ITEM:{
+            const jobsItem  = state.jobs.find(item =>item._id === state.currentJobsId)
+            return {
+                ...state, jobs: [jobsItem]
+            }
+        }
+        case SET_CURRENT_JOBS_ID :{
+            return{
+                ...state, currentJobsId: action.payload
+            }
+        }
+        case SET_JOBS_COUNT :{
+            return{
+                ...state, jobsCount: action.payload
+            }
         }
         default:
             return state;

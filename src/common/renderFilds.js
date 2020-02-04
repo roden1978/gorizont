@@ -15,7 +15,7 @@ export const renderTextField = ({
                                     value,
                                     meta: {touched, invalid, error},
                                     inputProps,
-    full,
+
                                     ...custom
 
                                 }) => (
@@ -24,7 +24,7 @@ export const renderTextField = ({
         value={input.value}
         placeholder={label}
         error={touched && invalid}
-        fullWidth={full}
+        fullWidth
         helperText={touched && error}
         {...input}
         {...inputProps}
