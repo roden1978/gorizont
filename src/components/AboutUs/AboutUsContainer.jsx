@@ -23,7 +23,8 @@ class AboutUsContainer extends React.Component{
         return (<AboutUs about = {this.props.about}
                          adminMode={this.props.adminMode}
                          setIsChangedAbout = {this.props.setIsChangedAbout}
-                         updateAbout = {this.props.updateAbout}/>)
+                         updateAbout = {this.props.updateAbout}
+            {...this.props}/>)
     }
 }
 /*функция принимает state созданный в redux при помощи reducers

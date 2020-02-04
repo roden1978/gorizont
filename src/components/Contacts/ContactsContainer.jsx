@@ -23,7 +23,8 @@ class ContactsContainer extends React.Component{
         return (<Contacts contacts = {this.props.contacts}
                           updateContacts = {this.props.updateContacts}
                           setIsChangedContacts = {this.props.setIsChangedContacts}
-                          adminMode={this.props.adminMode}/>)
+                          adminMode={this.props.adminMode}
+            {...this.props}/>)
     }
 }
 /*функция принимает state созданный в redux при помощи reducers

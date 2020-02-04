@@ -13,6 +13,7 @@ import 'moment/locale/ru'
 import katokIcon from '../../../assets/icons/katok.svg'
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import {Field, reduxForm} from "redux-form";
@@ -179,6 +180,11 @@ const AdminPanelNews = (props) => {
         }
     };
 
+    const handleRefreshClick = () => {
+        //setExpandedRefresh(!expandedRefresh);
+        props.setIsAllNews(true);
+    };
+
     const showResults = (values) => {
         const position = values.project.indexOf('|', 0);
         let id, title;
@@ -208,8 +214,6 @@ const AdminPanelNews = (props) => {
             props.deleteNews(values.id);
             handleDeleteExpandClick();
         }
-
-
     };
 
     return (
@@ -259,7 +263,14 @@ const AdminPanelNews = (props) => {
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
-
+                <Tooltip title={"Обновить"} placement={'top'} arrow>
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
+                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            onClick={handleRefreshClick}
+                            startIcon={<RefreshIcon/>}>
+                        Обновить
+                    </Button>
+                </Tooltip>
             </CardActions>
             <Collapse in={expandedCreate || expandedEdit || expandedDelete} timeout="auto"
                       unmountOnExit>

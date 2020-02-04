@@ -24,6 +24,7 @@ import {Field, reduxForm} from "redux-form";
 import {renderCheckbox, renderSelectField, renderTextField} from "../../../common/renderFilds";
 import Button from "@material-ui/core/Button";
 import {validate} from "../../../common/validate";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const useStyles = makeStyles(theme => ({
     price: {
@@ -138,7 +139,7 @@ const Job = (props) => {
         xs = 12;
         sm = 12;
     }
-debugger
+    debugger
     /*if (props.adminMode && props.getJobsItem)
     {
         xs = 12;
@@ -161,12 +162,12 @@ debugger
 
                 />
                 <CardContent>
-                        <>
-                            {props.description.split('\n').map((i, key) => {
-                                return <Typography key={key} paragraph variant="body1" color="textPrimary"
-                                                   gutterBottom>{i}</Typography>;
-                            })}
-                        </>
+                    <>
+                        {props.description.split('\n').map((i, key) => {
+                            return <Typography key={key} paragraph variant="body1" color="textPrimary"
+                                               gutterBottom>{i}</Typography>;
+                        })}
+                    </>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
                         З/п: {props.price} руб.
                     </Typography>
@@ -242,6 +243,10 @@ const AdminPanelJobs = (props) => {
         }
     };
 
+    const handleRefreshClick = () => {
+        //setExpandedRefresh(!expandedRefresh);
+        props.setIsAllJobs(true);
+    };
     const showResults = (values) => {
         /*const position = values.project.indexOf('|', 0);
         let id, title;
@@ -251,26 +256,38 @@ const AdminPanelJobs = (props) => {
             values.project = id;
             values.projectTitle = title.trim();
         }*/
-
-        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+        if (values.activate) {
+            values.createAt = new Date().toISOString()
+        }
+        //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
+        /*initialData.id = null;
+                initialData.company = '';
+                initialData.title = '';
+                initialData.description = '';
+                initialData.price = '';
+                initialData.email = '';
+                initialData.phone = '';
+                initialData.status = true;
+                initialData.createAt = null;*/
 
-
-        /*if (expandedEdit) {
-            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+        if (expandedEdit) {
+            props.updateJob(values.id, values.company, values.title, values.description,
+                values.price, values.email, values.phone, values.status, values.createAt);
             handleEditExpandClick();
         }
 
 
         if (expandedCreate) {
-            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
+            props.createJob(values.company, values.title, values.description,
+                values.price, values.email, values.phone, values.status);
             handleCreateExpandClick();
         }
 
         if (expandedDelete) {
-            props.deleteNews(values.id);
+            props.deleteJob(values.id);
             handleDeleteExpandClick();
-        }*/
+        }
 
 
     };
@@ -322,7 +339,14 @@ const AdminPanelJobs = (props) => {
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
-
+                <Tooltip title={"Обновить"} placement={'top'} arrow>
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
+                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            onClick={handleRefreshClick}
+                            startIcon={<RefreshIcon/>}>
+                        Обновить
+                    </Button>
+                </Tooltip>
             </CardActions>
             <Collapse in={expandedCreate || expandedEdit || expandedDelete} timeout="auto"
                       unmountOnExit>
@@ -354,6 +378,7 @@ const setInitialData = (props, reset, expandedDelete) => {
         initialData.phone = '';
         initialData.status = true;
         initialData.createAt = null;
+        initialData.activate = false;
     } else {
         initialData.id = props._id;
         initialData.company = props.company;
@@ -367,6 +392,7 @@ const setInitialData = (props, reset, expandedDelete) => {
         else
             initialData.status = props.status;
         initialData.createAt = props.createAt;
+        initialData.activate = false;
     }
 
 }
@@ -380,7 +406,8 @@ const initialData = {
     email: '',
     phone: null,
     status: null,
-    createAt: null
+    createAt: null,
+    activate: null
 }
 /*
 company:{type: String, required: true},
@@ -477,6 +504,15 @@ const EditJobsForm = (props) => {
                        label={getLabel()}
                        disabled={props.jobsCount === 1 ? true : false}/>
             </div>
+            {!props.expandedDelete ? <>
+                    <div>
+                        <Field name="activate"
+                               component={renderCheckbox}
+                               label="Активировать с текущей даты"/>
+                    </div>
+                </>
+                : null
+            }
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
                         disabled={pristine || submitting}>
@@ -490,7 +526,7 @@ const EditJobsForm = (props) => {
         </form>
     )
 }
-
+/*disabled={props.jobsCount === 1 ? true : false}/>*/
 const EditJobsReduxForm = reduxForm({
     form: 'EditJobsForm', // a unique identifier for this form
     validate,

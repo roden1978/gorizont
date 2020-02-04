@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import {Link} from "react-router-dom";
 import moment from "moment";
 import 'moment/locale/ru'
@@ -76,6 +77,16 @@ const useStyles = makeStyles(theme =>({
     buttonSubmit: {
         marginLeft: 10,
     },
+    refresh: {
+        transform: 'rotate(0deg)',
+        backgroundColor:'#f5f6f7',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.standard,
+        }),
+    },
+    refreshOpen: {
+        transform: 'rotate(360deg)',
+    },
 }));
 
 const Project = (props) => {
@@ -95,8 +106,6 @@ const Project = (props) => {
 
     let createAt = moment(props.createAt);
     createAt.locale('ru');
-//debugger
-//arginLeft: 'auto',
 
     return(
         <Grid item xs={10}>
@@ -165,13 +174,6 @@ const Project = (props) => {
 
 export default Project;
 
-/*
-{props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects}
-                                                   saveNews={props.saveNews} setNewsCount={props.setNewsCount}
-                                                   count={props.news.length} newsCount = {props.newsCount}
-                                                   {...props}/> : ''}
- */
-
 const AdminPanelProjects = (props) => {
     debugger
     const classes = useStyles();
@@ -180,7 +182,6 @@ const AdminPanelProjects = (props) => {
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        // if(!props.id)
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
             props.setLoadAlbums(true);
@@ -192,8 +193,6 @@ const AdminPanelProjects = (props) => {
             props.albums.length = 0;
             props.setIsAllProjects(true);
         }
-
-        //props.getId(null);
     };
 
     const handleEditExpandClick = () => {
@@ -208,8 +207,6 @@ const AdminPanelProjects = (props) => {
             props.expandOver();
             props.setIsAllProjects(true);
         }
-
-        //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
@@ -226,6 +223,10 @@ const AdminPanelProjects = (props) => {
         }
     };
 
+    const handleRefreshClick = () => {
+        props.setIsAllProjects(true);
+    };
+
     const showResults = (values) => {
         const position = values.albumId.indexOf('|', 0);
         let id, title;
@@ -235,18 +236,6 @@ const AdminPanelProjects = (props) => {
             values.albumId = id;
             values.albumName = title.trim();
         }
-
-        //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        //props.saveNews(JSON.stringify(values, null, 2));
-        /*id: null,
-    title: '',
-    description: '',
-    text: '',
-    albumId: '',
-    albumName: '',
-    status: null,
-    createAt: null*/
-
 
         if (expandedEdit) {
             props.updateProject(values.id, values.title, values.description, values.text, values.albumId, values.albumName, values.status, values.createAt);
@@ -263,8 +252,6 @@ const AdminPanelProjects = (props) => {
             props.deleteProject(values.id);
             handleDeleteExpandClick();
         }
-
-
     };
 
     return (
@@ -273,7 +260,7 @@ const AdminPanelProjects = (props) => {
                 <Typography variant="body2" color="textPrimary">
                     Создать
                 </Typography>
-                <Tooltip title={!expandedCreate ? "Создать новость" : "Отмена"} placement={'top'} arrow>
+                <Tooltip title={!expandedCreate ? "Создать проект" : "Отмена"} placement={'top'} arrow>
                     <IconButton onClick={handleCreateExpandClick}
                                 className={clsx(classes.expand, {
                                     [classes.expandOpen]: expandedCreate,
@@ -288,7 +275,7 @@ const AdminPanelProjects = (props) => {
                 <Typography variant="body2" color="textPrimary">
                     Редактировать
                 </Typography>
-                <Tooltip title={!expandedEdit ? "Редактировать новость" : "Отмена"} placement={'top'} arrow>
+                <Tooltip title={!expandedEdit ? "Редактировать проект" : "Отмена"} placement={'top'} arrow>
                     <IconButton onClick={handleEditExpandClick}
                                 className={clsx(classes.expand, {
                                     [classes.expandOpen]: expandedEdit,
@@ -315,6 +302,14 @@ const AdminPanelProjects = (props) => {
                     </IconButton>
                 </Tooltip>
 
+                <Tooltip title={"Обновить"} placement={'top'} arrow>
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
+                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            onClick={handleRefreshClick}
+                            startIcon={<RefreshIcon/>}>
+                        Обновить
+                    </Button>
+                </Tooltip>
             </CardActions>
             <Collapse in={expandedCreate || expandedEdit || expandedDelete} timeout="auto"
                       unmountOnExit>

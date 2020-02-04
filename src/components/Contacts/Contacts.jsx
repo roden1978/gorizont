@@ -15,6 +15,7 @@ import {Field, reduxForm} from "redux-form";
 import {renderTextField} from "../../common/renderFilds";
 import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -128,7 +129,10 @@ const AdminPanelContacts = (props) => {
 
         //props.getId(null);
     };
-
+    const handleRefreshClick = () => {
+        //setExpandedRefresh(!expandedRefresh);
+        props.getContacts();
+    };
     const showResults = (values) => {
         //     window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
@@ -163,7 +167,14 @@ const AdminPanelContacts = (props) => {
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
-
+                <Tooltip title={"Обновить"} placement={'top'} arrow>
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
+                            disabled={expandedEdit}
+                            onClick={handleRefreshClick}
+                            startIcon={<RefreshIcon/>}>
+                        Обновить
+                    </Button>
+                </Tooltip>
             </CardActions>
             <Collapse in={expandedEdit} timeout="auto"
                       unmountOnExit>
