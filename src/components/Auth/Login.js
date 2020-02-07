@@ -18,14 +18,15 @@ class Login extends React.Component {
 
     render() {
         return (<>
-            {this.props.auth ? <Redirect to = '/admin' /> : <Spinner/>}
+            {this.props.auth ? <Redirect to = '/news' /> : <Spinner/>}
         </>)
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        auth: state.auth.isAuthorized
+        auth: state.auth.isAuthorized,
+        adminMode: state.auth.adminMode
     }
 
 }

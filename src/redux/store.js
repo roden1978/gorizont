@@ -11,6 +11,7 @@ import jobs_reducer from "./reducers/jobsReducer";
 import contacts_reducer from "./reducers/contactsReducer";
 import about_reducer from "./reducers/aboutReducer";
 import auth_reducer from "./reducers/authReducer";
+import users_reducer from "./reducers/usersReducer";
 
 let reducers = combineReducers({
     news: news_reducer,
@@ -20,6 +21,7 @@ let reducers = combineReducers({
     contacts: contacts_reducer,
     about: about_reducer,
     auth: auth_reducer,
+    users: users_reducer,
     form: formReducer
 })
 

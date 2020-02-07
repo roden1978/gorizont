@@ -200,18 +200,16 @@ const AdminPanelJobs = (props) => {
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        // if(!props.id)
+
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
             props.setCurrentJobsId(props._id);
             props.setJobsItem(true);
             setInitialData(props, true);
         } else {
-            //props.projects.length = 0;
             props.setIsAllJobs(true);
         }
 
-        //props.getId(null);
     };
 
     const handleEditExpandClick = () => {
@@ -226,12 +224,11 @@ const AdminPanelJobs = (props) => {
 
         }
 
-        //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
         debugger
-        props.setJobsCount(props.count);
+        props.setJobsCount(props.jobs.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
             props.setCurrentJobsId(props._id);
@@ -239,44 +236,23 @@ const AdminPanelJobs = (props) => {
             setInitialData(props, false, true);
         } else {
             props.setIsAllJobs(true);
-
+            props.setJobsCount(null);
         }
     };
 
     const handleRefreshClick = () => {
-        //setExpandedRefresh(!expandedRefresh);
         props.setIsAllJobs(true);
     };
     const showResults = (values) => {
-        /*const position = values.project.indexOf('|', 0);
-        let id, title;
-        if (position > 0) {
-            id = values.project.slice(0, position);
-            title = values.project.slice(position + 1);
-            values.project = id;
-            values.projectTitle = title.trim();
-        }*/
+
         if (values.activate) {
             values.createAt = new Date().toISOString()
         }
-        //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        //props.saveNews(JSON.stringify(values, null, 2));
-        /*initialData.id = null;
-                initialData.company = '';
-                initialData.title = '';
-                initialData.description = '';
-                initialData.price = '';
-                initialData.email = '';
-                initialData.phone = '';
-                initialData.status = true;
-                initialData.createAt = null;*/
-
         if (expandedEdit) {
             props.updateJob(values.id, values.company, values.title, values.description,
                 values.price, values.email, values.phone, values.status, values.createAt);
             handleEditExpandClick();
         }
-
 
         if (expandedCreate) {
             props.createJob(values.company, values.title, values.description,
@@ -288,7 +264,6 @@ const AdminPanelJobs = (props) => {
             props.deleteJob(values.id);
             handleDeleteExpandClick();
         }
-
 
     };
 
@@ -409,16 +384,7 @@ const initialData = {
     createAt: null,
     activate: null
 }
-/*
-company:{type: String, required: true},
-    title:{type: String, required: true},
-    description:{type: String, required: true},
-    price:{type: String, required: true},
-    email:{type: String},
-    phone:{type: String, required: true},
-    status:{type: Boolean, default: true},
-    createAt:{type: Date, default: Date.now}
- */
+
 ///////////////////////////////////////////////////////
 
 const EditJobsForm = (props) => {
@@ -426,11 +392,6 @@ const EditJobsForm = (props) => {
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
     debugger
-    //console.log(props.val + " " + props.expandedEdit);
-
-    /*let projectsItems = projects.map(
-        projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}
-                               label={projectItem.title}></option>)*/
 
     if (props.expandedEdit) {
         pristine = false;
@@ -445,7 +406,6 @@ const EditJobsForm = (props) => {
             return "Удалить из базы данных навсегда"
         }
     }
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -502,13 +462,14 @@ const EditJobsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.jobsCount === 1 ? true : false}/>
+                       disabled={props.jobsCount === 1 || props.expandedCreate? true : false}/>
             </div>
             {!props.expandedDelete ? <>
                     <div>
                         <Field name="activate"
                                component={renderCheckbox}
-                               label="Активировать с текущей даты"/>
+                               label="Активировать с текущей даты"
+                               disabled={props.jobsCount === 1 || props.expandedCreate? true : false}/>
                     </div>
                 </>
                 : null
@@ -526,7 +487,6 @@ const EditJobsForm = (props) => {
         </form>
     )
 }
-/*disabled={props.jobsCount === 1 ? true : false}/>*/
 const EditJobsReduxForm = reduxForm({
     form: 'EditJobsForm', // a unique identifier for this form
     validate,

@@ -1,8 +1,9 @@
-import {SET_AUTHORIZED} from "../actions/types";
+import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_ROOT_MODE} from "../actions/types";
 
 let initialState = {
     isAuthorized: false,
-    adminMode: true
+    adminMode: false,
+    root: false
 }
 
 const auth_reducer = (state = initialState, action) => {
@@ -17,6 +18,22 @@ const auth_reducer = (state = initialState, action) => {
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
                 ...state, isAuthorized: action.payload
+            };
+        }
+            case SET_ADMIN_MODE: {
+            /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
+            * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
+            * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
+            return {
+                ...state, adminMode: action.payload
+            };
+        }
+        case SET_ROOT_MODE: {
+            /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
+            * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
+            * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
+            return {
+                ...state, root: action.payload
             };
         }
         default:

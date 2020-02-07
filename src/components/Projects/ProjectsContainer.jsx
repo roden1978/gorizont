@@ -48,6 +48,11 @@ class ProjectsContainer extends React.Component {
             this.props.setIsAllProjects(false);
             setTimeout(null, 2000);
         }
+
+        if (this.props.isAllProjects && !this.props.adminMode) {
+            this.props.getAllProjects();
+            this.props.setIsAllProjects(false);
+        }
     }
 
     componentWillUnmount() {

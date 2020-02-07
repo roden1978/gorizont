@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import auth0 from 'auth0-js'
+
 import {connect} from "react-redux";
 import {getAuthorize} from "../redux/actions/authActions";
 
@@ -48,8 +49,8 @@ export const mongodbAPI = {
             )
     },
     //Обновить новость
-    updateNews(newsData){
-        return instance.post('/api/news/upd',newsData)
+    updateNews(newsData) {
+        return instance.post('/api/news/upd', newsData)
             .then(response => {
                 return response.data;
             })
@@ -58,7 +59,7 @@ export const mongodbAPI = {
             )
     },
     //Создать новость
-    createNews(newsData){
+    createNews(newsData) {
         return instance.post('/api/news/', newsData)
             .then(response => {
                 return response.data;
@@ -68,14 +69,14 @@ export const mongodbAPI = {
             )
     },
     //Удалить новость из БД
-    deleteNews(newsData){
-      return instance.delete('/api/news/' + newsData.id)
-          .then(response => {
-              return response.data;
-          })
-          .catch(err =>
-              console.log(err)
-          )
+    deleteNews(newsData) {
+        return instance.delete('/api/news/' + newsData.id)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
     },
 //API для проектов
     //Полусть проекты с условием
@@ -110,9 +111,9 @@ export const mongodbAPI = {
             )
     },
     //Обновить проект
-    updateProject(projectData){
+    updateProject(projectData) {
         debugger
-        return instance.post('/api/projects/upd',projectData)
+        return instance.post('/api/projects/upd', projectData)
             .then(response => {
                 return response.data;
             })
@@ -121,7 +122,7 @@ export const mongodbAPI = {
             )
     },
     //Создать проект
-    createProject(projectData){
+    createProject(projectData) {
         return instance.post('/api/projects/', projectData)
             .then(response => {
                 return response.data;
@@ -131,7 +132,7 @@ export const mongodbAPI = {
             )
     },
     //Удалить проект из БД
-    deleteProject(projectData){
+    deleteProject(projectData) {
         return instance.delete('/api/projects/' + projectData.id)
             .then(response => {
                 return response.data;
@@ -173,8 +174,8 @@ export const mongodbAPI = {
             )
     },
     //Обновить объявление
-    updateJob(jobData){
-        return instance.post('/api/job/upd',jobData)
+    updateJob(jobData) {
+        return instance.post('/api/job/upd', jobData)
             .then(response => {
                 return response.data;
             })
@@ -183,7 +184,7 @@ export const mongodbAPI = {
             )
     },
     //Создать объявление
-    createJob(jobData){
+    createJob(jobData) {
         return instance.post('/api/job/', jobData)
             .then(response => {
                 return response.data;
@@ -193,7 +194,7 @@ export const mongodbAPI = {
             )
     },
     //Удалить объявление из БД
-    deleteJob(jobData){
+    deleteJob(jobData) {
         return instance.delete('/api/job/' + jobData.id)
             .then(response => {
                 return response.data;
@@ -214,8 +215,8 @@ export const mongodbAPI = {
             )
     },
     //Обновить контакты
-    updateContacts(contactsData){
-        return instance.post('/api/contacts/upd',contactsData)
+    updateContacts(contactsData) {
+        return instance.post('/api/contacts/upd', contactsData)
             .then(response => {
                 return response.data;
             })
@@ -235,8 +236,61 @@ export const mongodbAPI = {
             )
     },
     //Обновить инфу о нас
-    updateAbout(aboutData){
-        return instance.post('/api/about/upd',aboutData)
+    updateAbout(aboutData) {
+        return instance.post('/api/about/upd', aboutData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+
+    //Получить пользователей
+    getUsers() {
+        //debugger
+        return instance.get('/api/users/')
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+
+//Получить пользователя с ИД
+    getUser(id) {
+        return instance.get('/api/users/' + id)
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+//Обновить пользователя
+    updateUser(userData) {
+        return instance.post('/api/users/upd', userData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+//Создать пользователя
+    createUser(userData) {
+        return instance.post('/api/users/', userData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+//Удалить пользователя из БД
+    deleteUser(userData) {
+        return instance.delete('/api/users/' + userData.id)
             .then(response => {
                 return response.data;
             })
@@ -248,7 +302,7 @@ export const mongodbAPI = {
 
 export const flickrAPI = {
     //Получить список альбомов
-    getAlbums(){
+    getAlbums() {
         //debugger
         return instance.get('/api/albums')
             .then(response => {
@@ -259,7 +313,7 @@ export const flickrAPI = {
             )
     },
     //Получить список фотографий из альбома с ID
-    getPhotos(id/*Id PhotoAlbum*/){
+    getPhotos(id/*Id PhotoAlbum*/) {
         return instance.get('/api/photos/' + id)
             .then(response => {
                 return response.data
@@ -269,7 +323,7 @@ export const flickrAPI = {
             )
     },
     //Получить объект со ссылками на фото по ID с разными размерами фото
-    getPhoto(id/*Id Photo*/){
+    getPhoto(id/*Id Photo*/) {
         return instance.get('/api/photos/photo/' + id)
             .then(response => {
                 return response.data
@@ -281,24 +335,51 @@ export const flickrAPI = {
 }
 
 export const authAPI = {
-    authorizeAuth0(){
+    checkUser(userData) {
+        //debugger
+        return instance.post('/api/users/login', userData)
+            .then(response => {
+                //return response.data;
+                //return console.log(response.data)
+                if (response.data) {
+                    return true;
+                }
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    ///////////////////////
+    authorizeAuth0() {
         auth.authorize();
     },
 
-    handleAuthentication(){
+    handleAuthentication() {
         return new Promise((resolve, reject) => {
-           auth.parseHash((err, authResult) => {
-            if (authResult && authResult.accessToken) {
-                resolve(true);
-            }else if(err){
-                console.log(err);
+                auth.parseHash((err, authResult) => {
+                    if (authResult && authResult.accessToken) {
+                        resolve(true);
+                    } else if (err) {
+                        console.log(err);
+                    }
+                })
             }
-        })
-    }
-        )},
-    logout(){
+        )
+    },
+
+    logout() {
         auth.logout();
     }
 
 }
 
+/* checkUser(userData){
+        debugger
+        return instance.post('/api/users/login',userData)
+                .then(response => {
+                    return response.data;
+                })
+                .catch(err =>
+                    console.log(err)
+                )
+    },*/

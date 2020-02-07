@@ -2,7 +2,8 @@ export const validate = (values) => {
     const errors = {}
     const requiredFields = [
         'title', 'text', 'description', 'project', 'price','company',
-        'companyName', 'companyAddress', 'companyPhone', 'companyEmail'
+        'companyName', 'companyAddress', 'companyPhone', 'companyEmail',
+        'email', 'password'
     ]
     const requiredPhones = ['companyPhone', 'phone01', 'phone02',
         'phone03', 'phone04', 'phone05', 'phone']

@@ -40,11 +40,20 @@ export const SET_IS_CHANGED_CONTACTS = 'SET_IS_CHANGED_CONTACTS'
 export const SET_ABOUT = 'SET_ABOUT';
 export const SET_IS_CHANGED_ABOUT = 'SET_IS_CHANGED_ABOUT'
 
+//Пользователи
+export const SET_USERS = 'SET_USERS';
+export const CHANGE_USERS_ITEM = 'CHANGE_USERS_ITEM'
+export const SET_USERS_ITEM = 'SET_USERS_ITEM'
+export const IS_ALL_USERS = 'IS_ALL_USERS'
+export const SET_CURRENT_USERS_ID = 'SET_CURRENT_USERS_ID'
+export const SET_USERS_COUNT = 'SET_USERS_COUNT'
 
 /////
 export const IS_CLICKED = 'IS_CLICKED'
 export const SET_URL = 'SET_URL'
 export const SET_AUTHORIZED = 'SET_AUTHORIZED'
+export const SET_ADMIN_MODE = 'SET_ADMIN_MODE'
+export const SET_ROOT_MODE = 'SET_ROOT_MODE'
 
 
 

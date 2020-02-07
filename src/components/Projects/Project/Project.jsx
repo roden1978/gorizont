@@ -77,16 +77,7 @@ const useStyles = makeStyles(theme =>({
     buttonSubmit: {
         marginLeft: 10,
     },
-    refresh: {
-        transform: 'rotate(0deg)',
-        backgroundColor:'#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.standard,
-        }),
-    },
-    refreshOpen: {
-        transform: 'rotate(360deg)',
-    },
+
 }));
 
 const Project = (props) => {
@@ -103,6 +94,12 @@ const Project = (props) => {
         setExpanded(true);
         props.getId(null);
     }
+
+    const viewAllProjectsClick = () => {
+        setExpanded(false);
+        props.getId(null);
+        props.setIsAllProjects(true);
+    };
 
     let createAt = moment(props.createAt);
     createAt.locale('ru');
@@ -158,7 +155,8 @@ const Project = (props) => {
                     <CardContent>
                         <>
                             {props.text.split('\n').map((i, key) => {
-                                return <Typography key={key} paragraph variant="body1" color="textPrimary" gutterBottom>{i}</Typography>;
+                                return <Typography key={key} paragraph variant="body1" c
+                                                   olor="textPrimary" gutterBottom>{i}</Typography>;
                             })}
                         </>
                     </CardContent>
@@ -166,13 +164,23 @@ const Project = (props) => {
                 <Typography className={classes.date} variant="body2" color="textSecondary">
                     Старт проекта: {createAt.format('LL')}
                 </Typography>
-                {props.adminMode ? <AdminPanelProjects expandOver = {expandOver} {...props}/> : ''}
+                {props.projects.length === 1 && !props.adminMode ? <>
+                    <Tooltip title={"Показать все проекты"} placement={'top'} arrow>
+                        <Button  size="small"  type="button"
+                                onClick={viewAllProjectsClick}>
+                            Показать все проекты
+                        </Button>
+                    </Tooltip>
+                    </> : null}
+                {props.adminMode ? <AdminPanelProjects expandOver = {expandOver} count={props.projects.length}
+                                                       {...props}/> : ''}
             </Card>
         </Grid>
     );
 }
 
 export default Project;
+// && !props.adminMode
 
 const AdminPanelProjects = (props) => {
     debugger
@@ -220,6 +228,7 @@ const AdminPanelProjects = (props) => {
         } else {
             props.expandOver();
             props.setIsAllProjects(true);
+            props.setProjectsCount(null);
         }
     };
 
@@ -403,7 +412,6 @@ const EditProjectsForm = (props) => {
                             name="title"
                             component={renderTextField}
                             label="Заголовок"
-                            value={props.title}
                         />
                     </div>
                     <div>
@@ -411,7 +419,6 @@ const EditProjectsForm = (props) => {
                             name="description"
                             component={renderTextField}
                             label="Краткое описание"
-                            value={props.description}
                         />
                     </div>
                     < div>
@@ -447,7 +454,7 @@ const EditProjectsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.projectsCount === 1 ? true : false}/>
+                       disabled={props.projectsCount === 1 || props.expandedCreate? true : false}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 /*linear-gradient(to right, #0d47a1, #ffff #f5f6f7)
 * 'linear-gradient(to right, #0d47a1 90%, coral)'
 * backgroundColor: '#3b5998',//#0d47a1*/
-const NewsItem = (props) => {
+const User = (props) => {
     const classes = useStyles();
     debugger
     let createAt = moment(props.createAt);
@@ -124,7 +124,7 @@ const NewsItem = (props) => {
     );
 }
 
-export default NewsItem;
+export default User;
 
 const AdminPanelNews = (props) => {
     //debugger
