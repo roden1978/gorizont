@@ -20,20 +20,20 @@ export const getUsers = () => {
 }
 
 
-export const createUser = (title, text, project, projectTitle, status) =>{
+export const createUser = (firstName, lastName, email, password, root) =>{
     //debugger
     return async (dispatch) =>{
-        const data = await mongodbAPI.createUser({title, text, project, projectTitle, status});
+        const data = await mongodbAPI.createUser({firstName, lastName, email, password, root});
         if (data.resultCode === 0) {
             dispatch(getUsers());
         }
     }
 }
 
-export const updateUser = (id, title, text, project, projectTitle, status, createAt) =>{
+export const updateUser = (id, firstName, lastName, email, password, root) =>{
     //debugger
     return async (dispatch) =>{
-        const data = await mongodbAPI.updateUser({id, title, text, project, projectTitle, status, createAt});
+        const data = await mongodbAPI.updateUser({id, firstName, lastName, email, password, root});
         if (data.resultCode === 0) {
             dispatch(getUsers());
         }
@@ -63,7 +63,7 @@ export const setChangeUsersItem = () =>{
     }
 }
 
-export const  setUser = (user) =>{
+export const  setUserItem = (user) =>{
     return {
         type: SET_USERS_ITEM,
         payload: user

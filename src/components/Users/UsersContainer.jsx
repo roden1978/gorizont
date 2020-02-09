@@ -1,60 +1,43 @@
 import React from 'react';
 import {
-    getNews,
-    setLoadProjects,
-    setNewsItem,
-    setChangeNewsItem,
-    setCurrentNewsId,
-    createNews,
-    updateNews,
-    deleteNews,
-    getAllNews,
-    setIsAllNews,
-    setNewsCount
-} from '../../redux/actions/newsActions';
-import {getProjects} from "../../redux/actions/projectsActions";
+    getUsers,
+    setUserItem,
+    setChangeUsersItem,
+    setCurrentUsersId,
+    createUser,
+    updateUser,
+    deleteUser,
+    setIsAllUsers,
+    setUsersCount
+} from '../../redux/actions/usersActions';
 import Users from "./Users";
 import {connect} from "react-redux";
-
+import {compose} from "redux"
+import {withAuthRedirect} from "../../hoc/withAuthRedirect"
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         //debugger
         if (this.props.adminMode)
-            this.props.getAllNews();
-        else
-            this.props.getNews();
+            this.props.getUsers();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.loadProjects) {
-            this.props.getProjects();
-            this.props.setLoadProjects(false);
-        }
-        if (this.props.getNewsItem) {
-            this.props.setChangeNewsItem();
-            this.props.setNewsItem(false);
+
+        if (this.props.getUserItem) {
+            this.props.setChangeUsersItem();
+            this.props.setUserItem(false);
         }
 
-        if (this.props.isAllNews && this.props.adminMode) {
-            setTimeout(null,2000);
-            this.props.getAllNews();
-            this.props.setIsAllNews(false);
+        if (this.props.isAllUsers && this.props.adminMode) {
+            setTimeout(null, 2000);
+            this.props.getUsers();
+            this.props.setIsAllUsers(false);
         }
     }
 
     render() {
-        return (<Users news={this.props.news}
-                       setLoadProjects={this.props.setLoadProjects}
-                       setNewsItem={this.props.setNewsItem}
-                       setIsAllNews={this.props.setIsAllNews}
-                       projects={this.props.projects}
-                       setCurrentNewsId={this.props.setCurrentNewsId}
-                       createNews={this.props.createNews}
-                       updateNews={this.props.updateNews}
-                       deleteNews={this.props.deleteNews}
-                       adminMode={this.props.adminMode}
-                       setNewsCount={this.props.setNewsCount}
+        return (<Users users={this.props.users}
                        {...this.props}
         />)
     }
@@ -64,23 +47,27 @@ class UsersContainer extends React.Component {
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
     return {
-        news: state.news.news,
-        loadProjects: state.news.loadProjects,
-        projects: state.projects.projects,
-        isAllNews: state.news.isAllNews,
-        getNewsItem: state.news.getNewsItem,
-        currentNewsId: state.news.currentNewsId,
-        newsCount: state.news.newsCount,
-        adminMode: state.auth.adminMode
+        users: state.users.users,
+        isAllUsers: state.users.isAllUsers,
+        getUserItem: state.users.getUserItem,
+        currentUserId: state.users.currentUserId,
+        usersCount: state.users.usersCount,
+        adminMode: state.auth.adminMode,
+        adminRoot: state.auth.adminRoot
     }
 };
-
 /*Создаем контейнерную кмпоненту MyNewsContainer*/
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
-export default connect(mapStateToProps,
-    {   getNews, getProjects, setLoadProjects,
-        setNewsItem, setChangeNewsItem, setIsAllNews,
-        setCurrentNewsId, createNews, updateNews, getAllNews,
-        deleteNews, setNewsCount
-    })(UsersContainer);
+export default compose(connect(mapStateToProps,
+    {
+        getUsers,
+        setUserItem,
+        setChangeUsersItem,
+        setCurrentUsersId,
+        createUser,
+        updateUser,
+        deleteUser,
+        setIsAllUsers,
+        setUsersCount
+    }), withAuthRedirect)(UsersContainer);

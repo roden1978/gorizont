@@ -1,5 +1,5 @@
 import {authAPI, mongodbAPI} from '../../api/api'
-import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_ROOT_MODE} from "../actions/types";
+import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 import {getAllNews} from "./newsActions";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -10,17 +10,18 @@ export const setAuthorized = (isAuthorized) => {
     }
 }
 
-export const setAdminMode = (adminMode) => {
+export const setAdminMode = (adminMode, adminRoot) => {
     return {
         type: SET_ADMIN_MODE,
-        payload: adminMode
+        payload: adminMode,
+        adminRoot: adminRoot
     }
 }
 
-export const setRootMode = (root) => {
+export const setIsUsers = (isUsers) => {
     return {
-        type: SET_ROOT_MODE,
-        payload: root
+        type: SET_IS_USERS,
+        payload: isUsers
     }
 }
 
@@ -41,10 +42,13 @@ export const checkUser = (email, password) =>{
     //debugger
     return async (dispatch) =>{
         const data = await authAPI.checkUser({email, password});
+        console.log(data + '1233');
         if (data) {
             //dispatch(getAllNews());
-            //console.log(data);
-            dispatch(setAdminMode(true));
+
+            dispatch(setAdminMode(true, data.root));
+            /*if(data.root)
+                dispatch(setRootMode(true))*/
         }
     }
 }

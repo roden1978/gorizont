@@ -1,5 +1,4 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,8 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
-import moment from "moment";
-import 'moment/locale/ru'
 import katokIcon from '../../../assets/icons/katok.svg'
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -19,7 +16,7 @@ import Collapse from "@material-ui/core/Collapse";
 import {Field, reduxForm} from "redux-form";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
+import {renderTextField, renderCheckbox} from '../../../common/renderFilds'
 import {validate} from '../../../common/validate'
 
 const useStyles = makeStyles(theme => ({
@@ -81,44 +78,34 @@ const useStyles = makeStyles(theme => ({
 const User = (props) => {
     const classes = useStyles();
     debugger
-    let createAt = moment(props.createAt);
+   /* let createAt = moment(props.createAt);
 
-    createAt.locale('ru');
+    createAt.locale('ru');*/
     //console.log(createAt.format('LL'));
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
-                <CardHeader title={props.title}
+                <CardHeader title={`${props.firstName} ${props.lastName}`}
                             className={classes.title}
                             avatar={
                                 <Avatar className={classes.avatar}>
-                                    <img className={classes.katok} src={katokIcon} alt="Новости"/>
+                                    <img className={classes.katok} src={katokIcon} alt="Пользователь"/>
                                 </Avatar>
                             }
                 />
                 <CardContent>
-                    <>
-                        {props.text.split('\n').map((i, key) => {
-                            return <Typography key={key} paragraph variant="body1" color="textPrimary"
-                                               gutterBottom>{i}</Typography>;
-                        })}
-                    </>
-                </CardContent>
-                <CardActions>
                     <Typography className={classes.pos} variant="body2" color="textPrimary">
-                        Проект:
+                        Логин: {props.email}
                     </Typography>
+                    <Typography className={classes.pos} variant="body2" color="textPrimary">
+                        Пароль: {props.password}
+                    </Typography>
+                    <Typography className={classes.pos} variant="body2" color="textPrimary">
+                        Права на создание пользователей: {props.root === true ? "Да" : "Нет"}
+                    </Typography>
+                </CardContent>
 
-                    <NavLink to={'/projects/' + props.project}
-                             className={classes.link}>{props.projectTitle}</NavLink>
-                </CardActions>
-                <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
-                    {createAt.format('LL')}
-                </Typography>
-                {props.adminMode ? <AdminPanelNews setLoadProjects={props.setLoadProjects} projects={props.projects}
-                                                   saveNews={props.saveNews} setNewsCount={props.setNewsCount}
-                                                   count={props.news.length} newsCount={props.newsCount}
-                                                   {...props}/> : ''}
+                {props.adminMode ? <AdminPanelUsers {...props}/> : ''}
             </Card>
         </Grid>
     );
@@ -126,25 +113,22 @@ const User = (props) => {
 
 export default User;
 
-const AdminPanelNews = (props) => {
+const AdminPanelUsers = (props) => {
     //debugger
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
-    /*const [expandedHidden, setExpandedHidden] = React.useState(false);*/
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
         // if(!props.id)
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
-            props.setLoadProjects(true);
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.setCurrentUsersId(props._id);
+            props.setUserItem(true);
             setInitialData(props, true);
         } else {
-            props.projects.length = 0;
-            props.setIsAllNews(true);
+            props.setIsAllUsers(true);
         }
 
         //props.getId(null);
@@ -154,64 +138,65 @@ const AdminPanelNews = (props) => {
 
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
-            props.setLoadProjects(true);
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.setCurrentUsersId(props._id);
+            props.setUserItem(true);
             setInitialData(props, false, false);
         } else {
-            props.setIsAllNews(true);
+            props.setIsAllUsers(true);
 
         }
-
-        //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
         debugger
-        props.setNewsCount(props.count);
+        props.setUsersCount(props.users.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
-            props.setCurrentNewsId(props._id);
-            props.setNewsItem(true);
+            props.setCurrentUsersId(props._id);
+            props.setUserItem(true);
             setInitialData(props, false, true);
         } else {
-            props.setIsAllNews(true);
-            props.setNewsCount(null);
+            props.setIsAllUsers(true);
+            props.setUsersCount(null);
         }
     };
 
     const handleRefreshClick = () => {
         //setExpandedRefresh(!expandedRefresh);
-        props.setIsAllNews(true);
+        props.setIsAllUsers(true);
     };
 
     const showResults = (values) => {
-        const position = values.project.indexOf('|', 0);
+        /*const position = values.project.indexOf('|', 0);
         let id, title;
         if (position > 0) {
             id = values.project.slice(0, position);
             title = values.project.slice(position + 1);
             values.project = id;
             values.projectTitle = title.trim();
-        }
+        }*/
 
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
-
-
+/*initialData.id = null;
+        initialData.firstName = '';
+        initialData.lastName = '';
+        initialData.email = '';
+        initialData.password = '';
+        initialData.root = false;*/
         if (expandedEdit) {
-            props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
+            props.updateUser(values.id, values.firstName, values.lastName, values.email, values.password, values.root);
             handleEditExpandClick();
         }
 
 
         if (expandedCreate) {
-            props.createNews(values.title, values.text, values.project, values.projectTitle, values.status);
+            props.createUser(values.firstName, values.lastName, values.email, values.password, values.root);
             handleCreateExpandClick();
         }
 
         if (expandedDelete) {
-            props.deleteNews(values.id);
+            props.deleteUser(values.id);
             handleDeleteExpandClick();
         }
     };
@@ -222,7 +207,7 @@ const AdminPanelNews = (props) => {
                 <Typography variant="body2" color="textPrimary">
                     Создать
                 </Typography>
-                <Tooltip title={!expandedCreate ? "Создать новость" : "Отмена"} placement={'top'} arrow>
+                <Tooltip title={!expandedCreate ? "Создать пользователя" : "Отмена"} placement={'top'} arrow>
                     <IconButton onClick={handleCreateExpandClick}
                                 className={clsx(classes.expand, {
                                     [classes.expandOpen]: expandedCreate,
@@ -237,7 +222,7 @@ const AdminPanelNews = (props) => {
                 <Typography variant="body2" color="textPrimary">
                     Редактировать
                 </Typography>
-                <Tooltip title={!expandedEdit ? "Редактировать новость" : "Отмена"} placement={'top'} arrow>
+                <Tooltip title={!expandedEdit ? "Редактировать пользователя" : "Отмена"} placement={'top'} arrow>
                     <IconButton onClick={handleEditExpandClick}
                                 className={clsx(classes.expand, {
                                     [classes.expandOpen]: expandedEdit,
@@ -278,12 +263,10 @@ const AdminPanelNews = (props) => {
                     <Typography variant="h6" color="textPrimary" align="center">
                         ПАНЕЛЬ АДМИНИСТРИРОВАНИЯ
                     </Typography>
-                    <EditNewsReduxForm onSubmit={showResults}
+                    <EditUsersReduxForm onSubmit={showResults}
                                        expandedCreate={expandedCreate}
                                        expandedEdit={expandedEdit}
                                        expandedDelete={expandedDelete}
-                                       projects={props.projects}
-                                       newsCount={props.newsCount}
                                        {...props}/>
                 </CardContent>
             </Collapse>
@@ -295,48 +278,45 @@ const setInitialData = (props, reset, expandedDelete) => {
     debugger
     if (reset) {
         initialData.id = null;
-        initialData.title = '';
-        initialData.text = '';
-        initialData.project = '';
-        initialData.status = true;
-        initialData.projectTitle = '';
-        initialData.createAt = null
+        initialData.firstName = '';
+        initialData.lastName = '';
+        initialData.email = '';
+        initialData.password = '';
+        initialData.root = false;
     } else {
         initialData.id = props._id;
-        initialData.title = props.title;
-        initialData.text = props.text;
-        initialData.project = props.project;
+        initialData.firstName = props.firstName;
+        initialData.lastName = props.lastName;
+        initialData.email = props.email;
+        initialData.password = '';
         if (expandedDelete)
-            initialData.status = false;
+            initialData.root = false;
         else
-            initialData.status = props.status;
-        initialData.projectTitle = props.projectTitle;
-        initialData.createAt = props.createAt;
+            initialData.root = props.root;
     }
 
 }
 
 const initialData = {
     id: null,
-    title: '',
-    text: '',
-    project: '',
-    projectTitle: '',
-    status: null,
-    createAt: null
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    root: null,
 }
 ///////////////////////////////////////////////////////
 
-const EditNewsForm = (props) => {
+const EditUsersForm = (props) => {
     const classesStyle = useStyles();
-    const {handleSubmit, reset, classes, projects} = props;
+    const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
     //console.log(props.val + " " + props.expandedEdit);
 
-    let projectsItems = projects.map(
+    /*let projectsItems = projects.map(
         projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}
-                               label={projectItem.title}></option>)
+                               label={projectItem.title}></option>)*/
 
     if (props.expandedEdit) {
         pristine = false;
@@ -345,7 +325,7 @@ const EditNewsForm = (props) => {
 
     let getLabel = () => {
         if (props.expandedEdit || props.expandedCreate) {
-            return "Показывать на сайте"
+            return "Права на создание и изменение пользователей"
         }
         if (props.expandedDelete) {
             return "Удалить из базы данных навсегда"
@@ -358,45 +338,49 @@ const EditNewsForm = (props) => {
             {!props.expandedDelete ? <>
                     <div>
                         <Field
-                            name="title"
+                            name="firstName"
                             component={renderTextField}
-                            label="Заголовок"
+                            label="Имя"
                         />
                     </div>
                     < div>
                         < Field
-                            name="text"
+                            name="lastName"
                             component={renderTextField}
-                            label="Текст новости"
-
-                            multiline
-                            rowsMax="4"
-                            margin="normal"
+                            label="Фамилия"
                         />
                     </div>
-                    <div>
-                        <Field
-                            classes={classes}
-                            name="project"
-                            component={renderSelectField}
-                            label="Проект"
-                        >
-                            {props.expandedEdit ? <>
-                                    <option value={props.project} label={props.projectTitle}/>
-                                    <option value=''/>
-                                </> :
-                                <option value=''/>}
-                            {projectsItems}
-                        </Field>
+                    < div>
+                        < Field
+                            name="email"
+                            component={renderTextField}
+                            label="Адрес электронной почты"
+                        />
+                    </div>
+                    < div>
+                        < Field
+                            name="password"
+                            component={renderTextField}
+                            label="Пароль"
+                            type="password"
+                        />
+                    </div>
+                    < div>
+                        < Field
+                            name="confPassword"
+                            component={renderTextField}
+                            type="password"
+                            label="Подтвердить пароль"
+                        />
                     </div>
                 </>
                 : null
             }
             <div>
-                <Field name="status"
+                <Field name="root"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.newsCount === 1 || props.expandedCreate? true : false}/>
+                       disabled={props.usersCount === 1 }/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
@@ -412,8 +396,35 @@ const EditNewsForm = (props) => {
     )
 }
 
-const EditNewsReduxForm = reduxForm({
-    form: 'EditNewsForm', // a unique identifier for this form
+const EditUsersReduxForm = reduxForm({
+    form: 'EditUsersForm', // a unique identifier for this form
     validate,
     initialValues: initialData
-})(EditNewsForm)
+})(EditUsersForm)
+
+
+/*
+ || props.expandedCreate? true : false
+* <>
+                        {props.text.split('\n').map((i, key) => {
+                            return <Typography key={key} paragraph variant="body1" color="textPrimary"
+                                               gutterBottom>{i}</Typography>;
+                        })}
+                    </>
+                    *
+                    *
+                    * <div>
+                        <Field
+                            classes={classes}
+                            name="project"
+                            component={renderSelectField}
+                            label="Проект"
+                        >
+                            {props.expandedEdit ? <>
+                                    <option value={props.project} label={props.projectTitle}/>
+                                    <option value=''/>
+                                </> :
+                                <option value=''/>}
+                            {projectsItems}
+                        </Field>
+                    </div>*/

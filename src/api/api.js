@@ -1,19 +1,19 @@
 //import * as axios from "axios/index";
 
 import axios from 'axios'
-import auth0 from 'auth0-js'
+//import auth0 from 'auth0-js'
 
-import {connect} from "react-redux";
-import {getAuthorize} from "../redux/actions/authActions";
+//import {connect} from "react-redux";
+//import {getAuthorize} from "../redux/actions/authActions";
 
 const instance = axios.create();
-let auth = new auth0.WebAuth({
+/*let auth = new auth0.WebAuth({
     domain: 'dev-8e4ti4s2.auth0.com',
     clientID: 'bOS225UZ986RtJmRgZCZG2SzZPGPJGJZ',
     redirectUri: 'http://localhost:3000/login',
     responseType: 'token id_token',
     scope: 'email'
-})
+})*/
 //API для новостей
 export const mongodbAPI = {
     //Получить новости с условием
@@ -340,9 +340,12 @@ export const authAPI = {
         return instance.post('/api/users/login', userData)
             .then(response => {
                 //return response.data;
-                //return console.log(response.data)
+                return console.log(response.data)
                 if (response.data) {
-                    return true;
+                    return response.data;
+                }
+                else{
+                    return false;
                 }
             })
             .catch(err =>
@@ -350,7 +353,7 @@ export const authAPI = {
             )
     },
     ///////////////////////
-    authorizeAuth0() {
+  /*  authorizeAuth0() {
         auth.authorize();
     },
 
@@ -369,7 +372,7 @@ export const authAPI = {
 
     logout() {
         auth.logout();
-    }
+    }*/
 
 }
 

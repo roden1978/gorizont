@@ -47,6 +47,7 @@ export const SET_USERS_ITEM = 'SET_USERS_ITEM'
 export const IS_ALL_USERS = 'IS_ALL_USERS'
 export const SET_CURRENT_USERS_ID = 'SET_CURRENT_USERS_ID'
 export const SET_USERS_COUNT = 'SET_USERS_COUNT'
+export const SET_IS_USERS = 'SET_IS_USERS'
 
 /////
 export const IS_CLICKED = 'IS_CLICKED'

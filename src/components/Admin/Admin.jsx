@@ -1,6 +1,6 @@
 import React from "react";
 import {authAPI} from '../../api/api'
-import {checkUser} from "../../redux/actions/authActions";
+import {checkUser, setIsUsers} from "../../redux/actions/authActions";
 import Spinner from "../../common/Spinner";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
@@ -94,8 +94,11 @@ class Admin extends React.Component {
     }
 
     render() {
+        //debugger
         return (<>
-            {this.props.adminMode ? <Redirect to='/news'/> : <Login checkUser={this.props.checkUser}/>}
+            {this.props.adminMode ? this.props.adminRoot && this.props.isUsers ? <Redirect to='/admin/users'/> :
+                <Redirect to='/news'/> :
+                <Login checkUser={this.props.checkUser} setIsUsers={this.props.setIsUsers}/>}
         </>)
     }
 }
@@ -103,19 +106,23 @@ class Admin extends React.Component {
 let mapStateToProps = (state) => {
     return {
         auth: state.auth.isAuthorized,
-        adminMode: state.auth.adminMode
+        adminMode: state.auth.adminMode,
+        adminRoot: state.auth.adminRoot,
+        isUsers: state.auth.isUsers
     }
 
 }
 
-export default connect(mapStateToProps, {checkUser})(Admin)
+export default connect(mapStateToProps, {checkUser, setIsUsers})(Admin)
 
-const Login = (props) => {
+export const Login = (props) => {
     //debugger
     const classes = useStyles();
     const showResults = (values) => {
 
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+        if (values.newUsers)
+            props.setIsUsers(true);
 
         props.checkUser(values.email, values.password);
 
@@ -156,7 +163,7 @@ const initialData = {
 
 const LoginForm = (props) => {
     const classesStyle = useStyles();
-    const {handleSubmit, reset, classes, projects} = props;
+    const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
     //debugger
     //console.log(props.val + " " + props.expandedEdit);
@@ -201,7 +208,7 @@ const LoginForm = (props) => {
             <div>
                 <Field name="newUsers"
                        component={renderCheckbox}
-                       label='Создать новых пользователей'/>
+                       label='Администрирование пользователей'/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

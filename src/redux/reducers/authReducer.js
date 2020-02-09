@@ -1,9 +1,10 @@
-import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_ROOT_MODE} from "../actions/types";
+import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 
 let initialState = {
     isAuthorized: false,
     adminMode: false,
-    root: false
+    adminRoot: false,
+    isUsers: false
 }
 
 const auth_reducer = (state = initialState, action) => {
@@ -25,15 +26,15 @@ const auth_reducer = (state = initialState, action) => {
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
-                ...state, adminMode: action.payload
+                ...state, adminMode: action.payload, adminRoot: action.adminRoot
             };
         }
-        case SET_ROOT_MODE: {
+        case SET_IS_USERS: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
-                ...state, root: action.payload
+                ...state, isUsers: action.payload
             };
         }
         default:

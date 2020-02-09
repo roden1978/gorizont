@@ -5,7 +5,7 @@ import {
 
 let initialState = {
     users: [],
-    getUser: false,
+    getUserItem: false,
     isAllUsers: false,
     currentUserId: null,
     usersCount: null
@@ -28,12 +28,12 @@ const users_reducer = (state = initialState, action) => {
         }
         case  SET_USERS_ITEM:{
             return {
-                ...state, getUser: action.payload
+                ...state, getUserItem: action.payload
             }
         }
         case  IS_ALL_USERS:{
             return {
-                ...state, isAllNews: action.payload
+                ...state, isAllUsers: action.payload
             }
         }
         case CHANGE_USERS_ITEM:{
