@@ -282,6 +282,7 @@ export const mongodbAPI = {
     createUser(userData) {
         return instance.post('/api/users/', userData)
             .then(response => {
+                console.log(response.data.err)
                 return response.data;
             })
             .catch(err =>
@@ -340,7 +341,7 @@ export const authAPI = {
         return instance.post('/api/users/login', userData)
             .then(response => {
                 //return response.data;
-                return console.log(response.data)
+                //return console.log(response.data)
                 if (response.data) {
                     return response.data;
                 }

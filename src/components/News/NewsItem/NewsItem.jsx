@@ -151,7 +151,7 @@ const AdminPanelNews = (props) => {
     };
 
     const handleEditExpandClick = () => {
-
+        //props.setNewsCount(props.news.length);
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
             props.setLoadProjects(true);
@@ -168,7 +168,7 @@ const AdminPanelNews = (props) => {
 
     const handleDeleteExpandClick = () => {
         debugger
-        props.setNewsCount(props.count);
+        props.setNewsCount(props.news.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
             props.setCurrentNewsId(props._id);
@@ -244,7 +244,7 @@ const AdminPanelNews = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedDelete}>
+                                disabled={expandedCreate || expandedDelete || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -259,13 +259,13 @@ const AdminPanelNews = (props) => {
                                 })}
                                 aria-expanded={expandedDelete}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedEdit}>
+                                disabled={expandedCreate || expandedEdit || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small" type="button"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            disabled={expandedCreate || expandedEdit || expandedDelete || props._id === '0'}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить
@@ -400,7 +400,7 @@ const EditNewsForm = (props) => {
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
-                        disabled={pristine || submitting}>
+                        disabled={pristine || submitting }>
                     Отправить
                 </Button>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="button"

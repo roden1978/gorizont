@@ -77,10 +77,10 @@ const useStyles = makeStyles(theme => ({
 * backgroundColor: '#3b5998',//#0d47a1*/
 const User = (props) => {
     const classes = useStyles();
-    debugger
-   /* let createAt = moment(props.createAt);
+    //debugger
+    /* let createAt = moment(props.createAt);
 
-    createAt.locale('ru');*/
+     createAt.locale('ru');*/
     //console.log(createAt.format('LL'));
     return (
         <Grid item xs={10}>
@@ -148,7 +148,7 @@ const AdminPanelUsers = (props) => {
     };
 
     const handleDeleteExpandClick = () => {
-        debugger
+        //debugger
         props.setUsersCount(props.users.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
@@ -178,12 +178,12 @@ const AdminPanelUsers = (props) => {
 
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         //props.saveNews(JSON.stringify(values, null, 2));
-/*initialData.id = null;
-        initialData.firstName = '';
-        initialData.lastName = '';
-        initialData.email = '';
-        initialData.password = '';
-        initialData.root = false;*/
+        /*initialData.id = null;
+                initialData.firstName = '';
+                initialData.lastName = '';
+                initialData.email = '';
+                initialData.password = '';
+                initialData.root = false;*/
         if (expandedEdit) {
             props.updateUser(values.id, values.firstName, values.lastName, values.email, values.password, values.root);
             handleEditExpandClick();
@@ -264,10 +264,10 @@ const AdminPanelUsers = (props) => {
                         ПАНЕЛЬ АДМИНИСТРИРОВАНИЯ
                     </Typography>
                     <EditUsersReduxForm onSubmit={showResults}
-                                       expandedCreate={expandedCreate}
-                                       expandedEdit={expandedEdit}
-                                       expandedDelete={expandedDelete}
-                                       {...props}/>
+                                        expandedCreate={expandedCreate}
+                                        expandedEdit={expandedEdit}
+                                        expandedDelete={expandedDelete}
+                                        {...props}/>
                 </CardContent>
             </Collapse>
         </>
@@ -380,7 +380,7 @@ const EditUsersForm = (props) => {
                 <Field name="root"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.usersCount === 1 }/>
+                       disabled={props.usersCount === 1}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

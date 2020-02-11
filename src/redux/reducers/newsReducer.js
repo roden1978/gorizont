@@ -1,6 +1,8 @@
-import {SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM,
+import {
+    SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM,
     IS_ALL_NEWS, SET_NEWS_ITEM, SET_CURRENT_NEWS_ID,
-SET_NEWS_COUNT} from "../actions/types";
+    SET_NEWS_COUNT, SET_DEFAULT_NEWS
+} from "../actions/types";
 
 let initialState = {
     news: [],
@@ -55,6 +57,14 @@ const news_reducer = (state = initialState, action) => {
         case SET_NEWS_COUNT :{
             return{
                 ...state, newsCount: action.payload
+            }
+        }
+        case SET_DEFAULT_NEWS :{
+            return{
+                ...state, news: [{_id: '0', title: 'Войдите в панель администирования и создайте новость',
+                    text: '!!!ВНИМАНИЕ!!! Перед созданием новостей должен быть создан хотя бы один проект, ' +
+                        'если созданная новость не отобразилась обновите страницу.',
+                    project: '', projectTitle: '', status: true}]
             }
         }
         default:

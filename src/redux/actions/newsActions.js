@@ -5,7 +5,9 @@ import {
     CHANGE_NEWS_ITEM,
     IS_ALL_NEWS,
     SET_NEWS_ITEM,
-    SET_CURRENT_NEWS_ID, SET_NEWS_COUNT
+    SET_CURRENT_NEWS_ID,
+    SET_NEWS_COUNT,
+    SET_DEFAULT_NEWS
 } from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -98,5 +100,11 @@ export const  setNewsCount = (count) =>{
     return {
         type: SET_NEWS_COUNT,
         payload: count
+    }
+}
+
+export const setDefaultNews = () =>{
+    return{
+        type: SET_DEFAULT_NEWS
     }
 }

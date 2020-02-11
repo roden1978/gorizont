@@ -6,7 +6,8 @@ import {
     CHANGE_PROJECTS_ITEM,
     SET_PROJECTS_ITEM,
     IS_ALL_PROJECTS,
-    SET_PROJECTS_COUNT
+    SET_PROJECTS_COUNT,
+    SET_DEFAULT_PROJECT
 } from "../actions/types";
 
 let initialState = {
@@ -68,6 +69,13 @@ const projects_reducer = (state = initialState, action) => {
         case SET_PROJECTS_COUNT :{
             return{
                 ...state, projectsCount: action.payload
+            }
+        }
+        case SET_DEFAULT_PROJECT :{
+            return{
+                ...state, projects: [{_id: '0', title: 'Войдите в панель администирования и создайте проект',
+                    description:'!!!ВНИМАНИЕ!!! Если созданный проект не отобразился обновите страницу.',text: '',albumId:'',
+                    albumName: '', status: true}]
             }
         }
         default:

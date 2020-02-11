@@ -3,7 +3,7 @@ import {
     getProjects, getProject, getId,
     setLoadAlbums, getAllProjects, createProject,
     deleteProject, setChangeProjectsItem, setIsAllProjects,
-    updateProject, setProjectsCount, setProjectsItem
+    updateProject, setProjectsCount, setProjectsItem, setDefaultProject
 } from '../../redux/actions/projectsActions';
 import {getPhotosets} from '../../redux/actions/photosActions'
 import Projects from "./Projects";
@@ -53,6 +53,9 @@ class ProjectsContainer extends React.Component {
             this.props.getAllProjects();
             this.props.setIsAllProjects(false);
         }
+        if( this.props.projects.length === 0){
+            this.props.setDefaultProject();
+        }
     }
 
     componentWillUnmount() {
@@ -65,7 +68,7 @@ class ProjectsContainer extends React.Component {
         return (<Projects projects={this.props.projects} id={this.props.id} getId={this.props.getId} {...this.props}/>)
     }
 }
-
+//prevProps.projects.length === 0 &&
 /*функция принимает state созданный в redux при помощи reducers
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
@@ -89,5 +92,5 @@ export default connect(mapStateToProps, {
     getAllProjects, createProject, deleteProject,
     setChangeProjectsItem, setIsAllProjects,
     updateProject, setProjectsCount, setProjectsItem,
-    getPhotosets
+    getPhotosets, setDefaultProject
 })(ProjectsContainer);

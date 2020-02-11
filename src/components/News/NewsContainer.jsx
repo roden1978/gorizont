@@ -10,7 +10,8 @@ import {
     deleteNews,
     getAllNews,
     setIsAllNews,
-    setNewsCount
+    setNewsCount,
+    setDefaultNews
 } from '../../redux/actions/newsActions';
 import {getProjects} from "../../redux/actions/projectsActions";
 import News from "./News";
@@ -41,8 +42,11 @@ class NewsContainer extends React.Component {
             this.props.getAllNews();
             this.props.setIsAllNews(false);
         }
+        if( this.props.news.length === 0){
+            this.props.setDefaultNews();
+        }
     }
-
+//prevProps.news.length === 0 &&
     render() {
         return (<News news={this.props.news}
                       setLoadProjects={this.props.setLoadProjects}
@@ -82,5 +86,5 @@ export default connect(mapStateToProps,
     {   getNews, getProjects, setLoadProjects,
         setNewsItem, setChangeNewsItem, setIsAllNews,
         setCurrentNewsId, createNews, updateNews, getAllNews,
-        deleteNews, setNewsCount
+        deleteNews, setNewsCount, setDefaultNews
     })(NewsContainer);

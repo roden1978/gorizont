@@ -1,6 +1,6 @@
 import {
     SET_USERS, CHANGE_USERS_ITEM, SET_USERS_ITEM,
-    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS
+    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, WRONG_USERS_EMAIL
 } from "../actions/types";
 
 let initialState = {
@@ -8,7 +8,8 @@ let initialState = {
     getUserItem: false,
     isAllUsers: false,
     currentUserId: null,
-    usersCount: null
+    usersCount: null,
+    wrongEmail: false
 }
 
 const users_reducer = (state = initialState, action) => {
@@ -50,6 +51,10 @@ const users_reducer = (state = initialState, action) => {
         case SET_USERS_COUNT :{
             return{
                 ...state, usersCount: action.payload
+            }
+        }case WRONG_USERS_EMAIL :{
+            return{
+                ...state, wrongEmail: action.payload
             }
         }
         default:

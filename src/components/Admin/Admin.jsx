@@ -1,27 +1,15 @@
 import React from "react";
-import {authAPI} from '../../api/api'
 import {checkUser, setIsUsers} from "../../redux/actions/authActions";
-import Spinner from "../../common/Spinner";
 import {connect} from "react-redux";
-import {NavLink, Redirect} from "react-router-dom";
-import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import clsx from "clsx";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {Redirect} from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import Collapse from "@material-ui/core/Collapse";
 import CardContent from "@material-ui/core/CardContent";
 import {Field, reduxForm} from "redux-form";
-import {renderCheckbox, renderSelectField, renderTextField} from "../../common/renderFilds";
+import {renderCheckbox, renderTextField} from "../../common/renderFilds";
 import {validate} from "../../common/validate";
 import {makeStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
-import katokIcon from "../../assets/icons/katok.svg";
 import Grid from "@material-ui/core/Grid";
 import {Container} from "@material-ui/core";
 
@@ -89,8 +77,6 @@ const useStyles = makeStyles(theme => ({
 class Admin extends React.Component {
 
     componentDidMount() {
-        //debugger
-        //this.props.getAuthorize();
     }
 
     render() {
@@ -124,7 +110,7 @@ export const Login = (props) => {
         if (values.newUsers)
             props.setIsUsers(true);
 
-        props.checkUser(values.email, values.password);
+        props.checkUser(values.email, values.password, values.newUsers);
 
     };
 
@@ -166,27 +152,6 @@ const LoginForm = (props) => {
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
     //debugger
-    //console.log(props.val + " " + props.expandedEdit);
-
-    /* let projectsItems = projects.map(
-         projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}
-                                label={projectItem.title}></option>)*/
-
-    /*if (props.expandedEdit) {
-        pristine = false;
-        submitting = false;
-    }
-
-    let getLabel = () => {
-        if (props.expandedEdit || props.expandedCreate) {
-            return "Показывать на сайте"
-        }
-        if (props.expandedDelete) {
-            return "Удалить из базы данных навсегда"
-        }
-    }*/
-
-
     return (
         <form onSubmit={handleSubmit}>
 
@@ -229,40 +194,3 @@ const LoginReduxForm = reduxForm({
     validate,
     initialValues: initialData
 })(LoginForm)
-/*{console.log('Auth:' + this.props.auth)}*/
-
-
-/*import React from 'react'
-import {connect} from "react-redux";
-//import {} from "../../redux/actions/authActions";
-
-const Admin = (props) => {
-
-    return (
-        <div>
-            <div>Login</div>
-            <div>
-                Admin menu
-            </div>
-        </div>
-    );
-}
-let mapStateToProps = (state) => {
-    return {
-        auth: state.auth.isAuthorized,
-        adminMode: state.auth.adminMode
-    }
-
-}
-
-export default connect(mapStateToProps)(Admin)*/
-//export default compose(withAuthRedirect)
-
-/*
-* <div className={s.div_bkg}>
-                <ul>
-                    <li><NavLink to='/admin/create' className={s.tc}>Create</NavLink></li>
-                    <li><NavLink to='/admin/update' className={s.tc}>Update</NavLink></li>
-                    <li><NavLink to='/admin/delete' className={s.tc}>Delete</NavLink></li>
-                </ul>
-            </div>*/

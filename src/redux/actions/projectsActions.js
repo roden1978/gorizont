@@ -5,7 +5,10 @@ import {
     SET_ID,
     IS_ALL_PROJECTS,
     CHANGE_PROJECTS_ITEM,
-    SET_PROJECTS_ITEM, SET_PROJECTS_COUNT, LOAD_ALBUMS
+    SET_PROJECTS_ITEM,
+    SET_PROJECTS_COUNT,
+    LOAD_ALBUMS,
+    SET_DEFAULT_PROJECT
 } from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -65,6 +68,12 @@ export const  setProjectsCount = (count) =>{
     return {
         type: SET_PROJECTS_COUNT,
         payload: count
+    }
+}
+
+export const setDefaultProject = () =>{
+    return{
+        type: SET_DEFAULT_PROJECT
     }
 }
 

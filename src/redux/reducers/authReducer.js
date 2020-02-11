@@ -2,7 +2,7 @@ import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 
 let initialState = {
     isAuthorized: false,
-    adminMode: false,
+    adminMode: true,
     adminRoot: false,
     isUsers: false
 }
