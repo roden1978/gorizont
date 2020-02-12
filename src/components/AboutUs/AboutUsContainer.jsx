@@ -1,5 +1,6 @@
 import React from 'react';
-import {getAbout, setIsChangedAbout, updateAbout} from '../../redux/actions/aboutActions';
+import {getAbout, setIsChangedAbout,
+    updateAbout, setDefaultAbout, createAbout} from '../../redux/actions/aboutActions';
 import AboutUs from "./AboutUs";
 import {connect} from "react-redux";
 
@@ -17,6 +18,9 @@ class AboutUsContainer extends React.Component{
             this.props.getAbout();
             this.props.setIsChangedAbout(false);
         }
+        if( this.props.about.length === 0){
+            this.props.setDefaultAbout();
+        }
     }
 
     render() {
@@ -24,6 +28,7 @@ class AboutUsContainer extends React.Component{
                          adminMode={this.props.adminMode}
                          setIsChangedAbout = {this.props.setIsChangedAbout}
                          updateAbout = {this.props.updateAbout}
+                         createAbout = {this.props.createAbout}
             {...this.props}/>)
     }
 }
@@ -40,4 +45,5 @@ let mapStateToProps = (state) => {
 /*Создаем контейнерную кмпоненту MyNewsContainer*/
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
-export default connect(mapStateToProps, {getAbout, setIsChangedAbout, updateAbout})(AboutUsContainer);
+export default connect(mapStateToProps, {getAbout, setIsChangedAbout,
+    createAbout, updateAbout, setDefaultAbout})(AboutUsContainer);

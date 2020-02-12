@@ -116,8 +116,21 @@ const AdminPanelContacts = (props) => {
     debugger
     const classes = useStyles();
     const [expandedEdit, setExpandedEdit] = React.useState(false);
+    const [expandedCreate, setExpandedCreate] = React.useState(false);
 
+    const handleCreateExpandClick = () => {
+        // if(!props.id)
+        setExpandedCreate(!expandedCreate);
+        if (!expandedCreate) {
+            //props.setCurrentContactsId(props._id);
+            //props.setContactsItem(true);
+            setInitialData(props, true);
+        } else {
+            props.getContacts();
+        }
 
+        //props.getId(null);
+    };
     const handleEditExpandClick = () => {
         debugger
         setExpandedEdit(!expandedEdit);
@@ -145,7 +158,13 @@ const AdminPanelContacts = (props) => {
                 , values.phone04, values.phoneOwner05, values.phone05);
             handleEditExpandClick();
         }
-
+        if (expandedCreate) {
+            props.createContacts(values.companyName, values.companyAddress, values.companyEmail
+                , values.companyPhone, values.phoneOwner01, values.phone01, values.phoneOwner02
+                , values.phone02, values.phoneOwner03, values.phone03, values.phoneOwner04
+                , values.phone04, values.phoneOwner05, values.phone05);
+            handleCreateExpandClick();
+        }
 
     };
 
@@ -153,6 +172,21 @@ const AdminPanelContacts = (props) => {
     return (
         <>
             <CardActions>
+                <Typography variant="body2" color="textPrimary">
+                    Создать
+                </Typography>
+                <Tooltip title={!expandedCreate ? "Создать контакты" : "Отмена"} placement={'top'} arrow>
+                    <IconButton onClick={handleCreateExpandClick}
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expandedCreate,
+                                })}
+                                aria-expanded={expandedCreate}
+                                aria-label="Показать больше"
+                                disabled={props.contacts.length !== 0 ? props.contacts[0]._id !== '0' ? true : false : null}>
+                        <ExpandMoreIcon/>
+                    </IconButton>
+                </Tooltip>
+
                 <Typography variant="body2" color="textPrimary">
                     Редактировать
                 </Typography>
@@ -163,20 +197,21 @@ const AdminPanelContacts = (props) => {
                                     [classes.expandOpen]: expandedEdit,
                                 })}
                                 aria-expanded={expandedEdit}
-                                aria-label="Показать больше">
+                                aria-label="Показать больше"
+                                disabled={expandedCreate || props.contacts.length !== 0 ? props.contacts[0]._id === '0' ? true : false : null}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
-                            disabled={expandedEdit}
+                            disabled={expandedEdit || props.contacts.length !== 0 ? props.contacts[0]._id === '0' ? true : false : null}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить
                     </Button>
                 </Tooltip>
             </CardActions>
-            <Collapse in={expandedEdit} timeout="auto"
+            <Collapse in={expandedEdit || expandedCreate} timeout="auto"
                       unmountOnExit>
                 <CardContent className={classes.adminPanel}>
                     <Typography variant="h6" color="textPrimary" align="center">

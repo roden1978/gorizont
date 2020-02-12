@@ -214,6 +214,16 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    //Создать контакты
+    createContacts(contactsData) {
+        return instance.post('/api/contacts/', contactsData)
+            .then(response => {
+                return response.data;
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
     //Обновить контакты
     updateContacts(contactsData) {
         return instance.post('/api/contacts/upd', contactsData)
@@ -230,6 +240,17 @@ export const mongodbAPI = {
         return instance.get('/api/about')
             .then(response => {
                 return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    },
+    //Создать о нас
+    createAbout(aboutData) {
+        debugger
+        return instance.post('/api/about/', aboutData)
+            .then(response => {
+                return response.data;
             })
             .catch(err =>
                 console.log(err)

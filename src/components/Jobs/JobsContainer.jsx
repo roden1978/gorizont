@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     getJobs, getAllJobs, updateJob, createJob, deleteJob,
-    setChangeJobsItem, setCurrentJobsId, setIsAllJobs, setJobsCount, setJobsItem
+    setChangeJobsItem, setCurrentJobsId, setIsAllJobs, setJobsCount,
+    setJobsItem, setDefaultJob
 } from '../../redux/actions/jobsActions';
 import Jobs from "./Jobs";
 import {connect} from "react-redux";
@@ -28,6 +29,9 @@ class JobsContainer extends React.Component {
             this.props.getAllJobs();
             this.props.setIsAllJobs(false);
         }
+        if( this.props.jobs.length === 0){
+            this.props.setDefaultJob();
+        }
     }
 
     render() {
@@ -53,5 +57,6 @@ let mapStateToProps = (state) => {
 * в свою очередь возвращает нам фукцию во вторых скобках*/
 export default connect(mapStateToProps, {
     getJobs, getAllJobs, updateJob, createJob, deleteJob,
-    setChangeJobsItem, setCurrentJobsId, setIsAllJobs, setJobsCount, setJobsItem
+    setChangeJobsItem, setCurrentJobsId, setIsAllJobs,
+    setJobsCount, setJobsItem, setDefaultJob
 })(JobsContainer);

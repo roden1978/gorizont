@@ -8,7 +8,8 @@ import {
     updateUser,
     deleteUser,
     setIsAllUsers,
-    setUsersCount
+    setUsersCount,
+    setSetDefaultUser
 } from '../../redux/actions/usersActions';
 import Users from "./Users";
 import {connect} from "react-redux";
@@ -33,6 +34,9 @@ class UsersContainer extends React.Component {
             setTimeout(null, 2000);
             this.props.getUsers();
             this.props.setIsAllUsers(false);
+        }
+        if( this.props.users.length === 0){
+            this.props.setSetDefaultUser();
         }
     }
 
@@ -69,5 +73,6 @@ export default compose(connect(mapStateToProps,
         updateUser,
         deleteUser,
         setIsAllUsers,
-        setUsersCount
+        setUsersCount,
+        setSetDefaultUser
     }), withAuthRedirect)(UsersContainer);

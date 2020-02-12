@@ -46,7 +46,6 @@ class NewsContainer extends React.Component {
             this.props.setDefaultNews();
         }
     }
-//prevProps.news.length === 0 &&
     render() {
         return (<News news={this.props.news}
                       setLoadProjects={this.props.setLoadProjects}

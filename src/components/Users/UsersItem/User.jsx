@@ -229,7 +229,7 @@ const AdminPanelUsers = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedDelete}>
+                                disabled={expandedCreate || expandedDelete || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -244,13 +244,13 @@ const AdminPanelUsers = (props) => {
                                 })}
                                 aria-expanded={expandedDelete}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedEdit}>
+                                disabled={expandedCreate || expandedEdit  || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small" type="button"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            disabled={expandedCreate || expandedEdit || expandedDelete  || props._id === '0'}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить

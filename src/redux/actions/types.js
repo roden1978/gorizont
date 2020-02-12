@@ -45,6 +45,9 @@ export const SET_DEFAULT_CONTACTS = 'SET_DEFAULT_CONTACTS';
 export const SET_ABOUT = 'SET_ABOUT';
 export const SET_IS_CHANGED_ABOUT = 'SET_IS_CHANGED_ABOUT';
 export const SET_DEFAULT_ABOUT = 'SET_DEFAULT_ABOUT';
+export const SET_CURRENT_ABOUT_ID = 'SET_CURRENT_ABOUT_ID';
+export const IS_ALL_ABOUT = 'IS_ALL_ABOUT';
+export const SET_ABOUT_ITEM = 'SET_ABOUT_ITEM';
 
 //Пользователи
 export const SET_USERS = 'SET_USERS';

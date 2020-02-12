@@ -2,14 +2,12 @@ import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 
 let initialState = {
     isAuthorized: false,
-    adminMode: true,
+    adminMode: false,
     adminRoot: false,
     isUsers: false
 }
 
 const auth_reducer = (state = initialState, action) => {
-
-    //let copyState;// = {...state};
 
     //debugger
     switch (action.type) {
@@ -43,6 +41,3 @@ const auth_reducer = (state = initialState, action) => {
 }
 
 export default auth_reducer;
-
-/* [{__id:'123', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'},
-        {__id:'1234', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]*/

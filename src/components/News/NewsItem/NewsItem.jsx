@@ -131,7 +131,6 @@ const AdminPanelNews = (props) => {
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
-    /*const [expandedHidden, setExpandedHidden] = React.useState(false);*/
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {

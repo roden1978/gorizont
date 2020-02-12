@@ -1,4 +1,4 @@
-import {SET_CONTACTS, SET_IS_CHANGED_CONTACTS} from "../actions/types";
+import {SET_CONTACTS, SET_IS_CHANGED_CONTACTS, SET_DEFAULT_CONTACTS} from "../actions/types";
 
 let initialState = {
     contacts: [],
@@ -17,7 +17,6 @@ const contacts_reducer = (state = initialState, action) => {
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
                 ...state, contacts: action.payload
-                //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
             };
         }
         case SET_IS_CHANGED_CONTACTS: {
@@ -26,8 +25,16 @@ const contacts_reducer = (state = initialState, action) => {
             * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
             return {
                 ...state, isChangedContacts: action.payload
-                //...state, news:[ ...state.news, {__id:'12345', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]//action.payload
             };
+        }
+        case SET_DEFAULT_CONTACTS:{
+            return {
+                ...state, contacts: [{_id: '0', companyName: 'Войдите в панель администирования и создайте контакты',
+                    companyAddress: '!!!ВНИМАНИЕ!!! Если страница контактов не отобразилась обновите страницу.',
+                    companyEmail: '', companyPhone: '', phoneOwner01: '', phone01:'',
+                    phoneOwner02:'', phone02:'', phoneOwner03:'', phone03:'',
+                    phoneOwner04:'', phone04:'', phoneOwner05:'', phone05:''}]
+            }
         }
         default:
             return state;
@@ -35,6 +42,3 @@ const contacts_reducer = (state = initialState, action) => {
 }
 
 export default contacts_reducer;
-
-/* [{__id:'123', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'},
-        {__id:'1234', title: 'title', text: 'text', project: 'project', createAt:'26.11.2019'}]*/

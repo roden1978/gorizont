@@ -295,7 +295,7 @@ const AdminPanelJobs = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedDelete}>
+                                disabled={expandedCreate || expandedDelete || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -310,13 +310,13 @@ const AdminPanelJobs = (props) => {
                                 })}
                                 aria-expanded={expandedDelete}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedEdit}>
+                                disabled={expandedCreate || expandedEdit || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
-                            disabled={expandedCreate || expandedEdit || expandedDelete}
+                            disabled={expandedCreate || expandedEdit || expandedDelete || props._id === '0'}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить
@@ -492,22 +492,3 @@ const EditJobsReduxForm = reduxForm({
     validate,
     initialValues: initialData
 })(EditJobsForm)
-
-/*
-    <div>
-    <Field
-classes={classes}
-name="project"
-component={renderSelectField}
-label="Проект"
-full="true"
-
-    >
-    {props.expandedEdit ? <>
-                <option value={props.project} label={props.projectTitle}/>
-                <option value=''/>
-            </> :
-            <option value=''/>}
-{projectsItems}
-</Field>
-</div>*/

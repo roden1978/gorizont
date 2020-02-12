@@ -1,4 +1,4 @@
-import {SET_ABOUT, SET_IS_CHANGED_ABOUT} from "../actions/types";
+import {SET_ABOUT, SET_IS_CHANGED_ABOUT, SET_DEFAULT_ABOUT} from "../actions/types";
 
 let initialState = {
     about: [],
@@ -23,6 +23,12 @@ const about_reducer = (state = initialState, action) => {
             return {
                 ...state, isChangedAbout: action.payload
             };
+        }
+        case SET_DEFAULT_ABOUT:{
+            return {
+                ...state, about: [{_id: '0', text: 'Войдите в панель администирования и создайте контакты ' +
+                        '!!!ВНИМАНИЕ!!! Если страница контактов не отобразилась обновите страницу.'}]
+            }
         }
         default:
             return state;

@@ -5,7 +5,8 @@ import {
     SET_CURRENT_JOBS_ID,
     SET_JOBS,
     SET_JOBS_COUNT,
-    SET_JOBS_ITEM
+    SET_JOBS_ITEM,
+    SET_DEFAULT_JOB
 } from "../actions/types";
 
 /*Создаем объекты action с обязательным свойством type*/
@@ -27,7 +28,11 @@ export const setChangeJobsItem = () => {
         type: CHANGE_JOBS_ITEM
     }
 }
-
+export const setDefaultJob = () => {
+    return {
+        type: SET_DEFAULT_JOB
+    }
+}
 export const setJobsItem = (jobsItem) => {
     return {
         type: SET_JOBS_ITEM,

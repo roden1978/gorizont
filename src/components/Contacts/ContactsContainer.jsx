@@ -1,5 +1,6 @@
 import React from 'react';
-import {getContacts, updateContacts, setIsChangedContacts} from '../../redux/actions/contactsActions';
+import {getContacts, createContacts, updateContacts, setIsChangedContacts,
+setDefaultContacts} from '../../redux/actions/contactsActions';
 import Contacts from "./Contacts";
 import {connect} from "react-redux";
 
@@ -17,11 +18,15 @@ class ContactsContainer extends React.Component{
             this.props.getContacts();
             this.props.setIsChangedContacts(false);
         }
+        if( this.props.contacts.length === 0){
+            this.props.setDefaultContacts();
+        }
     }
 
     render() {
         return (<Contacts contacts = {this.props.contacts}
                           updateContacts = {this.props.updateContacts}
+                          createContacts = {this.props.createContacts}
                           setIsChangedContacts = {this.props.setIsChangedContacts}
                           adminMode={this.props.adminMode}
             {...this.props}/>)
@@ -40,4 +45,5 @@ let mapStateToProps = (state) => {
 /*Создаем контейнерную кмпоненту MyNewsContainer*/
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
-export default connect(mapStateToProps, {getContacts, updateContacts, setIsChangedContacts})(ContactsContainer);
+export default connect(mapStateToProps, {getContacts, createContacts, updateContacts,
+    setIsChangedContacts, setDefaultContacts})(ContactsContainer);

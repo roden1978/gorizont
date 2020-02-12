@@ -1,7 +1,7 @@
 import {
     CHANGE_JOBS_ITEM,
     IS_ALL_JOBS,
-    SET_CURRENT_JOBS_ID,
+    SET_CURRENT_JOBS_ID, SET_DEFAULT_JOB,
     SET_JOBS,
     SET_JOBS_COUNT,
     SET_JOBS_ITEM
@@ -54,6 +54,13 @@ const jobs_reducer = (state = initialState, action) => {
         case SET_JOBS_COUNT :{
             return{
                 ...state, jobsCount: action.payload
+            }
+        }
+        case SET_DEFAULT_JOB :{
+            return{
+                ...state, jobs: [{_id: '0', company:'', title: 'Войдите в панель администирования и создайте объявление',
+                    description: '!!!ВНИМАНИЕ!!! Если созданное объявление не отобразилась обновите страницу.',
+                    price: '', email: '', phone: '', status: true}]
             }
         }
         default:

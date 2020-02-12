@@ -1,6 +1,6 @@
 import {
     SET_USERS, CHANGE_USERS_ITEM, SET_USERS_ITEM,
-    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, WRONG_USERS_EMAIL
+    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, WRONG_USERS_EMAIL, SET_DEFAULT_USER
 } from "../actions/types";
 
 let initialState = {
@@ -52,9 +52,11 @@ const users_reducer = (state = initialState, action) => {
             return{
                 ...state, usersCount: action.payload
             }
-        }case WRONG_USERS_EMAIL :{
+        }case SET_DEFAULT_USER :{
             return{
-                ...state, wrongEmail: action.payload
+                ...state, users: [{_id: '0', firstName: 'Войдите в панель администирования и создайте новость',
+                    lastName: '!!!ВНИМАНИЕ!!! Если созданный пользователь не отобразился обновите страницу.',
+                    email: '', password: '', root: null}]
             }
         }
         default:

@@ -1,7 +1,7 @@
 import {mongodbAPI} from '../../api/api'
 import {
     SET_USERS, CHANGE_USERS_ITEM, SET_USERS_ITEM,
-    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, WRONG_USERS_EMAIL
+    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, SET_DEFAULT_USER
 } from "../actions/types";
 import {stopSubmit} from "redux-form";
 
@@ -88,6 +88,11 @@ export const  setUsersCount = (count) =>{
     return {
         type: SET_USERS_COUNT,
         payload: count
+    }
+}
+export const setSetDefaultUser = () =>{
+    return{
+        type: SET_DEFAULT_USER
     }
 }
 /*

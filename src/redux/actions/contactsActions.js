@@ -1,5 +1,5 @@
 import {mongodbAPI} from '../../api/api'
-import {SET_CONTACTS, SET_IS_CHANGED_CONTACTS} from "../actions/types";
+import {SET_CONTACTS, SET_IS_CHANGED_CONTACTS, SET_DEFAULT_CONTACTS} from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
 export const setContacts = (contacts) => {
@@ -15,11 +15,31 @@ export const setIsChangedContacts = (isChangedContacts) => {
         payload: isChangedContacts
     }
 }
+export const setDefaultContacts = () => {
+    return {
+        type: SET_DEFAULT_CONTACTS
+    }
+}
 /*Thunk Creators*/
 export const getContacts = () => {
     return async (dispatch) => {
         const contacts = await mongodbAPI.getContacts();
         dispatch(setContacts(contacts));
+    }
+}
+export const createContacts = (companyName, companyAddress, companyEmail, companyPhone,
+                               phoneOwner01, phone01, phoneOwner02, phone02,
+                               phoneOwner03, phone03, phoneOwner04, phone04,
+                               phoneOwner05, phone05) =>{
+    //debugger
+    return async (dispatch) =>{
+        const data = await mongodbAPI.createContacts({companyName, companyAddress, companyEmail, companyPhone,
+            phoneOwner01, phone01, phoneOwner02, phone02,
+            phoneOwner03, phone03, phoneOwner04, phone04,
+            phoneOwner05, phone05});
+        if (data.resultCode === 0) {
+            dispatch(getContacts());
+        }
     }
 }
 
@@ -40,19 +60,3 @@ export const updateContacts = (id, companyName, companyAddress, companyEmail, co
         }
     }
 }
-
-/*
-* companyName: contactsData.companyName,
-        companyAddress: contactsData.companyAddress,
-        companyEmail: contactsData.companyEmail,
-        companyPhone: contactsData.companyPhone,
-        phoneOwner01: contactsData.phoneOwner01,
-        phone01: contactsData.phone01,
-        phoneOwner02: contactsData.phoneOwner02,
-        phone02: contactsData.phone02,
-        phoneOwner03: contactsData.phoneOwner03,
-        phone03: contactsData.phone03,
-        phoneOwner04: contactsData.phoneOwner04,
-        phone04: contactsData.phone04,
-        phoneOwner05: contactsData.phoneOwner05,
-        phone05: contactsData.phone05,*/
