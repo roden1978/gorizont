@@ -1,6 +1,8 @@
 import {
     SET_USERS, CHANGE_USERS_ITEM, SET_USERS_ITEM,
-    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS, WRONG_USERS_EMAIL, SET_DEFAULT_USER
+    SET_CURRENT_USERS_ID, SET_USERS_COUNT, IS_ALL_USERS,
+    CREATE_USER_SUCCESS, SET_DEFAULT_USER, SET_ADMIN_ROOT_COUNT,
+    IS_ADMIN_ROOT_COUNT
 } from "../actions/types";
 
 let initialState = {
@@ -9,7 +11,9 @@ let initialState = {
     isAllUsers: false,
     currentUserId: null,
     usersCount: null,
-    wrongEmail: false
+    createUserSuccess: null,
+    adminRootCount: null,
+    isAdminRootCount: false
 }
 
 const users_reducer = (state = initialState, action) => {
@@ -37,6 +41,11 @@ const users_reducer = (state = initialState, action) => {
                 ...state, isAllUsers: action.payload
             }
         }
+        case  IS_ADMIN_ROOT_COUNT:{
+            return {
+                ...state, isAdminRootCount: action.payload
+            }
+        }
         case CHANGE_USERS_ITEM:{
             const usersItem  = state.users.find(user =>user._id === state.currentUserId)
             return {
@@ -52,13 +61,27 @@ const users_reducer = (state = initialState, action) => {
             return{
                 ...state, usersCount: action.payload
             }
-        }case SET_DEFAULT_USER :{
+        }
+        case SET_ADMIN_ROOT_COUNT :{
+            debugger
+            return{
+                ...state, adminRootCount: action.payload
+            }
+        }
+        case SET_DEFAULT_USER :{
             return{
                 ...state, users: [{_id: '0', firstName: 'Войдите в панель администирования и создайте новость',
                     lastName: '!!!ВНИМАНИЕ!!! Если созданный пользователь не отобразился обновите страницу.',
                     email: '', password: '', root: null}]
             }
         }
+        case CREATE_USER_SUCCESS:{
+            //debugger
+            return {
+                ...state, createUserSuccess: action.payload
+            }
+        }
+
         default:
             return state;
     }

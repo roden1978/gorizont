@@ -320,6 +320,15 @@ export const mongodbAPI = {
                 console.log(err)
             )
     },
+    getAdminRootCount(){
+        return instance.get('/api/users/count')
+            .then(response => {
+                return response.data
+            })
+            .catch(err =>
+                console.log(err)
+            )
+    }
 }
 
 export const flickrAPI = {

@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     adminPanel: {
         border: '2px solid grey',
         backgroundColor: '#e9ecf4'
-    }
+    },
 }));
 
 /*linear-gradient(to right, #0d47a1, #ffff #f5f6f7)
@@ -77,11 +77,7 @@ const useStyles = makeStyles(theme => ({
 * backgroundColor: '#3b5998',//#0d47a1*/
 const User = (props) => {
     const classes = useStyles();
-    //debugger
-    /* let createAt = moment(props.createAt);
 
-     createAt.locale('ru');*/
-    //console.log(createAt.format('LL'));
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
@@ -104,7 +100,6 @@ const User = (props) => {
                         Права на создание пользователей: {props.root === true ? "Да" : "Нет"}
                     </Typography>
                 </CardContent>
-
                 {props.adminMode ? <AdminPanelUsers {...props}/> : ''}
             </Card>
         </Grid>
@@ -121,8 +116,10 @@ const AdminPanelUsers = (props) => {
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        // if(!props.id)
+        debugger
+
         setExpandedCreate(!expandedCreate);
+
         if (!expandedCreate) {
             props.setCurrentUsersId(props._id);
             props.setUserItem(true);
@@ -135,7 +132,7 @@ const AdminPanelUsers = (props) => {
     };
 
     const handleEditExpandClick = () => {
-
+        props.setIsAdminRootCount(true);
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
             props.setCurrentUsersId(props._id);
@@ -143,13 +140,15 @@ const AdminPanelUsers = (props) => {
             setInitialData(props, false, false);
         } else {
             props.setIsAllUsers(true);
-
+            props.setIsAdminRootCount(false);
+            props.setAdminRootCount(0);
         }
     };
 
     const handleDeleteExpandClick = () => {
-        //debugger
+        debugger
         props.setUsersCount(props.users.length);
+        props.setIsAdminRootCount(true);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
             props.setCurrentUsersId(props._id);
@@ -158,6 +157,8 @@ const AdminPanelUsers = (props) => {
         } else {
             props.setIsAllUsers(true);
             props.setUsersCount(null);
+            props.setIsAdminRootCount(false);
+            props.setAdminRootCount(0);
         }
     };
 
@@ -167,23 +168,8 @@ const AdminPanelUsers = (props) => {
     };
 
     const showResults = (values) => {
-        /*const position = values.project.indexOf('|', 0);
-        let id, title;
-        if (position > 0) {
-            id = values.project.slice(0, position);
-            title = values.project.slice(position + 1);
-            values.project = id;
-            values.projectTitle = title.trim();
-        }*/
-
         //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        //props.saveNews(JSON.stringify(values, null, 2));
-        /*initialData.id = null;
-                initialData.firstName = '';
-                initialData.lastName = '';
-                initialData.email = '';
-                initialData.password = '';
-                initialData.root = false;*/
+
         if (expandedEdit) {
             props.updateUser(values.id, values.firstName, values.lastName, values.email, values.password, values.root);
             handleEditExpandClick();
@@ -244,13 +230,13 @@ const AdminPanelUsers = (props) => {
                                 })}
                                 aria-expanded={expandedDelete}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedEdit  || props._id === '0'}>
+                                disabled={expandedCreate || expandedEdit || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small" type="button"
-                            disabled={expandedCreate || expandedEdit || expandedDelete  || props._id === '0'}
+                            disabled={expandedCreate || expandedEdit || expandedDelete || props._id === '0'}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить
@@ -311,7 +297,7 @@ const EditUsersForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    //debugger
+    debugger
     //console.log(props.val + " " + props.expandedEdit);
 
     /*let projectsItems = projects.map(
@@ -380,7 +366,8 @@ const EditUsersForm = (props) => {
                 <Field name="root"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.usersCount === 1}/>
+                       disabled={(props.adminRootCount === 1 && props.root && props.expandedEdit)
+                       || (props.expandedDelete && props.root && props.adminRootCount === 1)}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

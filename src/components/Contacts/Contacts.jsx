@@ -16,6 +16,14 @@ import {renderTextField} from "../../common/renderFilds";
 import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import maps from '../../assets/pictures/maps.png'
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,56 +62,110 @@ const useStyles = makeStyles(theme => ({
     expandOpen: {
         transform: 'rotate(180deg)',
     },
+    media: {
+        height: 0,
+        paddingTop: '52.6%', // 16:9
+    },
 }));
 
 const Contacts = (props) => {
     const classes = useStyles();
-    //const info = props.contacts[0];
-    //debugger
+
     return (
         <div className={classes.root}>
-            <Container className={classes.cardGrid} maxWidth="xl">
+            <Container className={classes.cardGrid} maxWidth="lg">
                 <Grid
                     container
                     direction="row"
                     justify="space-evenly"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={3}
                     className={classes.pos}
                 >
-                    <Grid item xs={10}>
+                    <Grid item xs={!props.adminMode ? 5 : 8}>
                         <Card>
-                            <CardHeader title={props.contacts.length === 0 ? '' : props.contacts[0].companyName}
+                            <CardHeader title="Контакты"
                                         className={classes.title}/>
                             <CardContent>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : 'Адрес:' + props.contacts[0].companyAddress}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : 'Эл. почта: ' + props.contacts[0].companyEmail}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : 'Телефон: ' + props.contacts[0].companyPhone}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner01 + ": " + props.contacts[0].phone01}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner02 + ": " + props.contacts[0].phone02}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner03 + ": " + props.contacts[0].phone03}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner04 + ": " + props.contacts[0].phone04}
-                                </Typography>
-                                <Typography variant="body1" color="textPrimary" gutterBottom>
-                                    {props.contacts.length === 0 ? '' : props.contacts[0].phoneOwner05 + ": " + props.contacts[0].phone05}
-                                </Typography>
+                                <TableContainer component={Paper}>
+                                    <Table className={classes.table} aria-label="simple table">
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell align="right" component="th" scope="row">Наименование</TableCell>
+                                                <TableCell
+                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyName}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align="right" component="th" scope="row">Адрес</TableCell>
+                                                <TableCell
+                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyAddress}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align="right" component="th" scope="row">Электронная почта</TableCell>
+                                                <TableCell
+                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyEmail}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align="right" component="th" scope="row">Телефон</TableCell>
+                                                <TableCell
+                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyPhone}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                {props.contacts.length !== 0 && props.contacts[0].phoneOwner01 !== '' && props.contacts[0].phone01  !== '' ? <>
+                                                        <TableCell align="right" component="th"
+                                                                   scope="row">{props.contacts[0].phoneOwner01}</TableCell>
+                                                        <TableCell
+                                                            align="left">{props.contacts[0].phone01}</TableCell>
+                                                    </>
+                                                    : null}
+                                            </TableRow>
+                                            <TableRow>
+                                                {props.contacts.length !== 0 && props.contacts[0].phoneOwner02 !== '' && props.contacts[0].phone02  !== '' ? <>
+                                                        <TableCell align="right" component="th"
+                                                                   scope="row">{props.contacts[0].phoneOwner02}</TableCell>
+                                                        <TableCell
+                                                            align="left">{props.contacts[0].phone02}</TableCell>
+                                                    </>
+                                                    : null}
+                                            </TableRow><TableRow>
+                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner03 !== '' && props.contacts[0].phone03  !== '' ? <>
+                                                    <TableCell align="right" component="th"
+                                                               scope="row">{props.contacts[0].phoneOwner03}</TableCell>
+                                                    <TableCell
+                                                        align="left">{props.contacts[0].phone03}</TableCell>
+                                                </>
+                                                : null}
+                                        </TableRow><TableRow>
+                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner04 !== '' && props.contacts[0].phone04  !== '' ? <>
+                                                    <TableCell align="right" component="th"
+                                                               scope="row">{props.contacts[0].phoneOwner04}</TableCell>
+                                                    <TableCell
+                                                        align="left">{props.contacts[0].phone04}</TableCell>
+                                                </>
+                                                : null}
+                                        </TableRow><TableRow>
+                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner05 !== '' && props.contacts[0].phone05  !== '' ? <>
+                                                    <TableCell align="right" component="th"
+                                                               scope="row">{props.contacts[0].phoneOwner05}</TableCell>
+                                                    <TableCell
+                                                        align="left">{props.contacts[0].phone05}</TableCell>
+                                                </>
+                                                : null}
+                                        </TableRow>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
                             </CardContent>
                             {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
                         </Card>
                     </Grid>
+                    {!props.adminMode ? <>
+                        <Grid item xs={5}>
+                            <div>
+                                <img src={maps} alt="maps"/>
+                            </div>
+                        </Grid>
+                    </> : null}
                 </Grid>
             </Container>
         </div>
@@ -182,7 +244,7 @@ const AdminPanelContacts = (props) => {
                                 })}
                                 aria-expanded={expandedCreate}
                                 aria-label="Показать больше"
-                                disabled={props.contacts.length !== 0 ? props.contacts[0]._id !== '0' ? true : false : null}>
+                                disabled={props.contacts.length !== 0 ? props.contacts[0]._id !== '0' : null}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -198,13 +260,13 @@ const AdminPanelContacts = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || props.contacts.length !== 0 ? props.contacts[0]._id === '0' ? true : false : null}>
+                                disabled={expandedCreate || props.contacts.length !== 0 ? props.contacts[0]._id === '0' : null}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
-                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
-                            disabled={expandedEdit || props.contacts.length !== 0 ? props.contacts[0]._id === '0' ? true : false : null}
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small" type="button"
+                            disabled={expandedEdit || props.contacts.length !== 0 ? props.contacts[0]._id === '0' : null}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить

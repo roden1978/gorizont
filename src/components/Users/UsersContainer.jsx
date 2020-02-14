@@ -9,7 +9,11 @@ import {
     deleteUser,
     setIsAllUsers,
     setUsersCount,
-    setSetDefaultUser
+    setSetDefaultUser,
+    setCreateUserSuccess,
+    getAdminRootCount,
+    setIsAdminRootCount,
+    setAdminRootCount
 } from '../../redux/actions/usersActions';
 import Users from "./Users";
 import {connect} from "react-redux";
@@ -19,12 +23,15 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         //debugger
-        if (this.props.adminMode)
+        if (this.props.adminMode){
             this.props.getUsers();
+            //this.props.getAdminRootCount();
+        }
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+debugger
         if (this.props.getUserItem) {
             this.props.setChangeUsersItem();
             this.props.setUserItem(false);
@@ -37,6 +44,10 @@ class UsersContainer extends React.Component {
         }
         if( this.props.users.length === 0){
             this.props.setSetDefaultUser();
+        }
+
+        if(this.props.isAdminRootCount){
+            this.props.getAdminRootCount();
         }
     }
 
@@ -57,7 +68,10 @@ let mapStateToProps = (state) => {
         currentUserId: state.users.currentUserId,
         usersCount: state.users.usersCount,
         adminMode: state.auth.adminMode,
-        adminRoot: state.auth.adminRoot
+        adminRoot: state.auth.adminRoot,
+        createUserSuccess: state.users.createUserSuccess,
+        adminRootCount: state.users.adminRootCount,
+        isAdminRootCount: state.users.isAdminRootCount
     }
 };
 /*Создаем контейнерную кмпоненту MyNewsContainer*/
@@ -74,5 +88,9 @@ export default compose(connect(mapStateToProps,
         deleteUser,
         setIsAllUsers,
         setUsersCount,
-        setSetDefaultUser
+        setSetDefaultUser,
+        setCreateUserSuccess,
+        getAdminRootCount,
+        setIsAdminRootCount,
+        setAdminRootCount
     }), withAuthRedirect)(UsersContainer);
