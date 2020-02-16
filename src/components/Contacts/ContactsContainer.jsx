@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 class ContactsContainer extends React.Component{
 
     componentDidMount() {
-    //debugger
+    debugger
         this.props.getContacts();
     }
 
@@ -29,6 +29,7 @@ class ContactsContainer extends React.Component{
                           createContacts = {this.props.createContacts}
                           setIsChangedContacts = {this.props.setIsChangedContacts}
                           adminMode={this.props.adminMode}
+                          mobile = {this.props.mobile}
             {...this.props}/>)
     }
 }

@@ -66,14 +66,20 @@ const useStyles = makeStyles(theme => ({
         height: 0,
         paddingTop: '52.6%', // 16:9
     },
+    table: {
+        minWidth: 200
+    },
+    fnt:{
+        fontSize: 8
+    }
 }));
 
 const Contacts = (props) => {
     const classes = useStyles();
-
+//debugger
     return (
         <div className={classes.root}>
-            <Container className={classes.cardGrid} maxWidth="lg">
+            <Container className={classes.cardGrid} maxWidth={props.mobile ? 'xl' : 'lg'}>
                 <Grid
                     container
                     direction="row"
@@ -82,7 +88,7 @@ const Contacts = (props) => {
                     spacing={3}
                     className={classes.pos}
                 >
-                    <Grid item xs={!props.adminMode ? 5 : 8}>
+                    <Grid item xs={!props.adminMode && !props.mobile ? 5 : 10}>
                         <Card>
                             <CardHeader title="Контакты"
                                         className={classes.title}/>
@@ -91,63 +97,68 @@ const Contacts = (props) => {
                                     <Table className={classes.table} aria-label="simple table">
                                         <TableBody>
                                             <TableRow>
-                                                <TableCell align="right" component="th" scope="row">Наименование</TableCell>
-                                                <TableCell
-                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyName}</TableCell>
+                                                <TableCell className={props.mobile ? classes.fnt :''} align="right"
+                                                           component="th" scope="row">Наименование</TableCell>
+                                                <TableCell className={props.mobile ? classes.fnt :''}
+                                                    align="left">{props.contacts.length === 0 ? '' :
+                                                    props.contacts[0].companyName}</TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="right" component="th" scope="row">Адрес</TableCell>
-                                                <TableCell
+                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Адрес</TableCell>
+                                                <TableCell className={props.mobile ? classes.fnt :''}
                                                     align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyAddress}</TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="right" component="th" scope="row">Электронная почта</TableCell>
-                                                <TableCell
+                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Электронная почта</TableCell>
+                                                <TableCell className={props.mobile ? classes.fnt :''}
                                                     align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyEmail}</TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="right" component="th" scope="row">Телефон</TableCell>
-                                                <TableCell
+                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Телефон</TableCell>
+                                                <TableCell className={props.mobile ? classes.fnt :''}
                                                     align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyPhone}</TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 {props.contacts.length !== 0 && props.contacts[0].phoneOwner01 !== '' && props.contacts[0].phone01  !== '' ? <>
-                                                        <TableCell align="right" component="th"
+                                                        <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
                                                                    scope="row">{props.contacts[0].phoneOwner01}</TableCell>
-                                                        <TableCell
+                                                        <TableCell className={props.mobile ? classes.fnt :''}
                                                             align="left">{props.contacts[0].phone01}</TableCell>
                                                     </>
                                                     : null}
                                             </TableRow>
                                             <TableRow>
                                                 {props.contacts.length !== 0 && props.contacts[0].phoneOwner02 !== '' && props.contacts[0].phone02  !== '' ? <>
-                                                        <TableCell align="right" component="th"
+                                                        <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
                                                                    scope="row">{props.contacts[0].phoneOwner02}</TableCell>
-                                                        <TableCell
+                                                        <TableCell className={props.mobile ? classes.fnt :''}
                                                             align="left">{props.contacts[0].phone02}</TableCell>
                                                     </>
                                                     : null}
-                                            </TableRow><TableRow>
+                                            </TableRow>
+                                            <TableRow>
                                             {props.contacts.length !== 0 && props.contacts[0].phoneOwner03 !== '' && props.contacts[0].phone03  !== '' ? <>
-                                                    <TableCell align="right" component="th"
+                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
                                                                scope="row">{props.contacts[0].phoneOwner03}</TableCell>
-                                                    <TableCell
+                                                    <TableCell className={props.mobile ? classes.fnt :''}
                                                         align="left">{props.contacts[0].phone03}</TableCell>
                                                 </>
                                                 : null}
-                                        </TableRow><TableRow>
+                                        </TableRow>
+                                            <TableRow>
                                             {props.contacts.length !== 0 && props.contacts[0].phoneOwner04 !== '' && props.contacts[0].phone04  !== '' ? <>
-                                                    <TableCell align="right" component="th"
+                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
                                                                scope="row">{props.contacts[0].phoneOwner04}</TableCell>
-                                                    <TableCell
+                                                    <TableCell className={props.mobile ? classes.fnt :''}
                                                         align="left">{props.contacts[0].phone04}</TableCell>
                                                 </>
                                                 : null}
-                                        </TableRow><TableRow>
+                                        </TableRow>
+                                            <TableRow>
                                             {props.contacts.length !== 0 && props.contacts[0].phoneOwner05 !== '' && props.contacts[0].phone05  !== '' ? <>
-                                                    <TableCell align="right" component="th"
+                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
                                                                scope="row">{props.contacts[0].phoneOwner05}</TableCell>
-                                                    <TableCell
+                                                    <TableCell className={props.mobile ? classes.fnt :''}
                                                         align="left">{props.contacts[0].phone05}</TableCell>
                                                 </>
                                                 : null}
@@ -159,7 +170,7 @@ const Contacts = (props) => {
                             {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
                         </Card>
                     </Grid>
-                    {!props.adminMode ? <>
+                    {!props.adminMode && !props.mobile ? <>
                         <Grid item xs={5}>
                             <div>
                                 <img src={maps} alt="maps"/>
@@ -175,7 +186,7 @@ const Contacts = (props) => {
 export default Contacts;
 
 const AdminPanelContacts = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
     const [expandedEdit, setExpandedEdit] = React.useState(false);
     const [expandedCreate, setExpandedCreate] = React.useState(false);
@@ -194,7 +205,7 @@ const AdminPanelContacts = (props) => {
         //props.getId(null);
     };
     const handleEditExpandClick = () => {
-        debugger
+        //debugger
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
             setInitialData(props);
@@ -289,7 +300,7 @@ const AdminPanelContacts = (props) => {
 }
 ////////////////////////////////////////////////////////
 const setInitialData = (props) => {
-    debugger
+    //debugger
     initialData.id = props.contacts[0]._id;
     initialData.companyName = props.contacts[0].companyName;
     initialData.companyAddress = props.contacts[0].companyAddress;
@@ -329,7 +340,7 @@ const EditContactsForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
 
     if (props.expandedEdit) {
         pristine = false;

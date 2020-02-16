@@ -19,7 +19,7 @@ const MobileContent = (props) => {
                 <Route path='/projects/:projectId?' component={ProjectsContainer}/>
                 <Route path='/gallery' component={GalleryContainer}/>
                 <Route path='/album/:albumId?' component={PhotoAlbumContainer}/>
-                <Route path='/contacts' component={ContactsContainer}/>
+                <Route path='/contacts' render={(props) => <ContactsContainer {...props} mobile = {true} />}/>
                 <Route path='/about' component={AboutUsContainer}/>
                 <Route path='/job' component={JobsContainer}/>
                 <Route path='*'
