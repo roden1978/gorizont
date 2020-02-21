@@ -16,6 +16,7 @@ import {
 import {getProjects} from "../../redux/actions/projectsActions";
 import News from "./News";
 import {connect} from "react-redux";
+import Spinner from "../../common/Spinner";
 
 class NewsContainer extends React.Component {
 
@@ -47,19 +48,11 @@ class NewsContainer extends React.Component {
         }
     }
     render() {
-        return (<News news={this.props.news}
-                      setLoadProjects={this.props.setLoadProjects}
-                      setNewsItem={this.props.setNewsItem}
-                      setIsAllNews={this.props.setIsAllNews}
-                      projects={this.props.projects}
-                      setCurrentNewsId={this.props.setCurrentNewsId}
-                      createNews={this.props.createNews}
-                      updateNews={this.props.updateNews}
-                      deleteNews={this.props.deleteNews}
-                      adminMode={this.props.adminMode}
-                      setNewsCount={this.props.setNewsCount}
-            {...this.props}
-        />)
+        return (<>
+            {this.props.news.length === 0 ? <Spinner/> : null}
+            <News {...this.props}
+        />
+        </>)
     }
 }
 
@@ -87,3 +80,17 @@ export default connect(mapStateToProps,
         setCurrentNewsId, createNews, updateNews, getAllNews,
         deleteNews, setNewsCount, setDefaultNews
     })(NewsContainer);
+
+/*
+news={this.props.news}
+                      setLoadProjects={this.props.setLoadProjects}
+                      setNewsItem={this.props.setNewsItem}
+                      setIsAllNews={this.props.setIsAllNews}
+                      projects={this.props.projects}
+                      setCurrentNewsId={this.props.setCurrentNewsId}
+                      createNews={this.props.createNews}
+                      updateNews={this.props.updateNews}
+                      deleteNews={this.props.deleteNews}
+                      adminMode={this.props.adminMode}
+                      setNewsCount={this.props.setNewsCount}
+ */

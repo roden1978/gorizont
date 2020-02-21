@@ -18,6 +18,9 @@ export const LOAD_PROJECTS  ='LOAD_PROJECTS';
 export const SET_ID = 'SET_ID';
 export const LOAD_ALBUMS  ='LOAD_ALBUMS';
 export const SET_DEFAULT_PROJECT = 'SET_DEFAULT_PROJECT';
+////////////////////////////
+export const SET_PROJECTS_PHOTOS = 'SET_PROJECTS_PHOTOS';
+export const SET_URL_TO_PROJECTS_PHOTOS = 'SET_URL_TO_PROJECTS_PHOTOS';
 
 //Объявления
 export const SET_JOBS = 'SET_JOBS';
@@ -45,9 +48,6 @@ export const SET_DEFAULT_CONTACTS = 'SET_DEFAULT_CONTACTS';
 export const SET_ABOUT = 'SET_ABOUT';
 export const SET_IS_CHANGED_ABOUT = 'SET_IS_CHANGED_ABOUT';
 export const SET_DEFAULT_ABOUT = 'SET_DEFAULT_ABOUT';
-export const SET_CURRENT_ABOUT_ID = 'SET_CURRENT_ABOUT_ID';
-export const IS_ALL_ABOUT = 'IS_ALL_ABOUT';
-export const SET_ABOUT_ITEM = 'SET_ABOUT_ITEM';
 
 //Пользователи
 export const SET_USERS = 'SET_USERS';
@@ -65,9 +65,9 @@ export const IS_ADMIN_ROOT_COUNT = 'IS_ADMIN_ROOT_COUNT';
 /////
 export const IS_CLICKED = 'IS_CLICKED';
 export const SET_URL = 'SET_URL';
-export const SET_AUTHORIZED = 'SET_AUTHORIZED';
+//export const SET_AUTHORIZED = 'SET_AUTHORIZED';
 export const SET_ADMIN_MODE = 'SET_ADMIN_MODE';
-export const SET_ROOT_MODE = 'SET_ROOT_MODE';
+//export const SET_ROOT_MODE = 'SET_ROOT_MODE';
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
-import katokIcon from '../../../assets/icons/katok.svg'
+import samosvalIcon from '../../../assets/icons/samosval.svg'
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Typography from "@material-ui/core/Typography";
@@ -22,8 +22,10 @@ import {Field, reduxForm} from "redux-form";
 import {renderCheckbox, renderSelectField, renderTextField} from "../../../common/renderFilds";
 import {validate} from '../../../common/validate'
 import Button from "@material-ui/core/Button";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
 
-const useStyles = makeStyles(theme =>({
+export const useStyles = makeStyles(theme => ({
     price: {
         fontSize: 14,
         fontWeight: 'bold',
@@ -36,15 +38,15 @@ const useStyles = makeStyles(theme =>({
     pos: {
         marginLeft: 12,
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     avatar: {
         backgroundColor: '#f5f6f7',
         width: 50,
-        height: 50,
+        height: 50
     },
     katok: {
-        width: 45,
+        width: 40,
     },
     card: {
         height: '100%',
@@ -59,7 +61,7 @@ const useStyles = makeStyles(theme =>({
     },
     expand: {
         transform: 'rotate(0deg)',
-        backgroundColor:'#f5f6f7',
+        backgroundColor: '#f5f6f7',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),
@@ -77,20 +79,38 @@ const useStyles = makeStyles(theme =>({
     buttonSubmit: {
         marginLeft: 10,
     },
-
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+        flexWrap: 'wrap',
+        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+        transform: 'translateZ(0)',
+    },
+    im: {
+        width: '100%',
+    },
 }));
 
 const Project = (props) => {
+    debugger
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
-        if(!props.id)
-        setExpanded(!expanded);
+        if (!props.id)
+            setExpanded(!expanded);
         props.getId(null);
     };
 
-    const expandOver = () =>{
+    const photos = props.photosWithUrl.filter(photo => photo.albumId === props.albumId)
+    photos.length = 4;
+
+    const expandOver = () => {
         setExpanded(true);
         props.getId(null);
     }
@@ -104,75 +124,84 @@ const Project = (props) => {
     let createAt = moment(props.createAt);
     createAt.locale('ru');
 
-    return(
+    return (
         <Grid item xs={10}>
             <Card className={classes.card}>
                 <CardHeader title={props.title}
                             className={classes.title}
                             avatar={
                                 <Avatar className={classes.avatar}>
-                                    <img className={classes.katok} src={katokIcon} alt="Работа"/>
+                                    <img className={classes.katok} src={samosvalIcon} alt="Работа"/>
                                 </Avatar>
                             }
 
                 />
                 <CardContent>
-                    <Typography variant="body1" color="textPrimary" gutterBottom>
+                    <Typography variant="body1" color="textPrimary" >
                         {props.description}
                     </Typography>
 
                 </CardContent>
-                <CardActions  className={classes.card_act}>
+                <CardActions className={classes.card_act}>
                     {props.albumId ? <>
+                            <Typography variant="body2" color="textPrimary">
+                                Полный фотоотчет
+                            </Typography>
+                            <Tooltip title="Открыть фотоальбом" placement={'top'} arrow>
+                                <IconButton aria-label="Фотоальбом"
+                                            component={Link} to={'/album/' + props.albumId}>
+                                    <PhotoLibraryOutlinedIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </>
+                        : ''}
                     <Typography variant="body2" color="textPrimary">
-                        Фотоальбом
-                    </Typography>
-                    <Tooltip title="Открыть фотоальбом" placement={'top'} arrow>
-                            <IconButton aria-label="Фотоальбом"
-                                        component={Link} to={'/album/' + props.albumId}>
-                                <PhotoLibraryOutlinedIcon />
-                            </IconButton>
-                    </Tooltip>
-                    </>
-                    : ''}
-                    <Typography variant="body2" color="textPrimary" >
                         Показать больше
                     </Typography>
                     <Tooltip title={!expanded ? "Показать больше" : "Свернуть"} placement={'top'} arrow>
-                    <IconButton
-                        className={clsx(classes.expand, {
-                            [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded }
-                        aria-label="Показать больше"
-                    >
-                        <ExpandMoreIcon/>
-                    </IconButton>
+                        <IconButton
+                            className={clsx(classes.expand, {
+                                [classes.expandOpen]: expanded,
+                            })}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="Показать больше"
+                        >
+                            <ExpandMoreIcon/>
+                        </IconButton>
                     </Tooltip>
                 </CardActions>
-                <Collapse in={expanded || props.id ? true : false} timeout="auto" unmountOnExit>
+                <Collapse in={expanded || props.id} timeout="auto" unmountOnExit>
                     <CardContent>
                         <>
                             {props.text.split('\n').map((i, key) => {
-                                return <Typography key={key} paragraph variant="body1" c
-                                                   olor="textPrimary" gutterBottom>{i}</Typography>;
+                                return <Typography key={key} paragraph variant="body1"
+                                                   color="textPrimary" gutterBottom>{i}</Typography>;
                             })}
                         </>
                     </CardContent>
+                        <div className={classes.root}>
+                            <GridList className={classes.gridList} cols={4}>
+                                {photos.map(photo => (
+                                    <GridListTile key={photo.title}>
+                                        <img src={photo.url} alt={photo.title}/>
+                                    </GridListTile>
+                                ))}
+                            </GridList>
+                        </div>
                 </Collapse>
                 <Typography className={classes.date} variant="body2" color="textSecondary">
                     Старт проекта: {createAt.format('LL')}
                 </Typography>
                 {props.projects.length === 1 && !props.adminMode ? <>
                     <Tooltip title={"Показать все проекты"} placement={'top'} arrow>
-                        <Button  size="small"  type="button"
+                        <Button size="small" type="button"
                                 onClick={viewAllProjectsClick}>
                             Показать все проекты
                         </Button>
                     </Tooltip>
-                    </> : null}
-                {props.adminMode ? <AdminPanelProjects expandOver = {expandOver} count={props.projects.length}
+                </> : null}
+                {props.adminMode ? <AdminPanelProjects expandOver={expandOver} count={props.projects.length}
                                                        {...props}/> : ''}
             </Card>
         </Grid>
@@ -180,7 +209,6 @@ const Project = (props) => {
 }
 
 export default Project;
-// && !props.adminMode
 
 const AdminPanelProjects = (props) => {
     debugger
@@ -291,7 +319,7 @@ const AdminPanelProjects = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedDelete  || props._id === '0'}>
+                                disabled={expandedCreate || expandedDelete || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -306,14 +334,14 @@ const AdminPanelProjects = (props) => {
                                 })}
                                 aria-expanded={expandedDelete}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || expandedEdit  || props._id === '0'}>
+                                disabled={expandedCreate || expandedEdit || props._id === '0'}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
 
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
-                    <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
-                            disabled={expandedCreate || expandedEdit || expandedDelete  || props._id === '0'}
+                    <Button className={classes.buttonSubmit} variant="outlined" size="small" type="button"
+                            disabled={expandedCreate || expandedEdit || expandedDelete || props._id === '0'}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить
@@ -327,12 +355,12 @@ const AdminPanelProjects = (props) => {
                         ПАНЕЛЬ АДМИНИСТРИРОВАНИЯ
                     </Typography>
                     <EditProjectsReduxForm onSubmit={showResults}
-                                       expandedCreate={expandedCreate}
-                                       expandedEdit={expandedEdit}
-                                       expandedDelete={expandedDelete}
-                                       albums={props.albums}
-                                       projectsCount = {props.projectsCount}
-                                       {...props}/>
+                                           expandedCreate={expandedCreate}
+                                           expandedEdit={expandedEdit}
+                                           expandedDelete={expandedDelete}
+                                           albums={props.albums}
+                                           projectsCount={props.projectsCount}
+                                           {...props}/>
                 </CardContent>
             </Collapse>
         </>
@@ -383,11 +411,10 @@ const EditProjectsForm = (props) => {
     const {handleSubmit, reset, classes, albums} = props;
     let {pristine, submitting} = props;
     debugger
-    //console.log(props.val + " " + props.expandedEdit);
 
     let albumsItem = albums.map(
         album => <option key={album.id} value={`${album.id}| ${album.description._content}`}
-                               label={album.description._content}></option>)
+                         label={album.description._content}></option>)
 
     if (props.expandedEdit) {
         pristine = false;
@@ -402,7 +429,6 @@ const EditProjectsForm = (props) => {
             return "Удалить из базы данных навсегда"
         }
     }
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -454,7 +480,7 @@ const EditProjectsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.projectsCount === 1 || props.expandedCreate? true : false}/>
+                       disabled={props.projectsCount === 1 || props.expandedCreate}/>
             </div>
             <div>
                 <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"

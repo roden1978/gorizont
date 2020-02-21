@@ -1,4 +1,5 @@
 import React from "react";
+import {useStyles} from "./AdminStyles";
 import {checkUser, setIsUsers} from "../../redux/actions/authActions";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
@@ -7,72 +8,10 @@ import CardContent from "@material-ui/core/CardContent";
 import {Field, reduxForm} from "redux-form";
 import {renderCheckbox, renderTextField} from "../../common/renderFilds";
 import {validate} from "../../common/validate";
-import {makeStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 import {Container} from "@material-ui/core";
-
-const useStyles = makeStyles(theme => ({
-    link: {
-        color: 'coral', // blueGrey[400],
-        textDecoration: 'none',
-        textTransform: 'uppercase',
-        fontWeight: 'lighter',
-        fontSize: 14,
-    },
-    title: {
-        fontSize: 16,
-        background:
-            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',
-        color: '#FFFFFF',
-    },
-    buttonSubmit: {
-        margin: 10,
-    },
-    avatar: {
-        backgroundColor: '#e9ecf4',
-        width: 50,
-        height: 50,
-    },
-    katok: {
-        width: 45,
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        backgroundColor: '#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    wi: {
-        backgroundColor: '#e9ecf4'
-    },
-    adminPanel: {
-        border: '2px solid grey',
-        backgroundColor: '#e9ecf4'
-    },
-    root: {
-        flexGrow: 1,
-    },
-    pos: {
-        paddingBottom: 20,
-        paddingTop: 20,
-    },
-    cardGrid: {
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(8),
-    }
-}));
 
 class Admin extends React.Component {
 

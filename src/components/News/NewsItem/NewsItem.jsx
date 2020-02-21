@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
-import {makeStyles} from '@material-ui/core/styles';
+import {useStyles} from './NewsStyles'
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
@@ -22,65 +22,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
 import {validate} from '../../../common/validate'
 
-const useStyles = makeStyles(theme => ({
-    link: {
-        color: 'coral', // blueGrey[400],
-        textDecoration: 'none',
-        textTransform: 'uppercase',
-        fontWeight: 'lighter',
-        fontSize: 14,
-    },
-    title: {
-        fontSize: 16,
-        background:
-            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',
-        color: '#FFFFFF',
-    },
-    pos: {
-        marginLeft: 12,
-    },
-    buttonSubmit: {
-        margin: 10,
-    },
-    avatar: {
-        backgroundColor: '#e9ecf4',
-        width: 50,
-        height: 50,
-    },
-    katok: {
-        width: 45,
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        backgroundColor: '#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    wi: {
-        backgroundColor: '#e9ecf4'
-    },
-    adminPanel: {
-        border: '2px solid grey',
-        backgroundColor: '#e9ecf4'
-    }
-}));
-
-/*linear-gradient(to right, #0d47a1, #ffff #f5f6f7)
-* 'linear-gradient(to right, #0d47a1 90%, coral)'
-* backgroundColor: '#3b5998',//#0d47a1*/
 const NewsItem = (props) => {
     const classes = useStyles();
-    debugger
+    //debugger
     let createAt = moment(props.createAt);
 
     createAt.locale('ru');
@@ -134,7 +78,7 @@ const AdminPanelNews = (props) => {
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        // if(!props.id)
+
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
             props.setLoadProjects(true);
@@ -145,8 +89,6 @@ const AdminPanelNews = (props) => {
             props.projects.length = 0;
             props.setIsAllNews(true);
         }
-
-        //props.getId(null);
     };
 
     const handleEditExpandClick = () => {
@@ -161,8 +103,6 @@ const AdminPanelNews = (props) => {
             props.setIsAllNews(true);
 
         }
-
-        //props.getId(null);
     };
 
     const handleDeleteExpandClick = () => {
@@ -180,7 +120,6 @@ const AdminPanelNews = (props) => {
     };
 
     const handleRefreshClick = () => {
-        //setExpandedRefresh(!expandedRefresh);
         props.setIsAllNews(true);
     };
 
@@ -193,10 +132,6 @@ const AdminPanelNews = (props) => {
             values.project = id;
             values.projectTitle = title.trim();
         }
-
-        //window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        //props.saveNews(JSON.stringify(values, null, 2));
-
 
         if (expandedEdit) {
             props.updateNews(values.id, values.title, values.text, values.project, values.projectTitle, values.status, values.createAt);
@@ -324,11 +259,10 @@ const initialData = {
     status: null,
     createAt: null
 }
-///////////////////////////////////////////////////////
 
 const EditNewsForm = (props) => {
-    const classesStyle = useStyles();
-    const {handleSubmit, reset, classes, projects} = props;
+    const classes = useStyles();
+    const {handleSubmit, reset, cls, projects} = props;
     let {pristine, submitting} = props;
     debugger
     //console.log(props.val + " " + props.expandedEdit);
@@ -375,7 +309,7 @@ const EditNewsForm = (props) => {
                     </div>
                     <div>
                         <Field
-                            classes={classes}
+                            classes={cls}
                             name="project"
                             component={renderSelectField}
                             label="Проект"
@@ -395,14 +329,14 @@ const EditNewsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.newsCount === 1 || props.expandedCreate? true : false}/>
+                       disabled={props.newsCount === 1 || props.expandedCreate}/>
             </div>
             <div>
-                <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="submit"
+                <Button className={classes.buttonSubmit} variant="contained" color="primary" type="submit"
                         disabled={pristine || submitting }>
                     Отправить
                 </Button>
-                <Button className={classesStyle.buttonSubmit} variant="contained" color="primary" type="button"
+                <Button className={classes.buttonSubmit} variant="contained" color="primary" type="button"
                         disabled={pristine || submitting} onClick={reset}>
                     Очистить поля
                 </Button>

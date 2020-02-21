@@ -1,4 +1,4 @@
-import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
+import {SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 
 let initialState = {
     isAuthorized: false,
@@ -11,14 +11,14 @@ const auth_reducer = (state = initialState, action) => {
 
     //debugger
     switch (action.type) {
-        case SET_AUTHORIZED: {
-            /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
+       /* case SET_AUTHORIZED: {
+            /!*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ
-            * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*/
+            * копия ОБЪЕКТОВ И ПОДОБЪЕКТОВ в ФИГУРНЫХ СКОБКАХ*!/
             return {
                 ...state, isAuthorized: action.payload
             };
-        }
+        }*/
             case SET_ADMIN_MODE: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
             * копия  ПРИМИТИВОВ в ФИГУРНЫХ СКОБКАХ

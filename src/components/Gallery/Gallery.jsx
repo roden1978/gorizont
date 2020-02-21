@@ -23,12 +23,12 @@ const Gallery = (props) => {
     const classes = useStyles();
     //debugger
 
-    let sets = props.sets.map(
+    let sets = props.setsWithUrl.map(
         photoset => <PhotoAlbums key={photoset.id}
-                                 id = {photoset.id}
-                                          title={photoset.title._content}
-                                          description={photoset.description._content}
-                                          url={photoset.primary}/>
+                                 id={photoset.id}
+                                 title={photoset.title._content}
+                                 description={photoset.description._content}
+                                 url={photoset.primary}/>
     )
 
     return (
@@ -36,7 +36,7 @@ const Gallery = (props) => {
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
                     <Typography variant="h5" align="center" color="textPrimary" paragraph>
-                        В галерее представлены фотоальбомы к проектам ООО Горизонт
+                        Фотоальбомы ООО Горизонт
                     </Typography>
                 </Container>
             </div>

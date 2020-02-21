@@ -1,5 +1,6 @@
 import React from 'react'
-import {Container, makeStyles} from "@material-ui/core";
+import {useStyles} from './AboutUsStyles';
+import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -16,48 +17,6 @@ import {renderTextField} from "../../common/renderFilds";
 import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
-//import SimpleMap from "../../common/SimpleMap";
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    pos: {
-        paddingBottom: 20,
-        paddingTop: 20,
-    },
-    cardGrid: {
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(8),
-    },
-    title: {
-        fontSize: 16,
-        background:
-            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',//#0d47a1
-        color: '#FFFFFF',
-    },
-    wi: {
-        backgroundColor: '#e9ecf4'
-    },
-    adminPanel: {
-        border: '2px solid grey',
-        backgroundColor: '#e9ecf4'
-    },
-    buttonSubmit: {
-        margin: 10,
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        backgroundColor: '#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    }
-}));
 
 const AboutUs = (props) => {
     const classes = useStyles();
@@ -111,17 +70,13 @@ const AdminPanelAboutUs = (props) => {
     const [expandedCreate, setExpandedCreate] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        // if(!props.id)
         setExpandedCreate(!expandedCreate);
         if (!expandedCreate) {
-            //props.setCurrentContactsId(props._id);
-            //props.setContactsItem(true);
             setInitialData(props, true);
         } else {
             props.getAbout();
         }
 
-        //props.getId(null);
     };
 
     const handleEditExpandClick = () => {
@@ -136,14 +91,11 @@ const AdminPanelAboutUs = (props) => {
         //props.getId(null);
     };
     const handleRefreshClick = () => {
-        //setExpandedRefresh(!expandedRefresh);
         props.getAbout();
     };
 
     const showResults = (values) => {
         //      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        //props.saveNews(JSON.stringify(values, null, 2));
-
 
         if (expandedEdit) {
             props.updateAbout(values.id, values.text);
@@ -170,7 +122,7 @@ const AdminPanelAboutUs = (props) => {
                                 })}
                                 aria-expanded={expandedCreate}
                                 aria-label="Показать больше"
-                                disabled={props.about.length !== 0 ? props.about[0]._id !== '0' ? true : false : null}>
+                                disabled={props.about.length !== 0 ? props.about[0]._id !== '0' : null}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
@@ -185,13 +137,13 @@ const AdminPanelAboutUs = (props) => {
                                 })}
                                 aria-expanded={expandedEdit}
                                 aria-label="Показать больше"
-                                disabled={expandedCreate || props.about.length !== 0 ? props.about[0]._id === '0' ? true : false : null}>
+                                disabled={expandedCreate || props.about.length !== 0 ? props.about[0]._id === '0' : null}>
                         <ExpandMoreIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Обновить"} placement={'top'} arrow>
                     <Button className={classes.buttonSubmit} variant="outlined" size="small"  type="button"
-                            disabled={expandedEdit|| props.about.length !== 0 ? props.about[0]._id === '0' ? true : false : null}
+                            disabled={expandedEdit|| props.about.length !== 0 ? props.about[0]._id === '0' : null}
                             onClick={handleRefreshClick}
                             startIcon={<RefreshIcon/>}>
                         Обновить

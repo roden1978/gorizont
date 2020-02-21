@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
+import {useStyles} from './JobsStyles';
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
@@ -21,68 +21,10 @@ import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import {Field, reduxForm} from "redux-form";
-import {renderCheckbox, renderSelectField, renderTextField} from "../../../common/renderFilds";
+import {renderCheckbox, renderTextField} from "../../../common/renderFilds";
 import Button from "@material-ui/core/Button";
 import {validate} from "../../../common/validate";
 import RefreshIcon from "@material-ui/icons/Refresh";
-
-const useStyles = makeStyles(theme => ({
-    price: {
-        fontSize: 14,
-        fontWeight: 'bold',
-    },
-    title: {
-        fontSize: 16,
-        background:
-            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)', //#0d47a1 #1976d2
-        color: '#ffffff'
-    },
-    pos: {
-        marginLeft: 12,
-        fontSize: 14,
-        fontWeight: 'bold',
-    },
-    date: {
-        marginLeft: 12
-    },
-    avatar: {
-        backgroundColor: '#ffffff',
-        width: 50,
-        height: 50,
-    },
-    katok: {
-        height: 45,
-    },
-    card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    cardContent: {
-        minHeight: 160,
-    },
-    buttonSubmit: {
-        margin: 10,
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        backgroundColor: '#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    wi: {
-        backgroundColor: '#e9ecf4'
-    },
-    adminPanel: {
-        border: '2px solid grey',
-        backgroundColor: '#e9ecf4'
-    }
-}));
 
 const Job = (props) => {
     const classes = useStyles();
@@ -90,7 +32,6 @@ const Job = (props) => {
     const currentDate = new Date();
     const pubDate = new Date(props.createAt);
     const days = 30 - Math.floor((currentDate - pubDate) / (24 * 60 * 60 * 1000)) + 1;
-    //console.log(days);
 
     let createAt = moment(props.createAt);
 
@@ -140,11 +81,7 @@ const Job = (props) => {
         sm = 12;
     }
     debugger
-    /*if (props.adminMode && props.getJobsItem)
-    {
-        xs = 12;
-        sm = 8;
-    }*/
+
     return (
         <Grid item xs={xs} sm={sm}>
             <Card className={classes.card}>
@@ -462,14 +399,14 @@ const EditJobsForm = (props) => {
                 <Field name="status"
                        component={renderCheckbox}
                        label={getLabel()}
-                       disabled={props.jobsCount === 1 || props.expandedCreate? true : false}/>
+                       disabled={props.jobsCount === 1 || props.expandedCreate}/>
             </div>
             {!props.expandedDelete ? <>
                     <div>
                         <Field name="activate"
                                component={renderCheckbox}
                                label="Активировать с текущей даты"
-                               disabled={props.jobsCount === 1 || props.expandedCreate? true : false}/>
+                               disabled={props.jobsCount === 1 || props.expandedCreate}/>
                     </div>
                 </>
                 : null

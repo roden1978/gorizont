@@ -3,15 +3,15 @@ import {
     getProjects, getProject, getId,
     setLoadAlbums, getAllProjects, createProject,
     deleteProject, setChangeProjectsItem, setIsAllProjects,
-    updateProject, setProjectsCount, setProjectsItem, setDefaultProject
+    updateProject, setProjectsCount, setProjectsItem, setDefaultProject,
+    getPhotos, getPhotoWithUrl
 } from '../../redux/actions/projectsActions';
 import {getPhotosets} from '../../redux/actions/photosActions'
 import Projects from "./Projects";
 import {connect} from "react-redux";
+import Spinner from "../../common/Spinner";
 
 class ProjectsContainer extends React.Component {
-
-
     updateProjectsData() {
         if (this.props.match.params.projectId) {
             this.props.getProject(this.props.match.params.projectId);
@@ -19,14 +19,15 @@ class ProjectsContainer extends React.Component {
         } else {
             if (this.props.adminMode)
                 this.props.getAllProjects();
-            else
+            else {
                 this.props.getProjects();
+                this.props.getPhotosets();
+            }
+
         }
     }
 
-
     componentDidMount() {
-        //debugger
         this.updateProjectsData()
     }
 
@@ -53,8 +54,17 @@ class ProjectsContainer extends React.Component {
             this.props.getAllProjects();
             this.props.setIsAllProjects(false);
         }
-        if( this.props.projects.length === 0){
+        if (this.props.projects.length === 0) {
             this.props.setDefaultProject();
+        }
+        //////////////////////////////////
+        debugger
+        if (prevProps.albums.length === 0 && this.props.albums.length > 0) {
+            this.props.albums.every((album) => this.props.getPhotos(album.id))
+        }
+
+        if (this.props.photosWithUrl.length === 0 && this.props.albumsCount === this.props.albums.length) {
+            this.props.photos.every((card) => this.props.getPhotoWithUrl(card.id, card))
         }
     }
 
@@ -65,10 +75,13 @@ class ProjectsContainer extends React.Component {
 
     render() {
         //debugger
-        return (<Projects projects={this.props.projects} id={this.props.id} getId={this.props.getId} {...this.props}/>)
+        return (<>
+            {this.props.projects.length === 0 ? <Spinner/> : null}
+            <Projects {...this.props}/>
+        </>)
     }
 }
-//prevProps.projects.length === 0 &&
+
 /*функция принимает state созданный в redux при помощи reducers
 * и возвращает требуемые нам данные из state*/
 let mapStateToProps = (state) => {
@@ -80,7 +93,10 @@ let mapStateToProps = (state) => {
         getProjectsItem: state.projects.getProjectsItem,
         isAllProjects: state.projects.isAllProjects,
         projectsCount: state.projects.projectsCount,
-        adminMode: state.auth.adminMode
+        adminMode: state.auth.adminMode,
+        photos: state.projects.photos,
+        photosWithUrl: state.projects.photosWithUrl,
+        albumsCount: state.projects.albumsCount
     }
 };
 
@@ -92,5 +108,5 @@ export default connect(mapStateToProps, {
     getAllProjects, createProject, deleteProject,
     setChangeProjectsItem, setIsAllProjects,
     updateProject, setProjectsCount, setProjectsItem,
-    getPhotosets, setDefaultProject
+    getPhotosets, setDefaultProject, getPhotos, getPhotoWithUrl
 })(ProjectsContainer);

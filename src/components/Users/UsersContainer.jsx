@@ -25,7 +25,6 @@ class UsersContainer extends React.Component {
         //debugger
         if (this.props.adminMode){
             this.props.getUsers();
-            //this.props.getAdminRootCount();
         }
 
     }

@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/core";
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import katok from "../../assets/icons/katok.svg";
+import greyder from "../../assets/icons/greyder.svg";
 import Avatar from "@material-ui/core/Avatar";
 import ModalPhoto from "../../common/ModalPhoto";
 import Container from "@material-ui/core/Container";
@@ -54,19 +54,19 @@ const PhotoAlbum = (props) => {
             <Container maxWidth="md" sx = {5}>
             <GridList cellHeight={400} className={classes.gridList} >
                 {props.cards.map(card => (
-                    <GridListTile key={card.url ? card.url : katok} >
+                    <GridListTile key={card.url ? card.url : greyder} >
                         <ButtonBase   onClick={()=>{
                             props.changeClicked(true);
                             props.getUrl(card.url);
                         }}>
-                            <img className={classes.im} src={card.url ? card.url : katok} alt={card.title}/>
+                            <img className={classes.im} src={card.url ? card.url : greyder} alt={card.title}/>
                         </ButtonBase>
                         <GridListTileBar
                             title={card.title}
                             className={classes.titleBar}
                             actionIcon={
                                 <Avatar className={classes.avatar}>
-                                    <img className={classes.katok} src={katok} alt={card.title}/>
+                                    <img className={classes.katok} src={greyder} alt={card.title}/>
                                 </Avatar>
                             }
                         />
@@ -78,7 +78,6 @@ const PhotoAlbum = (props) => {
 
         </div>
     );
-    //onClose()
 }
 
 export default PhotoAlbum;

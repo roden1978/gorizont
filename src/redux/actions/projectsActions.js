@@ -1,4 +1,4 @@
-import {mongodbAPI} from '../../api/api'
+import {flickrAPI, mongodbAPI} from '../../api/api'
 import {
     SET_PROJECTS,
     SET_PROJECT,
@@ -8,7 +8,9 @@ import {
     SET_PROJECTS_ITEM,
     SET_PROJECTS_COUNT,
     LOAD_ALBUMS,
-    SET_DEFAULT_PROJECT
+    SET_DEFAULT_PROJECT,
+    SET_PROJECTS_PHOTOS,
+    SET_URL_TO_PROJECTS_PHOTOS
 } from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -76,6 +78,20 @@ export const setDefaultProject = () =>{
         type: SET_DEFAULT_PROJECT
     }
 }
+export const setProjectsPhotos = (id, photos) =>{
+    return{
+        type: SET_PROJECTS_PHOTOS,
+        id: id,
+        photos: photos
+    }
+}
+export const setUrlToPhotos = (photo, card) => {
+    return {
+        type: SET_URL_TO_PROJECTS_PHOTOS,
+        payload: photo,
+        card: card
+    }
+}
 
 /*Thunk Creators*/
 /**
@@ -139,4 +155,17 @@ export const deleteProject = (id) =>{
     }
 }
 
+export const getPhotos = (id) => {
+    debugger
+    return async (dispatch) => {
+        const photos = await flickrAPI.getPhotos(id);
+        dispatch(setProjectsPhotos(id, photos));
+    }
+}
 
+export const getPhotoWithUrl = (id, card) => {
+    return async (dispatch) => {
+        const photo = await flickrAPI.getPhoto(id);
+        dispatch(setUrlToPhotos(photo, card));
+    }
+}

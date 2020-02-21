@@ -1,5 +1,6 @@
 import React from 'react'
-import {Container, makeStyles} from "@material-ui/core";
+import {Container} from "@material-ui/core";
+import {useStyles} from './ContactsStyles';
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -17,7 +18,6 @@ import {validate} from '../../common/validate'
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import maps from '../../assets/pictures/maps.png'
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -25,7 +25,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         flexWrap: 'wrap'
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     fnt:{
         fontSize: 8
     }
-}));
+}));*/
 
 const Contacts = (props) => {
     const classes = useStyles();

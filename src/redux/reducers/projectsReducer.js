@@ -7,11 +7,16 @@ import {
     SET_PROJECTS_ITEM,
     IS_ALL_PROJECTS,
     SET_PROJECTS_COUNT,
-    SET_DEFAULT_PROJECT
+    SET_DEFAULT_PROJECT,
+    SET_PROJECTS_PHOTOS,
+    SET_URL_TO_PROJECTS_PHOTOS
 } from "../actions/types";
 
 let initialState = {
     projects: [],
+    photos:[],
+    photosWithUrl: [],
+    albumsCount: 0,
     id: null,
     loadAlbums: false,
     getProjectsItem: false,
@@ -78,6 +83,25 @@ const projects_reducer = (state = initialState, action) => {
                     albumName: '', status: true}]
             }
         }
+        case SET_PROJECTS_PHOTOS:{
+            let photosWithAlbumId = action.photos.photoset.photo.map(photo => {
+                return {...photo, albumId: action.id}
+            })
+
+            //let count = state.albumsCount + 1
+            return {
+                ...state, photos: [...state.photos, ...photosWithAlbumId], albumsCount: state.albumsCount + 1
+            };
+        }
+        case SET_URL_TO_PROJECTS_PHOTOS:{
+            //debugger
+            const size = action.payload.sizes.size.find(ph => ph.label === "Small")
+            return {
+                ...state,
+                photosWithUrl: [...state.photosWithUrl, {...action.card, url: size.source}]
+            }
+
+        }
         default:
             return state;
     }
@@ -93,4 +117,7 @@ export default projects_reducer;
 /*return {
     ...state, projects: [...state.projects, action.payload]
 };
-}*/
+}
+"Small"
+"Large"
+*/

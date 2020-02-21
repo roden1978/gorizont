@@ -1,15 +1,6 @@
-import {authAPI, mongodbAPI} from '../../api/api'
-import {SET_AUTHORIZED, SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
-import {getAllNews} from "./newsActions";
+import {mongodbAPI} from '../../api/api'
+import {SET_ADMIN_MODE, SET_IS_USERS} from "../actions/types";
 import {stopSubmit} from "redux-form";
-
-/*Создаем объект action с обязательным свойством type*/
-export const setAuthorized = (isAuthorized) => {
-    return {
-        type: SET_AUTHORIZED,
-        payload: isAuthorized
-    }
-}
 
 export const setAdminMode = (adminMode, adminRoot) => {
     return {
@@ -26,45 +17,17 @@ export const setIsUsers = (isUsers) => {
     }
 }
 
-/*Thunk Creators*/
-export const getAuthorize = () => {
-
-    return async (dispatch) => {
-        await authAPI.handleAuthentication()
-            .then(result => {
-                dispatch(setAdminMode(true))
-                dispatch(setAuthorized(result))
-            });
-
-
-    }
-}
 export const checkUser = (email, password, newUsers) => {
     //debugger
     return async (dispatch) => {
-        const data = await authAPI.checkUser({email, password});
-        //console.log(data + '1233');
+        const data = await mongodbAPI.checkUser({email, password});
         if (data) {
-            //dispatch(getAllNews());
             if (!data.root && newUsers)
                 dispatch(stopSubmit('LoginForm', {email: "У вас нет прав на администрирование пользователей"}))
             else
                 dispatch(setAdminMode(true, data.root));
-            /*if(data.root)
-                dispatch(setRootMode(true))*/
         } else {
             dispatch(stopSubmit('LoginForm', {password: "Не верный логин или пароль"}))
         }
     }
 }
-
-/*
-export const getNews = () => {
-    return async (dispatch) => {
-        const news = await mongodbAPI.getNews();
-        dispatch(setNews(news));
-    }
-}
-
-.resultCode === 0
-*/

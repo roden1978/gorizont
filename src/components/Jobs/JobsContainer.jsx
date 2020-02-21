@@ -6,6 +6,7 @@ import {
 } from '../../redux/actions/jobsActions';
 import Jobs from "./Jobs";
 import {connect} from "react-redux";
+import Spinner from "../../common/Spinner";
 
 class JobsContainer extends React.Component {
 
@@ -29,13 +30,17 @@ class JobsContainer extends React.Component {
             this.props.getAllJobs();
             this.props.setIsAllJobs(false);
         }
-        if( this.props.jobs.length === 0){
+        if (this.props.jobs.length === 0) {
             this.props.setDefaultJob();
         }
     }
 
     render() {
-        return (<Jobs jobs={this.props.jobs} {...this.props}/>)
+        return (
+            <>
+                {this.props.jobs.length === 0 ? <Spinner/> : null}
+                <Jobs {...this.props}/>
+            </>)
     }
 }
 
@@ -60,3 +65,6 @@ export default connect(mapStateToProps, {
     setChangeJobsItem, setCurrentJobsId, setIsAllJobs,
     setJobsCount, setJobsItem, setDefaultJob
 })(JobsContainer);
+/*
+jobs={this.props.jobs}
+ */

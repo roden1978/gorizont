@@ -2,6 +2,7 @@ import React from 'react';
 import {getPhotos, getPhotoWithUrl, changeClicked, getUrl} from '../../redux/actions/photosActions';
 import {connect} from "react-redux";
 import PhotoAlbum from "./PhotoAlbum";
+import Spinner from "../../common/Spinner";
 
 class PhotoAlbumContainer extends React.Component {
 
@@ -24,17 +25,17 @@ class PhotoAlbumContainer extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.photosWithUrl.length = 0;
+        this.props.cards.length = 0;
         this.props.photos.length = 0;
     }
 
     render() {
-    //debugger
-        return (<PhotoAlbum cards={this.props.photosWithUrl}
-                            isClicked={this.props.isClicked}
-                            url={this.props.url}
-                            changeClicked={this.props.changeClicked}
-                            getUrl={this.props.getUrl}/>)
+        //debugger
+        return (
+            <>
+                {this.props.cards.length === 0 ? <Spinner/> : null}
+                <PhotoAlbum {...this.props}/>
+            </>)
     }
 }
 
@@ -43,7 +44,7 @@ class PhotoAlbumContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         photos: state.photos.photos,
-        photosWithUrl: state.photos.photosWithUrl,
+        cards: state.photos.photosWithUrl,
         isClicked: state.photos.isClicked,
         url: state.photos.url
     }
@@ -53,3 +54,11 @@ let mapStateToProps = (state) => {
 /*Двойные скобки обозначют что мы вызвали фукцию connect, а она
 * в свою очередь возвращает нам фукцию во вторых скобках*/
 export default connect(mapStateToProps, {getPhotos, getPhotoWithUrl, changeClicked, getUrl})(PhotoAlbumContainer);
+
+/*
+ cards={this.props.photosWithUrl}
+                            isClicked={this.props.isClicked}
+                            url={this.props.url}
+                            changeClicked={this.props.changeClicked}
+                            getUrl={this.props.getUrl}
+ */

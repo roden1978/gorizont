@@ -1,22 +1,20 @@
 import React from 'react'
-import styles from './Content.module.css'
+import {useStyles} from './ContentStyles';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import ProjectsContainer from "../Projects/ProjectsContainer";
 import JobsContainer from "../Jobs/JobsContainer";
 import ContactsContainer from "../Contacts/ContactsContainer";
 import AboutUsContainer from "../AboutUs/AboutUsContainer";
 import Admin from "../Admin/Admin";
-//import Login from "../Admin/Admin";
 import Users from "../Users/UsersContainer";
 import NewsContainer from "../News/NewsContainer";
 import GalleryContainer from "../Gallery/GalleryContainer";
 import PhotoAlbumContainer from "../PhotoAlbum/PhotoAlbumContainer";
-//import Auth from "../Auth/Auth";
-//import Login from "../Auth/Login";
 
-const Content = (props) => {
+const Content = () => {
+    const classes = useStyles();
     return (
-        <div className={styles.content}>
+        <div className={classes.content}>
             <Switch>
                 <Route exact path='/'
                        render={() => <Redirect from='/' to='/news'/>}/>
@@ -37,13 +35,3 @@ const Content = (props) => {
 }
 
 export default withRouter(Content)
-
-/*
-                <Route exact path='/admin/create' component={Create}/>
-                <Route exact path='/admin/update' component={Update}/>
-                <Route exact path='/admin/delete' component={Delete}/>
-                <Route path='/auth'
-                       render={() => <Auth/>}/>
-                <Route path='/login'
-                       render={() => <Login/>}/>
-* */

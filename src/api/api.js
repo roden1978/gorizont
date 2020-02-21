@@ -328,6 +328,21 @@ export const mongodbAPI = {
             .catch(err =>
                 console.log(err)
             )
+    },
+    checkUser(userData) {
+        //debugger
+        return instance.post('/api/users/login', userData)
+            .then(response => {
+                if (response.data) {
+                    return response.data;
+                }
+                else{
+                    return false;
+                }
+            })
+            .catch(err =>
+                console.log(err)
+            )
     }
 }
 
@@ -364,56 +379,3 @@ export const flickrAPI = {
             )
     }
 }
-
-export const authAPI = {
-    checkUser(userData) {
-        //debugger
-        return instance.post('/api/users/login', userData)
-            .then(response => {
-                //return response.data;
-                //return console.log(response.data)
-                if (response.data) {
-                    return response.data;
-                }
-                else{
-                    return false;
-                }
-            })
-            .catch(err =>
-                console.log(err)
-            )
-    },
-    ///////////////////////
-  /*  authorizeAuth0() {
-        auth.authorize();
-    },
-
-    handleAuthentication() {
-        return new Promise((resolve, reject) => {
-                auth.parseHash((err, authResult) => {
-                    if (authResult && authResult.accessToken) {
-                        resolve(true);
-                    } else if (err) {
-                        console.log(err);
-                    }
-                })
-            }
-        )
-    },
-
-    logout() {
-        auth.logout();
-    }*/
-
-}
-
-/* checkUser(userData){
-        debugger
-        return instance.post('/api/users/login',userData)
-                .then(response => {
-                    return response.data;
-                })
-                .catch(err =>
-                    console.log(err)
-                )
-    },*/

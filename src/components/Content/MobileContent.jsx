@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './Content.module.css'
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import ProjectsContainer from "../Projects/ProjectsContainer";
 import JobsContainer from "../Jobs/JobsContainer";
@@ -8,10 +7,12 @@ import AboutUsContainer from "../AboutUs/AboutUsContainer";
 import NewsContainer from "../News/NewsContainer";
 import GalleryContainer from "../Gallery/GalleryContainer";
 import PhotoAlbumContainer from "../PhotoAlbum/PhotoAlbumContainer";
+import {useStyles} from "./ContentStyles";
 
-const MobileContent = (props) => {
+const MobileContent = () => {
+    const classes = useStyles();
     return (
-        <div className={styles.mobileContent}>
+        <div className={classes.mobileContent}>
             <Switch>
                 <Route exact path='/'
                        render={() => <Redirect from='/' to='/job'/>}/>
