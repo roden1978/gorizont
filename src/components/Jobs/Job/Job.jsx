@@ -85,8 +85,10 @@ const Job = (props) => {
     return (
         <Grid item xs={xs} sm={sm}>
             <Card className={classes.card}>
-                <CardHeader title={props.title}
-                            className={classes.title}
+                <CardHeader title={!props.status && props.adminMode ? props.title + " (срытый)" :props.title}
+                            className={clsx(classes.title, {
+                                [classes.titleHidden]: !props.status && props.adminMode,
+                            })}
                             subheader={
                                 <Typography variant="body1" color="textSecondary" gutterBottom>
                                     {props.company}

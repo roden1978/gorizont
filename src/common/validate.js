@@ -1,7 +1,7 @@
 export const validate = (values) => {
     const errors = {}
     const requiredFields = [
-        'title', 'text', 'description', 'project', 'price','company',
+        'title', 'text', 'description', 'price','company',
         'companyName', 'companyAddress', 'companyPhone', 'companyEmail',
         'email', 'password','firstName', 'lastName', 'confPassword', 'password'
     ]
@@ -49,7 +49,9 @@ export const validate = (values) => {
             errors[confPassword] = "Пароли не совпадают"
         /!*console.log(values['confPassword'])
         console.log(values[pass])*!/
-    })*/
+    })
+     'project'
+    */
 
     if(values[reqPassword] !== values[confPassword])
         errors[confPassword] = "Пароли не совпадают"

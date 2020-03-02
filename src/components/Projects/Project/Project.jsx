@@ -35,6 +35,12 @@ export const useStyles = makeStyles(theme => ({
             'linear-gradient(to bottom, #4e69a2, #3b5998 50%)', //#0d47a1 #1976d2
         color: '#ffffff',
     },
+    titleHidden: {
+        fontSize: 16,
+        background:
+            'linear-gradient(to bottom, #a24e4e, #983b3b 50%)',
+        color: '#FFFFFF',
+    },
     pos: {
         marginLeft: 12,
         fontSize: 14,
@@ -127,8 +133,10 @@ const Project = (props) => {
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
-                <CardHeader title={props.title}
-                            className={classes.title}
+                <CardHeader title={!props.status && props.adminMode ? props.title + " (срытый)" :props.title}
+                            className={clsx(classes.title, {
+                                [classes.titleHidden]: !props.status && props.adminMode,
+                            })}
                             avatar={
                                 <Avatar className={classes.avatar}>
                                     <img className={classes.katok} src={samosvalIcon} alt="Работа"/>

@@ -14,6 +14,12 @@ export const useStyles = makeStyles(theme => ({
             'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',
         color: '#FFFFFF',
     },
+    titleHidden: {
+        fontSize: 16,
+        background:
+            'linear-gradient(to bottom, #a24e4e, #983b3b 50%)',
+        color: '#FFFFFF',
+    },
     pos: {
         marginLeft: 12,
     },

@@ -51,7 +51,7 @@ class ProjectsContainer extends React.Component {
         }
 
         if (this.props.isAllProjects && !this.props.adminMode) {
-            this.props.getAllProjects();
+            this.props.getProjects();
             this.props.setIsAllProjects(false);
         }
         if (this.props.projects.length === 0) {

@@ -32,8 +32,10 @@ const NewsItem = (props) => {
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
-                <CardHeader title={props.title}
-                            className={classes.title}
+                <CardHeader title={!props.status && props.adminMode ? props.title + " (срытый)" :props.title}
+                            className={clsx(classes.title, {
+                                [classes.titleHidden]: !props.status && props.adminMode,
+                            })}
                             avatar={
                                 <Avatar className={classes.avatar}>
                                     <img className={classes.katok} src={katokIcon} alt="Новости"/>
@@ -49,12 +51,12 @@ const NewsItem = (props) => {
                     </>
                 </CardContent>
                 <CardActions>
-                    <Typography className={classes.pos} variant="body2" color="textPrimary">
-                        Проект:
-                    </Typography>
-
-                    <NavLink to={'/projects/' + props.project}
-                             className={classes.link}>{props.projectTitle}</NavLink>
+                    {props.project ? <> <Typography className={classes.pos} variant="body2" color="textPrimary">
+                            Проект:
+                        </Typography>
+                        <NavLink to={'/projects/' + props.project}
+                        className={classes.link}>{props.projectTitle}</NavLink> </>:
+                        null}
                 </CardActions>
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
                     {createAt.format('LL')}
@@ -124,13 +126,19 @@ const AdminPanelNews = (props) => {
     };
 
     const showResults = (values) => {
-        const position = values.project.indexOf('|', 0);
-        let id, title;
-        if (position > 0) {
-            id = values.project.slice(0, position);
-            title = values.project.slice(position + 1);
-            values.project = id;
-            values.projectTitle = title.trim();
+        if(values.project){
+            const position = values.project.indexOf('|', 0);
+            let id, title;
+            if (position > 0) {
+                id = values.project.slice(0, position);
+                title = values.project.slice(position + 1);
+                values.project = id;
+                values.projectTitle = title.trim();
+            }
+        }
+        else{
+            values.project = '';
+            values.projectTitle = '';
         }
 
         if (expandedEdit) {
@@ -318,7 +326,7 @@ const EditNewsForm = (props) => {
                                     <option value={props.project} label={props.projectTitle}/>
                                     <option value=''/>
                                 </> :
-                                <option value=''/>}
+                                <option value='null'/>}
                             {projectsItems}
                         </Field>
                     </div>
