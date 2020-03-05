@@ -1,7 +1,7 @@
 import {
     SET_NEWS, LOAD_PROJECTS, CHANGE_NEWS_ITEM,
     IS_ALL_NEWS, SET_NEWS_ITEM, SET_CURRENT_NEWS_ID,
-    SET_NEWS_COUNT, SET_DEFAULT_NEWS
+    SET_NEWS_COUNT, SET_DEFAULT_NEWS, SET_PROJECT_ID_FOR_REDIRECT
 } from "../actions/types";
 
 let initialState = {
@@ -10,7 +10,8 @@ let initialState = {
     getNewsItem: false,
     isAllNews: false,
     currentNewsId: null,
-    newsCount: null
+    newsCount: null,
+    projectIdForRedirect: null
 }
 
 const news_reducer = (state = initialState, action) => {
@@ -65,6 +66,11 @@ const news_reducer = (state = initialState, action) => {
                     text: '!!!ВНИМАНИЕ!!! Перед созданием новостей должен быть создан хотя бы один проект, ' +
                         'если созданная новость не отобразилась обновите страницу.',
                     project: '', projectTitle: '', status: true}]
+            }
+        }
+        case SET_PROJECT_ID_FOR_REDIRECT :{
+            return{
+                ...state, projectIdForRedirect: action.payload
             }
         }
         default:

@@ -7,8 +7,12 @@ import {
     SET_NEWS_ITEM,
     SET_CURRENT_NEWS_ID,
     SET_NEWS_COUNT,
-    SET_DEFAULT_NEWS
+    SET_DEFAULT_NEWS,
+    SET_PROJECT_ID_FOR_REDIRECT
 } from "../actions/types";
+import React from "react";
+
+//const history = useHistory();
 
 /*Создаем объект action с обязательным свойством type*/
 export const setNews = (news) => {
@@ -63,6 +67,15 @@ export const deleteNews = (id) =>{
     }
 }
 
+export const checkProject=(id) =>{
+    return async (dispatch) =>{
+        const data = await mongodbAPI.getProject(id);
+        if (data) {
+            dispatch(setProjectIdForRedirect(data._id))
+        }
+    }
+}
+
 export const setLoadProjects = (loadProjects) =>{
     return{
         type: LOAD_PROJECTS,
@@ -106,5 +119,12 @@ export const  setNewsCount = (count) =>{
 export const setDefaultNews = () =>{
     return{
         type: SET_DEFAULT_NEWS
+    }
+}
+
+export const  setProjectIdForRedirect = (id) =>{
+    return {
+        type: SET_PROJECT_ID_FOR_REDIRECT,
+        payload: id
     }
 }

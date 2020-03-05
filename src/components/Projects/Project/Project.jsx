@@ -1,4 +1,5 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 import samosvalIcon from '../../../assets/icons/samosval.svg'
@@ -14,7 +15,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import {Link} from "react-router-dom";
 import moment from "moment";
 import 'moment/locale/ru'
 import Tooltip from "@material-ui/core/Tooltip";
@@ -105,6 +105,7 @@ export const useStyles = makeStyles(theme => ({
 const Project = (props) => {
     debugger
     const classes = useStyles();
+    const history = useHistory();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -129,6 +130,20 @@ const Project = (props) => {
 
     let createAt = moment(props.createAt);
     createAt.locale('ru');
+
+    const redirect =(id)=>{
+        const path = '/album/' + id
+        history.push(path);
+    }
+
+    if(props.albumIdForRedirect){
+        props.setAlbumIdForRedirect(null);
+        redirect(props.albumId);
+    }
+
+    const checkAlbum = () =>{
+        props.checkAlbum(props.albumId)
+    }
 
     return (
         <Grid item xs={10}>
@@ -156,8 +171,7 @@ const Project = (props) => {
                                 Полный фотоотчет
                             </Typography>
                             <Tooltip title="Открыть фотоальбом" placement={'top'} arrow>
-                                <IconButton aria-label="Фотоальбом"
-                                            component={Link} to={'/album/' + props.albumId}>
+                                <IconButton aria-label="Фотоальбом" onClick={checkAlbum}>
                                     <PhotoLibraryOutlinedIcon/>
                                 </IconButton>
                             </Tooltip>

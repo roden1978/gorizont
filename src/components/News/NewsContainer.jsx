@@ -11,7 +11,9 @@ import {
     getAllNews,
     setIsAllNews,
     setNewsCount,
-    setDefaultNews
+    setDefaultNews,
+    checkProject,
+    setProjectIdForRedirect
 } from '../../redux/actions/newsActions';
 import {getProjects} from "../../redux/actions/projectsActions";
 import News from "./News";
@@ -67,7 +69,8 @@ let mapStateToProps = (state) => {
         getNewsItem: state.news.getNewsItem,
         currentNewsId: state.news.currentNewsId,
         newsCount: state.news.newsCount,
-        adminMode: state.auth.adminMode
+        adminMode: state.auth.adminMode,
+        projectIdForRedirect: state.news.projectIdForRedirect
     }
 };
 
@@ -78,7 +81,8 @@ export default connect(mapStateToProps,
     {   getNews, getProjects, setLoadProjects,
         setNewsItem, setChangeNewsItem, setIsAllNews,
         setCurrentNewsId, createNews, updateNews, getAllNews,
-        deleteNews, setNewsCount, setDefaultNews
+        deleteNews, setNewsCount, setDefaultNews, checkProject,
+        setProjectIdForRedirect
     })(NewsContainer);
 
 /*

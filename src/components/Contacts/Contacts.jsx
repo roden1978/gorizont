@@ -25,55 +25,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-/*const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        flexWrap: 'wrap'
-    },
-    pos: {
-        paddingBottom: 20,
-        paddingTop: 20,
-    },
-    cardGrid: {
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(8),
-    },
-    title: {
-        fontSize: 16,
-        background:
-            'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',//#0d47a1
-        color: '#FFFFFF',
-    },
-    adminPanel: {
-        border: '2px solid grey',
-        backgroundColor: '#e9ecf4'
-    },
-    buttonSubmit: {
-        margin: 10,
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        backgroundColor: '#f5f6f7',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    media: {
-        height: 0,
-        paddingTop: '52.6%', // 16:9
-    },
-    table: {
-        minWidth: 200
-    },
-    fnt:{
-        fontSize: 8
-    }
-}));*/
-
 const Contacts = (props) => {
     const classes = useStyles();
 //debugger
@@ -89,86 +40,101 @@ const Contacts = (props) => {
                     className={classes.pos}
                 >
                     <Grid item xs={!props.adminMode && !props.mobile ? 5 : 10}>
-                        <Card>
-                            <CardHeader title="Контакты"
-                                        className={classes.title}/>
-                            <CardContent>
-                                <TableContainer component={Paper}>
-                                    <Table className={classes.table} aria-label="simple table">
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className={props.mobile ? classes.fnt :''} align="right"
-                                                           component="th" scope="row">Наименование</TableCell>
-                                                <TableCell className={props.mobile ? classes.fnt :''}
-                                                    align="left">{props.contacts.length === 0 ? '' :
-                                                    props.contacts[0].companyName}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Адрес</TableCell>
-                                                <TableCell className={props.mobile ? classes.fnt :''}
-                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyAddress}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Электронная почта</TableCell>
-                                                <TableCell className={props.mobile ? classes.fnt :''}
-                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyEmail}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th" scope="row">Телефон</TableCell>
-                                                <TableCell className={props.mobile ? classes.fnt :''}
-                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyPhone}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                {props.contacts.length !== 0 && props.contacts[0].phoneOwner01 !== '' && props.contacts[0].phone01  !== '' ? <>
-                                                        <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
-                                                                   scope="row">{props.contacts[0].phoneOwner01}</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt :''}
-                                                            align="left">{props.contacts[0].phone01}</TableCell>
-                                                    </>
-                                                    : null}
-                                            </TableRow>
-                                            <TableRow>
-                                                {props.contacts.length !== 0 && props.contacts[0].phoneOwner02 !== '' && props.contacts[0].phone02  !== '' ? <>
-                                                        <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
-                                                                   scope="row">{props.contacts[0].phoneOwner02}</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt :''}
-                                                            align="left">{props.contacts[0].phone02}</TableCell>
-                                                    </>
-                                                    : null}
-                                            </TableRow>
-                                            <TableRow>
-                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner03 !== '' && props.contacts[0].phone03  !== '' ? <>
-                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
-                                                               scope="row">{props.contacts[0].phoneOwner03}</TableCell>
-                                                    <TableCell className={props.mobile ? classes.fnt :''}
-                                                        align="left">{props.contacts[0].phone03}</TableCell>
-                                                </>
-                                                : null}
-                                        </TableRow>
-                                            <TableRow>
-                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner04 !== '' && props.contacts[0].phone04  !== '' ? <>
-                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
-                                                               scope="row">{props.contacts[0].phoneOwner04}</TableCell>
-                                                    <TableCell className={props.mobile ? classes.fnt :''}
-                                                        align="left">{props.contacts[0].phone04}</TableCell>
-                                                </>
-                                                : null}
-                                        </TableRow>
-                                            <TableRow>
-                                            {props.contacts.length !== 0 && props.contacts[0].phoneOwner05 !== '' && props.contacts[0].phone05  !== '' ? <>
-                                                    <TableCell className={props.mobile ? classes.fnt :''} align="right" component="th"
-                                                               scope="row">{props.contacts[0].phoneOwner05}</TableCell>
-                                                    <TableCell className={props.mobile ? classes.fnt :''}
-                                                        align="left">{props.contacts[0].phone05}</TableCell>
-                                                </>
-                                                : null}
-                                        </TableRow>
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </CardContent>
-                            {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
-                        </Card>
+                        {props.contacts.length !== 0 ?
+                            <>
+                                <Card>
+                                    <CardHeader title="Контакты"
+                                                className={classes.title}/>
+                                    <CardContent>
+                                        <TableContainer component={Paper}>
+                                            <Table className={classes.table} aria-label="simple table">
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="right"
+                                                                   component="th" scope="row">Наименование</TableCell>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="left">{props.contacts.length === 0 ? '' :
+                                                            props.contacts[0].companyName}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="right" component="th"
+                                                                   scope="row">Адрес</TableCell>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyAddress}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="right" component="th" scope="row">Электронная
+                                                            почта</TableCell>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyEmail}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="right" component="th"
+                                                                   scope="row">Телефон</TableCell>
+                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                   align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyPhone}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        {props.contacts.length !== 0 && props.contacts[0].phoneOwner01 !== '' && props.contacts[0].phone01 !== '' ? <>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="right" component="th"
+                                                                           scope="row">{props.contacts[0].phoneOwner01}</TableCell>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="left">{props.contacts[0].phone01}</TableCell>
+                                                            </>
+                                                            : null}
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        {props.contacts.length !== 0 && props.contacts[0].phoneOwner02 !== '' && props.contacts[0].phone02 !== '' ? <>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="right" component="th"
+                                                                           scope="row">{props.contacts[0].phoneOwner02}</TableCell>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="left">{props.contacts[0].phone02}</TableCell>
+                                                            </>
+                                                            : null}
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        {props.contacts.length !== 0 && props.contacts[0].phoneOwner03 !== '' && props.contacts[0].phone03 !== '' ? <>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="right" component="th"
+                                                                           scope="row">{props.contacts[0].phoneOwner03}</TableCell>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="left">{props.contacts[0].phone03}</TableCell>
+                                                            </>
+                                                            : null}
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        {props.contacts.length !== 0 && props.contacts[0].phoneOwner04 !== '' && props.contacts[0].phone04 !== '' ? <>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="right" component="th"
+                                                                           scope="row">{props.contacts[0].phoneOwner04}</TableCell>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="left">{props.contacts[0].phone04}</TableCell>
+                                                            </>
+                                                            : null}
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        {props.contacts.length !== 0 && props.contacts[0].phoneOwner05 !== '' && props.contacts[0].phone05 !== '' ? <>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="right" component="th"
+                                                                           scope="row">{props.contacts[0].phoneOwner05}</TableCell>
+                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                           align="left">{props.contacts[0].phone05}</TableCell>
+                                                            </>
+                                                            : null}
+                                                    </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </CardContent>
+                                    {props.adminMode ? <AdminPanelContacts  {...props}/> : ''}
+                                </Card>
+                            </> : null}
                     </Grid>
                     {!props.adminMode && !props.mobile ? <>
                         <Grid item xs={5}>

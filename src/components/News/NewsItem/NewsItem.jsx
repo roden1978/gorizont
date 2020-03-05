@@ -1,5 +1,6 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
+//import {NavLink} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 import {useStyles} from './NewsStyles'
 import Grid from "@material-ui/core/Grid";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -21,18 +22,34 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
 import {validate} from '../../../common/validate'
+//import {setProjectIdForRedirect} from "../../../redux/actions/newsActions";
 
 const NewsItem = (props) => {
     const classes = useStyles();
+    const history = useHistory();
     //debugger
     let createAt = moment(props.createAt);
+
+    const redirect =(id)=>{
+        const path = '/projects/' + id
+        history.push(path);
+    }
+
+    if(props.projectIdForRedirect){
+        props.setProjectIdForRedirect(null);
+        redirect(props.project);
+    }
+
+    const checkPrj = () =>{
+        props.checkProject(props.project)
+    }
 
     createAt.locale('ru');
     //console.log(createAt.format('LL'));
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
-                <CardHeader title={!props.status && props.adminMode ? props.title + " (срытый)" :props.title}
+                <CardHeader title={!props.status && props.adminMode ? props.title + " (срытый)" : props.title}
                             className={clsx(classes.title, {
                                 [classes.titleHidden]: !props.status && props.adminMode,
                             })}
@@ -51,11 +68,14 @@ const NewsItem = (props) => {
                     </>
                 </CardContent>
                 <CardActions>
-                    {props.project ? <> <Typography className={classes.pos} variant="body2" color="textPrimary">
-                            Проект:
-                        </Typography>
-                        <NavLink to={'/projects/' + props.project}
-                        className={classes.link}>{props.projectTitle}</NavLink> </>:
+                    {props.project ? <>
+                            <Button color="primary" href="#outlined-buttons" onClick={checkPrj}>
+                                Обзор проекта
+                            </Button>
+                            <Typography className={classes.pos} variant="body2" color="textPrimary">
+                                {props.projectTitle}
+                            </Typography>
+                        </> :
                         null}
                 </CardActions>
                 <Typography className={classes.pos} variant="body2" color="textSecondary" gutterBottom>
@@ -69,7 +89,10 @@ const NewsItem = (props) => {
         </Grid>
     );
 }
-
+/*
+ <NavLink to={'/projects/' + props.project}
+                        className={classes.link}>{props.projectTitle}</NavLink>
+ */
 export default NewsItem;
 
 const AdminPanelNews = (props) => {
@@ -126,7 +149,7 @@ const AdminPanelNews = (props) => {
     };
 
     const showResults = (values) => {
-        if(values.project){
+        if (values.project) {
             const position = values.project.indexOf('|', 0);
             let id, title;
             if (position > 0) {
@@ -135,8 +158,7 @@ const AdminPanelNews = (props) => {
                 values.project = id;
                 values.projectTitle = title.trim();
             }
-        }
-        else{
+        } else {
             values.project = '';
             values.projectTitle = '';
         }
@@ -341,7 +363,7 @@ const EditNewsForm = (props) => {
             </div>
             <div>
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" type="submit"
-                        disabled={pristine || submitting }>
+                        disabled={pristine || submitting}>
                     Отправить
                 </Button>
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" type="button"

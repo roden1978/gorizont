@@ -10,7 +10,8 @@ import {
     LOAD_ALBUMS,
     SET_DEFAULT_PROJECT,
     SET_PROJECTS_PHOTOS,
-    SET_URL_TO_PROJECTS_PHOTOS
+    SET_URL_TO_PROJECTS_PHOTOS,
+    SET_ALBUM_ID_FOR_REDIRECT
 } from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -92,6 +93,12 @@ export const setUrlToPhotos = (photo, card) => {
         card: card
     }
 }
+export const  setAlbumIdForRedirect = (id) =>{
+    return {
+        type: SET_ALBUM_ID_FOR_REDIRECT,
+        payload: id
+    }
+}
 
 /*Thunk Creators*/
 /**
@@ -167,5 +174,14 @@ export const getPhotoWithUrl = (id, card) => {
     return async (dispatch) => {
         const photo = await flickrAPI.getPhoto(id);
         dispatch(setUrlToPhotos(photo, card));
+    }
+}
+
+export const checkAlbum = (id) =>{
+    return async (dispatch) =>{
+        const data = await flickrAPI.getPhotos(id);
+        if (data) {
+            dispatch(setAlbumIdForRedirect(data.photoset.id))
+        }
     }
 }

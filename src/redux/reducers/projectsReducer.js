@@ -9,7 +9,7 @@ import {
     SET_PROJECTS_COUNT,
     SET_DEFAULT_PROJECT,
     SET_PROJECTS_PHOTOS,
-    SET_URL_TO_PROJECTS_PHOTOS
+    SET_URL_TO_PROJECTS_PHOTOS, SET_ALBUM_ID_FOR_REDIRECT
 } from "../actions/types";
 
 let initialState = {
@@ -21,7 +21,8 @@ let initialState = {
     loadAlbums: false,
     getProjectsItem: false,
     isAllProjects: false,
-    projectsCount: null
+    projectsCount: null,
+    albumIdForRedirect: null
 }
 
 const projects_reducer = (state = initialState, action) => {
@@ -101,6 +102,11 @@ const projects_reducer = (state = initialState, action) => {
                 photosWithUrl: [...state.photosWithUrl, {...action.card, url: size.source}]
             }
 
+        }
+        case SET_ALBUM_ID_FOR_REDIRECT :{
+            return{
+                ...state, albumIdForRedirect: action.payload
+            }
         }
         default:
             return state;

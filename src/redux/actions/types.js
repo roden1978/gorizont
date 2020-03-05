@@ -6,6 +6,7 @@ export const IS_ALL_NEWS = 'IS_ALL_NEWS';
 export const SET_CURRENT_NEWS_ID = 'SET_CURRENT_NEWS_ID';
 export const SET_NEWS_COUNT = 'SET_NEWS_COUNT';
 export const SET_DEFAULT_NEWS = 'SET_DEFAULT_NEWS';
+export const SET_PROJECT_ID_FOR_REDIRECT = 'SET_PROJECT_ID_FOR_REDIRECT';
 
 //Проекты
 export const SET_PROJECTS = 'SET_PROJECTS';
@@ -21,6 +22,7 @@ export const SET_DEFAULT_PROJECT = 'SET_DEFAULT_PROJECT';
 ////////////////////////////
 export const SET_PROJECTS_PHOTOS = 'SET_PROJECTS_PHOTOS';
 export const SET_URL_TO_PROJECTS_PHOTOS = 'SET_URL_TO_PROJECTS_PHOTOS';
+export const SET_ALBUM_ID_FOR_REDIRECT = 'SET_ALBUM_ID_FOR_REDIRECT';
 
 //Объявления
 export const SET_JOBS = 'SET_JOBS';
