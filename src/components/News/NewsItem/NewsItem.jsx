@@ -22,6 +22,8 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
 import {validate} from '../../../common/validate'
+//import PhotoLibraryOutlinedIcon from "@material-ui/icons/PhotoLibraryOutlined";
+import FolderIcon from '@material-ui/icons/Folder';
 //import {setProjectIdForRedirect} from "../../../redux/actions/newsActions";
 
 const NewsItem = (props) => {
@@ -69,9 +71,14 @@ const NewsItem = (props) => {
                 </CardContent>
                 <CardActions>
                     {props.project ? <>
-                            <Button color="primary" href="#outlined-buttons" onClick={checkPrj}>
+                            <Typography variant="body2" color="textPrimary">
                                 Обзор проекта
-                            </Button>
+                            </Typography>
+                            <Tooltip title="Открыть проект" placement={'top'} arrow>
+                                <IconButton aria-label="Проект" onClick={checkPrj}>
+                                    <FolderIcon color="primary"/>
+                                </IconButton>
+                            </Tooltip>
                             <Typography className={classes.pos} variant="body2" color="textPrimary">
                                 {props.projectTitle}
                             </Typography>
@@ -92,6 +99,10 @@ const NewsItem = (props) => {
 /*
  <NavLink to={'/projects/' + props.project}
                         className={classes.link}>{props.projectTitle}</NavLink>
+
+                         <Button color="primary" href="#outlined-buttons" onClick={checkPrj}>
+                                Обзор проекта
+                            </Button>
  */
 export default NewsItem;
 

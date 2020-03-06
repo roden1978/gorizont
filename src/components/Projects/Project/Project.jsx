@@ -172,7 +172,7 @@ const Project = (props) => {
                             </Typography>
                             <Tooltip title="Открыть фотоальбом" placement={'top'} arrow>
                                 <IconButton aria-label="Фотоальбом" onClick={checkAlbum}>
-                                    <PhotoLibraryOutlinedIcon/>
+                                    <PhotoLibraryOutlinedIcon color="primary"/>
                                 </IconButton>
                             </Tooltip>
                         </>
