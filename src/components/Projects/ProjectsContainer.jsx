@@ -16,9 +16,12 @@ class ProjectsContainer extends React.Component {
         if (this.props.match.params.projectId) {
             this.props.getProject(this.props.match.params.projectId);
             this.props.getId(this.props.match.params.projectId);
+            this.props.getPhotosets();
         } else {
-            if (this.props.adminMode)
+            if (this.props.adminMode){
                 this.props.getAllProjects();
+            this.props.getPhotosets();
+            }
             else {
                 this.props.getProjects();
                 this.props.getPhotosets();
@@ -58,7 +61,7 @@ class ProjectsContainer extends React.Component {
             this.props.setDefaultProject();
         }
         //////////////////////////////////
-        debugger
+        //debugger
         if (prevProps.albums.length === 0 && this.props.albums.length > 0) {
             this.props.albums.every((album) => this.props.getPhotos(album.id))
         }

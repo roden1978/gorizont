@@ -103,7 +103,7 @@ export const useStyles = makeStyles(theme => ({
 }));
 
 const Project = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
     const history = useHistory();
     const [expanded, setExpanded] = React.useState(false);

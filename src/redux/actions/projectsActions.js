@@ -153,7 +153,7 @@ export const updateProject = (id, title, description, text, albumId, albumName, 
 }
 
 export const deleteProject = (id) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.deleteProject({id});
         if (data.resultCode === 0) {
@@ -163,7 +163,7 @@ export const deleteProject = (id) =>{
 }
 
 export const getPhotos = (id) => {
-    debugger
+    //debugger
     return async (dispatch) => {
         const photos = await flickrAPI.getPhotos(id);
         dispatch(setProjectsPhotos(id, photos));
