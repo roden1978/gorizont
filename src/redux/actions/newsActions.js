@@ -10,9 +10,6 @@ import {
     SET_DEFAULT_NEWS,
     SET_PROJECT_ID_FOR_REDIRECT
 } from "../actions/types";
-import React from "react";
-
-//const history = useHistory();
 
 /*Создаем объект action с обязательным свойством type*/
 export const setNews = (news) => {
