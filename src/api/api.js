@@ -112,7 +112,7 @@ export const mongodbAPI = {
     },
     //Обновить проект
     updateProject(projectData) {
-        debugger
+        //debugger
         return instance.post('/api/projects/upd', projectData)
             .then(response => {
                 return response.data;
@@ -247,7 +247,7 @@ export const mongodbAPI = {
     },
     //Создать о нас
     createAbout(aboutData) {
-        debugger
+        //debugger
         return instance.post('/api/about/', aboutData)
             .then(response => {
                 return response.data;

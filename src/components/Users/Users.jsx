@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Users = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
 
     let usersItems = props.users.map(

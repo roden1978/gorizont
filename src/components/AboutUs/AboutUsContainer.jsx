@@ -15,7 +15,7 @@ class AboutUsContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+        //debugger
         if (this.props.isChangedAbout) {
             setTimeout(null, 2000);
             this.props.getAbout();

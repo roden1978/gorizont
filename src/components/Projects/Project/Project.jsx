@@ -233,7 +233,7 @@ const Project = (props) => {
 export default Project;
 
 const AdminPanelProjects = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
@@ -268,7 +268,7 @@ const AdminPanelProjects = (props) => {
     };
 
     const handleDeleteExpandClick = () => {
-        debugger
+        //debugger
         props.setProjectsCount(props.count);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
@@ -390,7 +390,7 @@ const AdminPanelProjects = (props) => {
 }
 
 const setInitialData = (props, reset, expandedDelete) => {
-    debugger
+    //debugger
     if (reset) {
         initialData.id = null;
         initialData.title = '';
@@ -432,7 +432,7 @@ const EditProjectsForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset, classes, albums} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
 
     let albumsItem = albums.map(
         album => <option key={album.id} value={`${album.id}| ${album.description._content}`}

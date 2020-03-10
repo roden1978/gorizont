@@ -63,7 +63,7 @@ const users_reducer = (state = initialState, action) => {
             }
         }
         case SET_ADMIN_ROOT_COUNT :{
-            debugger
+            //debugger
             return{
                 ...state, adminRootCount: action.payload
             }

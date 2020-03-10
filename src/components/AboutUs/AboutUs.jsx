@@ -64,7 +64,7 @@ const AboutUs = (props) => {
 export default AboutUs;
 
 const AdminPanelAboutUs = (props) => {
-    debugger
+    //debugger
     const classes = useStyles();
     const [expandedEdit, setExpandedEdit] = React.useState(false);
     const [expandedCreate, setExpandedCreate] = React.useState(false);
@@ -80,7 +80,7 @@ const AdminPanelAboutUs = (props) => {
     };
 
     const handleEditExpandClick = () => {
-        debugger
+        //debugger
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
             setInitialData(props);
@@ -166,7 +166,7 @@ const AdminPanelAboutUs = (props) => {
 }
 ////////////////////////////////////////////////////////
 const setInitialData = (props) => {
-    debugger
+    //debugger
     initialData.id = props.about[0]._id;
     initialData.text = props.about[0].text;
 }
@@ -181,7 +181,7 @@ const EditAboutForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
 
 
     if (props.expandedEdit) {

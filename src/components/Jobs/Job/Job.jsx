@@ -80,7 +80,7 @@ const Job = (props) => {
         xs = 12;
         sm = 12;
     }
-    debugger
+    //debugger
 
     return (
         <Grid item xs={xs} sm={sm}>
@@ -166,7 +166,7 @@ const AdminPanelJobs = (props) => {
     };
 
     const handleDeleteExpandClick = () => {
-        debugger
+        //debugger
         props.setJobsCount(props.jobs.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
@@ -281,7 +281,7 @@ const AdminPanelJobs = (props) => {
 }
 
 const setInitialData = (props, reset, expandedDelete) => {
-    debugger
+    //debugger
     if (reset) {
         initialData.id = null;
         initialData.company = '';
@@ -330,7 +330,7 @@ const EditJobsForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
 
     if (props.expandedEdit) {
         pristine = false;

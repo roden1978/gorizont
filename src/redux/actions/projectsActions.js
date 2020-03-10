@@ -133,7 +133,7 @@ export const getAllProjects = () => {
 }
 
 export const createProject = (title, description, text, albumId, albumName, status) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.createProject({title, description, text, albumId, albumName, status});
         if (data.resultCode === 0) {
@@ -143,7 +143,7 @@ export const createProject = (title, description, text, albumId, albumName, stat
 }
 
 export const updateProject = (id, title, description, text, albumId, albumName, status, createAt) =>{
-    debugger
+    //debugger
     return async (dispatch) =>{
         const data = await mongodbAPI.updateProject({id, title, description, text, albumId, albumName, status, createAt});
         if (data.resultCode === 0) {

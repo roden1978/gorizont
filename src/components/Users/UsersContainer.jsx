@@ -30,7 +30,7 @@ class UsersContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-debugger
+//debugger
         if (this.props.getUserItem) {
             this.props.setChangeUsersItem();
             this.props.setUserItem(false);

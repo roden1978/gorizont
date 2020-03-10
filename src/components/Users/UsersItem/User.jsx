@@ -116,7 +116,7 @@ const AdminPanelUsers = (props) => {
     const [expandedDelete, setExpandedDelete] = React.useState(false);
 
     const handleCreateExpandClick = () => {
-        debugger
+        //debugger
 
         setExpandedCreate(!expandedCreate);
 
@@ -146,7 +146,7 @@ const AdminPanelUsers = (props) => {
     };
 
     const handleDeleteExpandClick = () => {
-        debugger
+        //debugger
         props.setUsersCount(props.users.length);
         props.setIsAdminRootCount(true);
         setExpandedDelete(!expandedDelete);
@@ -261,7 +261,7 @@ const AdminPanelUsers = (props) => {
 }
 
 const setInitialData = (props, reset, expandedDelete) => {
-    debugger
+    //debugger
     if (reset) {
         initialData.id = null;
         initialData.firstName = '';
@@ -297,7 +297,7 @@ const EditUsersForm = (props) => {
     const classesStyle = useStyles();
     const {handleSubmit, reset} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
     //console.log(props.val + " " + props.expandedEdit);
 
     /*let projectsItems = projects.map(

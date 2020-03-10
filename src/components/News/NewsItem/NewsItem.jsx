@@ -142,7 +142,7 @@ const AdminPanelNews = (props) => {
     };
 
     const handleDeleteExpandClick = () => {
-        debugger
+        //debugger
         props.setNewsCount(props.news.length);
         setExpandedDelete(!expandedDelete);
         if (!expandedDelete) {
@@ -267,7 +267,7 @@ const AdminPanelNews = (props) => {
 }
 
 const setInitialData = (props, reset, expandedDelete) => {
-    debugger
+    //debugger
     if (reset) {
         initialData.id = null;
         initialData.title = '';
@@ -305,7 +305,7 @@ const EditNewsForm = (props) => {
     const classes = useStyles();
     const {handleSubmit, reset, cls, projects} = props;
     let {pristine, submitting} = props;
-    debugger
+    //debugger
     //console.log(props.val + " " + props.expandedEdit);
 
     let projectsItems = projects.map(

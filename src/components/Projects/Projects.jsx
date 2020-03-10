@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Projects = (props) => {
-    //debugger
+
     const classes = useStyles();
 
     let projectItems = props.projects.map(

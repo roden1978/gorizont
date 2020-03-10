@@ -10,12 +10,12 @@ import Spinner from "../../common/Spinner";
 class ContactsContainer extends React.Component {
 
     componentDidMount() {
-        debugger
+        //debugger
         this.props.getContacts();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+        //debugger
         if (this.props.isChangedContacts) {
             setTimeout(null, 2000);
             this.props.getContacts();
