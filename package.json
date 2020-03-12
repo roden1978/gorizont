@@ -2,6 +2,8 @@
   "name": "gorizont",
   "version": "0.1.0",
   "private": true,
+  "author": "RoDen",
+  "homepage": "http://gt59.ru",
   "dependencies": {
     "@material-ui/core": "^4.9.2",
     "@material-ui/icons": "^4.5.1",
@@ -48,5 +50,6 @@
   },
   "devDependencies": {
     "react-router-dom": "^5.1.2"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
