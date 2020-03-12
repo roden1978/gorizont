@@ -50,6 +50,5 @@
   },
   "devDependencies": {
     "react-router-dom": "^5.1.2"
-  },
-  "proxy": "http://194.58.119.89:5000/"
+  }
 }
