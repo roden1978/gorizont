@@ -1,11 +1,10 @@
 const proxy = require("http-proxy-middleware");
 
 module.exports = function(app) {
-    app.use(
-        proxy('/api', {
-            target: "http://194.58.119.89:5000",
-            changeOrigin: true,
-            secure: false
+    app.use("/api",
+        proxy({
+            target: "http://gt59.ru:5005",
+            changeOrigin: true
         })
     );
 };
@@ -29,5 +28,12 @@ module.exports = function(app) {
             changeOrigin: true
         })
     )
+    *
+    * app.use("/forecast",
+   proxy({
+      target: "https://api.darksky.net/",
+      changeOrigin: true
+   })
+);
 * */
 

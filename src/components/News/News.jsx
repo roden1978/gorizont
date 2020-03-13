@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
-    pos:{
+    pos: {
         paddingBottom: 20,
         paddingTop: 20,
     },
@@ -21,35 +21,36 @@ const useStyles = makeStyles(theme => ({
 const News = (props) => {
     //debugger
     const classes = useStyles();
-
-    let newsItems = props.news.map(
-        newsItem => <NewsItem key={newsItem._id}
-                              {...newsItem}
-                              projects = {props.projects}
-                              setLoadProjects = {props.setLoadProjects}
-                              setNewsItem = {props.setNewsItem}
-                              setIsAllNews = {props.setIsAllNews}
-                              setCurrentNewsId = {props.setCurrentNewsId}
-                              createNews={props.createNews}
-                              updateNews={props.updateNews}
-                              deleteNews={props.deleteNews}
-                              setNewsCount={props.setNewsCount}
-                              newsCount = {props.newsCount}
-            {...props}/>)
+    let newsItems;
+    if (props.news)
+        newsItems = props.news.map(
+            newsItem => <NewsItem key={newsItem._id}
+                                  {...newsItem}
+                                  projects={props.projects}
+                                  setLoadProjects={props.setLoadProjects}
+                                  setNewsItem={props.setNewsItem}
+                                  setIsAllNews={props.setIsAllNews}
+                                  setCurrentNewsId={props.setCurrentNewsId}
+                                  createNews={props.createNews}
+                                  updateNews={props.updateNews}
+                                  deleteNews={props.deleteNews}
+                                  setNewsCount={props.setNewsCount}
+                                  newsCount={props.newsCount}
+                                  {...props}/>)
 
     return (
         <div className={classes.root}>
             <Container className={classes.cardGrid} maxWidth="xl">
-            <Grid
-                container
-                direction="row"
-                justify="space-evenly"
-                alignItems="center"
-                spacing={3}
-                className={classes.pos}
-            >
-                {newsItems}
-            </Grid>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-evenly"
+                    alignItems="center"
+                    spacing={3}
+                    className={classes.pos}
+                >
+                    {newsItems}
+                </Grid>
             </Container>
         </div>
     );

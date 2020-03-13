@@ -23,7 +23,7 @@ import Spinner from "../../common/Spinner";
 class NewsContainer extends React.Component {
 
     componentDidMount() {
-        //debugger
+        debugger
         if (this.props.adminMode)
             this.props.getAllNews();
         else
@@ -45,14 +45,14 @@ class NewsContainer extends React.Component {
             this.props.getAllNews();
             this.props.setIsAllNews(false);
         }
-        if( this.props.news.length === 0){
+        if(this.props.news && this.props.news.length === 0){
             this.props.setDefaultNews();
         }
     }
     render() {
         return (<>
-            {this.props.news.length === 0 ? <Spinner/> : null}
-            <News {...this.props}
+            {!this.props.news ? <Spinner/> : null}
+            <News news = {this.props.news} {...this.props}
         />
         </>)
     }
