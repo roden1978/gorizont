@@ -34,6 +34,7 @@ const Jobs = (props) => {
                 justify="space-evenly"
                 alignItems="center"
                 spacing={3}
+                className={classes.pos}
             >
                     {jobs}
 

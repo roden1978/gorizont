@@ -48,11 +48,11 @@ export const useStyles = makeStyles(theme => ({
     },
     avatar: {
         backgroundColor: '#f5f6f7',
-        width: 50,
-        height: 50
+        width: 35,
+        height: 35
     },
     katok: {
-        width: 40,
+        width: 30,
     },
     card: {
         height: '100%',
@@ -126,19 +126,26 @@ const Project = (props) => {
         setExpanded(false);
         props.getId(null);
         props.setIsAllProjects(true);
+         redirectToProjects();
     };
 
     let createAt = moment(props.createAt);
     createAt.locale('ru');
 
-    const redirect =(id)=>{
+    const redirectToAlbum =(id)=>{
         const path = '/album/' + id
+        history.push(path);
+    }
+
+    const redirectToProjects =()=>{
+       props.setIsAllProjects(false);
+        const path = '/projects'
         history.push(path);
     }
 
     if(props.albumIdForRedirect){
         props.setAlbumIdForRedirect(null);
-        redirect(props.albumId);
+        redirectToAlbum(props.albumId);
     }
 
     const checkAlbum = () =>{
@@ -215,7 +222,7 @@ const Project = (props) => {
                 <Typography className={classes.date} variant="body2" color="textSecondary">
                     Старт проекта: {createAt.format('LL')}
                 </Typography>
-                {props.projects.length === 1 && !props.adminMode ? <>
+                {props.projects.length === 1 ? <>
                     <Tooltip title={"Показать все проекты"} placement={'top'} arrow>
                         <Button size="small" type="button"
                                 onClick={viewAllProjectsClick}>
@@ -229,7 +236,7 @@ const Project = (props) => {
         </Grid>
     );
 }
-
+// && !props.adminMode
 export default Project;
 
 const AdminPanelProjects = (props) => {

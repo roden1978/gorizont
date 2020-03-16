@@ -1,5 +1,4 @@
 import React from 'react'
-//import {NavLink} from "react-router-dom";
 import {useHistory} from 'react-router-dom';
 import {useStyles} from './NewsStyles'
 import Grid from "@material-ui/core/Grid";
@@ -22,9 +21,7 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import {renderTextField, renderCheckbox, renderSelectField} from '../../../common/renderFilds'
 import {validate} from '../../../common/validate'
-//import PhotoLibraryOutlinedIcon from "@material-ui/icons/PhotoLibraryOutlined";
 import FolderIcon from '@material-ui/icons/Folder';
-//import {setProjectIdForRedirect} from "../../../redux/actions/newsActions";
 
 const NewsItem = (props) => {
     const classes = useStyles();

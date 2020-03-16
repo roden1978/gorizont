@@ -23,7 +23,7 @@ import Spinner from "../../common/Spinner";
 class NewsContainer extends React.Component {
 
     componentDidMount() {
-        debugger
+        //debugger
         if (this.props.adminMode)
             this.props.getAllNews();
         else

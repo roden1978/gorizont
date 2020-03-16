@@ -33,6 +33,7 @@ const Projects = (props) => {
                     justify="space-evenly"
                     alignItems="center"
                     spacing={3}
+                    className={classes.pos}
                 >
                     {projectItems}
 

@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     cardGrid: {
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(8),
-    }
+    },
 }));
 
 const News = (props) => {

@@ -53,10 +53,10 @@ class ProjectsContainer extends React.Component {
             setTimeout(null, 2000);
         }
 
-        if (this.props.isAllProjects && !this.props.adminMode) {
+       /* if (this.props.isAllProjects && !this.props.adminMode) {
             this.props.getProjects();
             this.props.setIsAllProjects(false);
-        }
+        }*/
         if (this.props.projects.length === 0) {
             this.props.setDefaultProject();
         }

@@ -9,7 +9,7 @@ export const useStyles = makeStyles(theme => ({
         fontSize: 14,
     },
     title: {
-        fontSize: 16,
+        fontSize: 24,
         background:
             'linear-gradient(to bottom, #4e69a2, #3b5998 50%)',
         color: '#FFFFFF',
@@ -28,11 +28,11 @@ export const useStyles = makeStyles(theme => ({
     },
     avatar: {
         backgroundColor: '#f5f6f7',
-        width: 50,
-        height: 50,
+        width: 35,
+        height: 35,
     },
     katok: {
-        width: 45,
+        width: 30,
     },
     expand: {
         transform: 'rotate(0deg)',
