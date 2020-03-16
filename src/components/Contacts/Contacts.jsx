@@ -50,80 +50,116 @@ const Contacts = (props) => {
                                             <Table className={classes.table} aria-label="simple table">
                                                 <TableBody>
                                                     <TableRow>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="right"
                                                                    component="th" scope="row">Наименование</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                                       [classes.fnt]: props.mobile,
+                                                                   })}
                                                                    align="left">{props.contacts.length === 0 ? '' :
                                                             props.contacts[0].companyName}</TableCell>
                                                     </TableRow>
                                                     <TableRow>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="right" component="th"
                                                                    scope="row">Адрес</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyAddress}</TableCell>
                                                     </TableRow>
                                                     <TableRow>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="right" component="th" scope="row">Электронная
                                                             почта</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyEmail}</TableCell>
                                                     </TableRow>
                                                     <TableRow>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="right" component="th"
                                                                    scope="row">Телефон</TableCell>
-                                                        <TableCell className={props.mobile ? classes.fnt : ''}
+                                                        <TableCell className={clsx('', {
+                                                            [classes.fnt]: props.mobile,
+                                                        })}
                                                                    align="left">{props.contacts.length === 0 ? '' : props.contacts[0].companyPhone}</TableCell>
                                                     </TableRow>
                                                     <TableRow>
                                                         {props.contacts.length !== 0 && props.contacts[0].phoneOwner01 !== '' && props.contacts[0].phone01 !== '' ? <>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="right" component="th"
                                                                            scope="row">{props.contacts[0].phoneOwner01}</TableCell>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="left">{props.contacts[0].phone01}</TableCell>
                                                             </>
                                                             : null}
                                                     </TableRow>
                                                     <TableRow>
                                                         {props.contacts.length !== 0 && props.contacts[0].phoneOwner02 !== '' && props.contacts[0].phone02 !== '' ? <>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="right" component="th"
                                                                            scope="row">{props.contacts[0].phoneOwner02}</TableCell>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="left">{props.contacts[0].phone02}</TableCell>
                                                             </>
                                                             : null}
                                                     </TableRow>
                                                     <TableRow>
                                                         {props.contacts.length !== 0 && props.contacts[0].phoneOwner03 !== '' && props.contacts[0].phone03 !== '' ? <>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="right" component="th"
                                                                            scope="row">{props.contacts[0].phoneOwner03}</TableCell>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="left">{props.contacts[0].phone03}</TableCell>
                                                             </>
                                                             : null}
                                                     </TableRow>
                                                     <TableRow>
                                                         {props.contacts.length !== 0 && props.contacts[0].phoneOwner04 !== '' && props.contacts[0].phone04 !== '' ? <>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="right" component="th"
                                                                            scope="row">{props.contacts[0].phoneOwner04}</TableCell>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="left">{props.contacts[0].phone04}</TableCell>
                                                             </>
                                                             : null}
                                                     </TableRow>
                                                     <TableRow>
                                                         {props.contacts.length !== 0 && props.contacts[0].phoneOwner05 !== '' && props.contacts[0].phone05 !== '' ? <>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="right" component="th"
                                                                            scope="row">{props.contacts[0].phoneOwner05}</TableCell>
-                                                                <TableCell className={props.mobile ? classes.fnt : ''}
+                                                                <TableCell className={clsx('', {
+                                                                    [classes.fnt]: props.mobile,
+                                                                })}
                                                                            align="left">{props.contacts[0].phone05}</TableCell>
                                                             </>
                                                             : null}

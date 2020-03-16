@@ -11,7 +11,7 @@ class ContactsContainer extends React.Component {
 
     componentDidMount() {
         //debugger
-        this.props.getContacts();
+       this.props.getContacts();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -30,7 +30,7 @@ class ContactsContainer extends React.Component {
         return (
             <>
                 {this.props.contacts.length === 0 ? <Spinner/> : null}
-                <Contacts {...this.props}/>
+                <Contacts {...this.props} />
             </>)
     }
 }

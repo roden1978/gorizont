@@ -8,7 +8,6 @@ export const setContacts = (contacts) => {
         payload: contacts
     }
 }
-
 export const setIsChangedContacts = (isChangedContacts) => {
     return {
         type: SET_IS_CHANGED_CONTACTS,
