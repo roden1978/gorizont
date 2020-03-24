@@ -29,18 +29,25 @@ const NewsItem = (props) => {
     //debugger
     let createAt = moment(props.createAt);
 
-    const redirect =(id)=>{
+    /*const redirect =(id)=>{
+        props.setProjectIdForRedirect(null);
         const path = '/projects/' + id
         history.push(path);
-    }
+        //return <Redirect to ='/projects/'/>
+    }*/
 
-    if(props.projectIdForRedirect){
+    if(props.projectIdForRedirect === props.project &
+    props.currentNewsId === props._id){
+        debugger
+        //redirect(props.projectIdForRedirect);
         props.setProjectIdForRedirect(null);
-        redirect(props.project);
+        const path = '/projects/' + props.projectIdForRedirect
+        history.push(path);
     }
 
     const checkPrj = () =>{
         props.checkProject(props.project)
+        props.setCurrentNewsId(props._id)
     }
 
     createAt.locale('ru');

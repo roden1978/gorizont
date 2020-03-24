@@ -50,6 +50,7 @@ class NewsContainer extends React.Component {
         }
     }
     render() {
+
         return (<>
             {!this.props.news ? <Spinner/> : null}
             <News news = {this.props.news} {...this.props}

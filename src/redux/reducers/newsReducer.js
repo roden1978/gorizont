@@ -69,6 +69,7 @@ const news_reducer = (state = initialState, action) => {
             }
         }
         case SET_PROJECT_ID_FOR_REDIRECT :{
+
             return{
                 ...state, projectIdForRedirect: action.payload
             }

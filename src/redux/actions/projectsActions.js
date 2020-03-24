@@ -11,7 +11,8 @@ import {
     SET_DEFAULT_PROJECT,
     SET_PROJECTS_PHOTOS,
     SET_URL_TO_PROJECTS_PHOTOS,
-    SET_ALBUM_ID_FOR_REDIRECT
+    SET_ALBUM_ID_FOR_REDIRECT,
+    SET_CURRENT_PROJECT_ID
 } from "../actions/types";
 
 /*Создаем объект action с обязательным свойством type*/
@@ -96,6 +97,12 @@ export const setUrlToPhotos = (photo, card) => {
 export const  setAlbumIdForRedirect = (id) =>{
     return {
         type: SET_ALBUM_ID_FOR_REDIRECT,
+        payload: id
+    }
+}
+export const  setCurrentProjectId = (id) =>{
+    return {
+        type: SET_CURRENT_PROJECT_ID,
         payload: id
     }
 }

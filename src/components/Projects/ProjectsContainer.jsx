@@ -4,7 +4,8 @@ import {
     setLoadAlbums, getAllProjects, createProject,
     deleteProject, setChangeProjectsItem, setIsAllProjects,
     updateProject, setProjectsCount, setProjectsItem, setDefaultProject,
-    getPhotos, getPhotoWithUrl, checkAlbum, setAlbumIdForRedirect
+    getPhotos, getPhotoWithUrl, checkAlbum, setAlbumIdForRedirect,
+    setCurrentProjectId
 } from '../../redux/actions/projectsActions';
 import {getPhotosets} from '../../redux/actions/photosActions'
 import Projects from "./Projects";
@@ -96,6 +97,7 @@ let mapStateToProps = (state) => {
         getProjectsItem: state.projects.getProjectsItem,
         isAllProjects: state.projects.isAllProjects,
         projectsCount: state.projects.projectsCount,
+        currentProjectId: state.projects.currentProjectId, //////////////
         adminMode: state.auth.adminMode,
         photos: state.projects.photos,
         photosWithUrl: state.projects.photosWithUrl,
@@ -113,5 +115,5 @@ export default connect(mapStateToProps, {
     setChangeProjectsItem, setIsAllProjects,
     updateProject, setProjectsCount, setProjectsItem,
     getPhotosets, setDefaultProject, getPhotos, getPhotoWithUrl,
-    checkAlbum, setAlbumIdForRedirect
+    checkAlbum, setAlbumIdForRedirect, setCurrentProjectId
 })(ProjectsContainer);

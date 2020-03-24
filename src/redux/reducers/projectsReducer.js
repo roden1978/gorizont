@@ -9,7 +9,9 @@ import {
     SET_PROJECTS_COUNT,
     SET_DEFAULT_PROJECT,
     SET_PROJECTS_PHOTOS,
-    SET_URL_TO_PROJECTS_PHOTOS, SET_ALBUM_ID_FOR_REDIRECT
+    SET_URL_TO_PROJECTS_PHOTOS,
+    SET_ALBUM_ID_FOR_REDIRECT,
+    SET_CURRENT_PROJECT_ID
 } from "../actions/types";
 
 let initialState = {
@@ -22,7 +24,8 @@ let initialState = {
     getProjectsItem: false,
     isAllProjects: false,
     projectsCount: null,
-    albumIdForRedirect: null
+    albumIdForRedirect: null,
+    currentProjectId: ''
 }
 
 const projects_reducer = (state = initialState, action) => {
@@ -106,6 +109,11 @@ const projects_reducer = (state = initialState, action) => {
         case SET_ALBUM_ID_FOR_REDIRECT :{
             return{
                 ...state, albumIdForRedirect: action.payload
+            }
+        }
+        case SET_CURRENT_PROJECT_ID :{
+            return{
+                ...state, currentProjectId: action.payload
             }
         }
         default:

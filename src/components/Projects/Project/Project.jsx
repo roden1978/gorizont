@@ -132,10 +132,10 @@ const Project = (props) => {
     let createAt = moment(props.createAt);
     createAt.locale('ru');
 
-    const redirectToAlbum =(id)=>{
+    /*const redirectToAlbum =(id)=>{
         const path = '/album/' + id
         history.push(path);
-    }
+    }*/
 
     const redirectToProjects =()=>{
        props.setIsAllProjects(false);
@@ -143,14 +143,31 @@ const Project = (props) => {
         history.push(path);
     }
 
-    if(props.albumIdForRedirect){
-        props.setAlbumIdForRedirect(null);
-        redirectToAlbum(props.albumId);
+    if(props.albumIdForRedirect === props.albumId && props.currentProjectId === props._id){
+        props.setAlbumIdForRedirect('');
+        //redirectToAlbum(props.albumIdForRedirect);
+        const path = '/album/' + props.albumIdForRedirect
+        history.push(path);
     }
 
     const checkAlbum = () =>{
         props.checkAlbum(props.albumId)
+        props.setCurrentProjectId(props._id)
     }
+
+    /* if(props.projectIdForRedirect === props.project &
+    props.currentNewsId === props._id){
+        debugger
+        //redirect(props.projectIdForRedirect);
+        props.setProjectIdForRedirect(null);
+        const path = '/projects/' + props.projectIdForRedirect
+        history.push(path);
+    }
+
+    const checkPrj = () =>{
+        props.checkProject(props.project)
+        props.setCurrentNewsId(props._id)
+    }*/
 
     return (
         <Grid item xs={10}>

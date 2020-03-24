@@ -23,6 +23,8 @@ export const SET_DEFAULT_PROJECT = 'SET_DEFAULT_PROJECT';
 export const SET_PROJECTS_PHOTOS = 'SET_PROJECTS_PHOTOS';
 export const SET_URL_TO_PROJECTS_PHOTOS = 'SET_URL_TO_PROJECTS_PHOTOS';
 export const SET_ALBUM_ID_FOR_REDIRECT = 'SET_ALBUM_ID_FOR_REDIRECT';
+//////////////////typscript
+export const SET_CURRENT_PROJECT_ID = 'SET_CURRENT_PROJECT_ID';
 
 //Объявления
 export const SET_JOBS = 'SET_JOBS';
