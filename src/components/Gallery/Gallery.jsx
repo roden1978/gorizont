@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 const Gallery = (props) => {
     const classes = useStyles();
-    //debugger
+    //
 
     let sets = props.setsWithUrl.map(
         photoset => <PhotoAlbums key={photoset.id}

@@ -26,20 +26,11 @@ import FolderIcon from '@material-ui/icons/Folder';
 const NewsItem = (props) => {
     const classes = useStyles();
     const history = useHistory();
-    //debugger
-    let createAt = moment(props.createAt);
 
-    /*const redirect =(id)=>{
-        props.setProjectIdForRedirect(null);
-        const path = '/projects/' + id
-        history.push(path);
-        //return <Redirect to ='/projects/'/>
-    }*/
+    let createAt = moment(props.createAt);
 
     if(props.projectIdForRedirect === props.project &
     props.currentNewsId === props._id){
-        debugger
-        //redirect(props.projectIdForRedirect);
         props.setProjectIdForRedirect(null);
         const path = '/projects/' + props.projectIdForRedirect
         history.push(path);
@@ -51,7 +42,7 @@ const NewsItem = (props) => {
     }
 
     createAt.locale('ru');
-    //console.log(createAt.format('LL'));
+
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>
@@ -100,18 +91,11 @@ const NewsItem = (props) => {
         </Grid>
     );
 }
-/*
- <NavLink to={'/projects/' + props.project}
-                        className={classes.link}>{props.projectTitle}</NavLink>
 
-                         <Button color="primary" href="#outlined-buttons" onClick={checkPrj}>
-                                Обзор проекта
-                            </Button>
- */
 export default NewsItem;
 
 const AdminPanelNews = (props) => {
-    //debugger
+
     const classes = useStyles();
     const [expandedCreate, setExpandedCreate] = React.useState(false);
     const [expandedEdit, setExpandedEdit] = React.useState(false);
@@ -132,7 +116,6 @@ const AdminPanelNews = (props) => {
     };
 
     const handleEditExpandClick = () => {
-        //props.setNewsCount(props.news.length);
         setExpandedEdit(!expandedEdit);
         if (!expandedEdit) {
             props.setLoadProjects(true);
@@ -271,7 +254,7 @@ const AdminPanelNews = (props) => {
 }
 
 const setInitialData = (props, reset, expandedDelete) => {
-    //debugger
+
     if (reset) {
         initialData.id = null;
         initialData.title = '';
@@ -309,8 +292,6 @@ const EditNewsForm = (props) => {
     const classes = useStyles();
     const {handleSubmit, reset, cls, projects} = props;
     let {pristine, submitting} = props;
-    //debugger
-    //console.log(props.val + " " + props.expandedEdit);
 
     let projectsItems = projects.map(
         projectItem => <option key={projectItem._id} value={`${projectItem._id}| ${projectItem.title}`}

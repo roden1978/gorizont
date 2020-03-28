@@ -52,7 +52,7 @@ export const validate = (values) => {
         }
 
         if(values[digit] && values[digit].length > 6)
-            errors[digit] = 'Сумма превышает допустимы размер'
+            errors[digit] = 'Сумма превышает допустимый размер'
     })
 
     if(values[reqPassword] !== values[confPassword])
@@ -69,8 +69,8 @@ export const validate = (values) => {
     })
 
     maxLengthText.forEach(length =>{
-        if(values[length] && values[length].length > 1000)
-            errors[length] = 'Длина должная быть не более 1000 символов'
+        if(values[length] && values[length].length > 3000)
+            errors[length] = 'Длина должная быть не более 3000 символов'
     })
 
     return errors

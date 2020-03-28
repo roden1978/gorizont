@@ -155,20 +155,6 @@ const Project = (props) => {
         props.setCurrentProjectId(props._id)
     }
 
-    /* if(props.projectIdForRedirect === props.project &
-    props.currentNewsId === props._id){
-        debugger
-        //redirect(props.projectIdForRedirect);
-        props.setProjectIdForRedirect(null);
-        const path = '/projects/' + props.projectIdForRedirect
-        history.push(path);
-    }
-
-    const checkPrj = () =>{
-        props.checkProject(props.project)
-        props.setCurrentNewsId(props._id)
-    }*/
-
     return (
         <Grid item xs={10}>
             <Card className={classes.card}>

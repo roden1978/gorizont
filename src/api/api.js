@@ -1,24 +1,12 @@
-//import * as axios from "axios/index";
-
 import axios from 'axios'
-//import auth0 from 'auth0-js'
-
-//import {connect} from "react-redux";
-//import {getAuthorize} from "../redux/actions/authActions";
 
 const instance = axios.create();
-/*let auth = new auth0.WebAuth({
-    domain: 'dev-8e4ti4s2.auth0.com',
-    clientID: 'bOS225UZ986RtJmRgZCZG2SzZPGPJGJZ',
-    redirectUri: 'http://localhost:3000/login',
-    responseType: 'token id_token',
-    scope: 'email'
-})*/
+
 //API для новостей
 export const mongodbAPI = {
     //Получить новости с условием
     getNews() {
-        //debugger
+        //
         return instance.get('/api/news/')
             .then(response => {
                 return response.data
@@ -29,7 +17,7 @@ export const mongodbAPI = {
     },
     //Получить все новости
     getAllNews() {
-        //debugger
+        //
         return instance.get('/api/news/all')
             .then(response => {
                 return response.data
@@ -101,7 +89,7 @@ export const mongodbAPI = {
     },
     //Получить все проекты
     getAllProjects() {
-        //debugger
+        //
         return instance.get('/api/projects/all')
             .then(response => {
                 return response.data
@@ -112,7 +100,7 @@ export const mongodbAPI = {
     },
     //Обновить проект
     updateProject(projectData) {
-        //debugger
+        //
         return instance.post('/api/projects/upd', projectData)
             .then(response => {
                 return response.data;
@@ -143,7 +131,7 @@ export const mongodbAPI = {
     },
     //API для объявлений
     getJobs() {
-        //debugger
+        //
         return instance.get('/api/job')
             .then(response => {
                 return response.data
@@ -154,7 +142,7 @@ export const mongodbAPI = {
     },
     //Получить все объявления
     getAllJobs() {
-        //debugger
+        //
         return instance.get('/api/job/all')
             .then(response => {
                 return response.data
@@ -205,7 +193,7 @@ export const mongodbAPI = {
     },
     //API для контактов
     getContacts() {
-        //debugger
+        //
         return instance.get('/api/contacts')
             .then(response => {
                 return response.data
@@ -236,7 +224,7 @@ export const mongodbAPI = {
     },
     //API для о нас
     getAbout() {
-        //debugger
+        //
         return instance.get('/api/about')
             .then(response => {
                 return response.data
@@ -247,7 +235,7 @@ export const mongodbAPI = {
     },
     //Создать о нас
     createAbout(aboutData) {
-        //debugger
+        //
         return instance.post('/api/about/', aboutData)
             .then(response => {
                 return response.data;
@@ -269,7 +257,7 @@ export const mongodbAPI = {
 
     //Получить пользователей
     getUsers() {
-        //debugger
+        //
         return instance.get('/api/users/')
             .then(response => {
                 return response.data
@@ -280,7 +268,7 @@ export const mongodbAPI = {
     },
 
 //Получить пользователя с ИД
-    getUser(id) {
+   /* getUser(id) {
         return instance.get('/api/users/' + id)
             .then(response => {
                 return response.data
@@ -288,7 +276,7 @@ export const mongodbAPI = {
             .catch(err =>
                 console.log(err)
             )
-    },
+    },*/
 //Обновить пользователя
     updateUser(userData) {
         return instance.post('/api/users/upd', userData)
@@ -330,7 +318,7 @@ export const mongodbAPI = {
             )
     },
     checkUser(userData) {
-        //debugger
+        //
         return instance.post('/api/users/login', userData)
             .then(response => {
                 if (response.data) {
@@ -349,7 +337,7 @@ export const mongodbAPI = {
 export const flickrAPI = {
     //Получить список альбомов
     getAlbums() {
-        //debugger
+        //
         return instance.get('/api/albums')
             .then(response => {
                 return response.data.photosets.photoset
@@ -359,7 +347,7 @@ export const flickrAPI = {
             )
     },
     //Получить список фотографий из альбома с ID
-    getPhotos(id/*Id PhotoAlbum*/) {
+    getPhotos(/*ИД_Фотоальбома*/id) {
         return instance.get('/api/photos/' + id)
             .then(response => {
                 return response.data
@@ -369,7 +357,7 @@ export const flickrAPI = {
             )
     },
     //Получить объект со ссылками на фото по ID с разными размерами фото
-    getPhoto(id/*Id Photo*/) {
+    getPhoto(/*ИД_фотографии*/id) {
         return instance.get('/api/photos/photo/' + id)
             .then(response => {
                 return response.data
@@ -379,3 +367,5 @@ export const flickrAPI = {
             )
     }
 }
+
+flickrAPI.getPhotos()

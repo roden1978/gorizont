@@ -5,6 +5,9 @@ let initialState = {
     adminMode: false,
     adminRoot: false,
     isUsers: false
+    /*adminMode: true,
+    adminRoot: true,
+    isUsers: true*/
 }
 
 const auth_reducer = (state = initialState, action) => {

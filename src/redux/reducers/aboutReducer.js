@@ -7,9 +7,6 @@ let initialState = {
 
 const about_reducer = (state = initialState, action) => {
 
-    //let copyState;// = {...state};
-
-    //debugger
     switch (action.type) {
         case SET_ABOUT: {
             /*копия МАССИВОВ в КВАДРАТНЫХ СКОБКАХ
@@ -26,8 +23,8 @@ const about_reducer = (state = initialState, action) => {
         }
         case SET_DEFAULT_ABOUT:{
             return {
-                ...state, about: [{_id: '0', text: 'Войдите в панель администирования и создайте контакты ' +
-                        '!!!ВНИМАНИЕ!!! Если страница контактов не отобразилась обновите страницу.'}]
+                ...state, about: [{_id: '0', text: 'Войдите в панель администирования и создайте страницу о компании ' +
+                        '!!!ВНИМАНИЕ!!! Если страница о компании не отобразилась обновите страницу.'}]
             }
         }
         default:
